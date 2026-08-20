@@ -1,0 +1,555 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
+  <title>ポップコーン・キャッチ＆バースト！</title>
+  <style>
+    * {
+      box-sizing: border-box;
+      user-select: none;
+      -webkit-user-select: none;
+      touch-action: manipulation;
+    }
+    body {
+      margin: 0;
+      padding: 0;
+      background: #f7e6c4;
+      font-family: 'Helvetica Neue', Arial, sans-serif;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      min-height: 100vh;
+      overflow: hidden;
+    }
+    #game-container {
+      position: relative;
+      width: 100%;
+      max-width: 420px;
+      height: 100vh;
+      max-height: 750px;
+      background: linear-gradient(180deg, #fff3e0 0%, #ffe0b2 100%);
+      box-shadow: 0 10px 25px rgba(0,0,0,0.2);
+      border-radius: 12px;
+      overflow: hidden;
+      display: flex;
+      flex-direction: column;
+    }
+    /* ヘッダー飾り */
+    .roof-stripe {
+      height: 24px;
+      background: repeating-linear-gradient(
+        -45deg,
+        #e53935,
+        #e53935 15px,
+        #ffffff 15px,
+        #ffffff 30px
+      );
+      box-shadow: 0 2px 5px rgba(0,0,0,0.1);
+    }
+    canvas {
+      width: 100%;
+      height: 100%;
+      display: block;
+    }
+    /* 画面オーバーレイ */
+    .screen {
+      position: absolute;
+      top: 24px;
+      left: 0;
+      width: 100%;
+      height: calc(100% - 24px);
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      justify-content: center;
+      padding: 20px;
+      background: rgba(255, 253, 245, 0.95);
+      z-index: 10;
+      text-align: center;
+    }
+    .hidden {
+      display: none !important;
+    }
+    h1 {
+      color: #d32f2f;
+      font-size: 26px;
+      margin: 10px 0 5px;
+      text-shadow: 1px 1px 0px #fff;
+    }
+    .subtitle {
+      color: #f57c00;
+      font-weight: bold;
+      font-size: 14px;
+      margin-bottom: 20px;
+    }
+    .btn {
+      background: linear-gradient(180deg, #ff9800 0%, #f57c00 100%);
+      color: white;
+      border: none;
+      padding: 14px 32px;
+      font-size: 18px;
+      font-weight: bold;
+      border-radius: 30px;
+      box-shadow: 0 4px 10px rgba(245, 124, 0, 0.4);
+      cursor: pointer;
+      margin: 8px 0;
+      transition: transform 0.1s;
+    }
+    .btn:active {
+      transform: scale(0.95);
+    }
+    .btn-secondary {
+      background: linear-gradient(180deg, #4fc3f7 0%, #0288d1 100%);
+      box-shadow: 0 4px 10px rgba(2, 136, 209, 0.4);
+    }
+    /* ルール説明カード */
+    .rule-box {
+      background: #fff;
+      border: 2px solid #ffe0b2;
+      border-radius: 12px;
+      padding: 12px;
+      margin: 15px 0;
+      font-size: 13px;
+      color: #424242;
+      text-align: left;
+      line-height: 1.5;
+    }
+    .rule-item {
+      display: flex;
+      align-items: center;
+      margin: 4px 0;
+    }
+    .rule-icon {
+      font-size: 18px;
+      margin-right: 8px;
+      width: 24px;
+      text-align: center;
+    }
+    /* 結果画面 */
+    .result-score {
+      font-size: 36px;
+      color: #d32f2f;
+      font-weight: bold;
+      margin: 5px 0;
+    }
+    .rank-badge {
+      display: inline-block;
+      background: #e53935;
+      color: white;
+      font-size: 20px;
+      font-weight: bold;
+      padding: 6px 20px;
+      border-radius: 20px;
+      margin: 10px 0;
+      animation: pop 0.3s ease-out;
+    }
+    .coupon-box {
+      border: 2px dashed #e53935;
+      background: #ffebee;
+      border-radius: 10px;
+      padding: 12px;
+      width: 100%;
+      margin: 10px 0;
+    }
+    .coupon-title {
+      font-size: 12px;
+      color: #c62828;
+      font-weight: bold;
+    }
+    .coupon-detail {
+      font-size: 16px;
+      color: #b71c1c;
+      font-weight: bold;
+      margin: 4px 0;
+    }
+    .shop-info {
+      font-size: 11px;
+      color: #616161;
+      margin-top: 5px;
+      border-top: 1px solid #eee;
+      padding-top: 5px;
+    }
+    @keyframes pop {
+      0% { transform: scale(0.5); }
+      80% { transform: scale(1.1); }
+      100% { transform: scale(1); }
+    }
+  </style>
+</head>
+<body>
+
+<div id="game-container">
+  <div class="roof-stripe"></div>
+
+  <div id="start-screen" class="screen">
+    <div style="font-size: 40px;">🍿</div>
+    <h1>ポップコーン<br>キャッチ＆バースト！</h1>
+    <div class="subtitle">スマホで連打！はじけるポップコーン！</div>
+    
+    <div class="rule-box">
+      <div class="rule-item"><span class="rule-icon">🍿</span> 通常ポップコーン：<b>+10pt</b></div>
+      <div class="rule-item"><span class="rule-icon">🍯</span> キャラメルポップコーン：<b>+30pt</b></div>
+      <div class="rule-item"><span class="rule-icon">⭐</span> スターポップコーン：<b>+50pt</b></div>
+      <div class="rule-item"><span class="rule-icon">💣</span> 焦げポップコーン：<b style="color:#d32f2f">-20pt</b></div>
+      <div style="margin-top:6px; font-size:11px; color:#757575;">※20秒間に降ってくるポップコーンを連打でキャッチ！高得点で屋台のお得クーポンをGET！</div>
+    </div>
+
+    <button class="btn" id="start-btn">ゲームスタート！</button>
+  </div>
+
+  <canvas id="gameCanvas"></canvas>
+
+  <div id="result-screen" class="screen hidden">
+    <div style="font-size: 14px; color: #616161;">ゲーム終了！獲得スコア</div>
+    <div class="result-score" id="final-score">0 PTS</div>
+    
+    <div style="font-size: 12px; color: #757575;">あなたのランク</div>
+    <div class="rank-badge" id="rank-badge">ノーマル</div>
+
+    <div class="coupon-box">
+      <div class="coupon-title">🎁 屋台で使える特典クーポン 🎁</div>
+      <div class="coupon-detail" id="coupon-text">50円引きクーポン</div>
+      <div style="font-size: 10px; color: #757575;">※注文時にこの画面をスタッフに見せてね！</div>
+    </div>
+
+    <div class="shop-info">
+      📍 <b>屋台場所:</b> イベント会場 Aブロック (和纏祭)<br>
+      🍿 <b>メニュー:</b> レギュラー / フレーバー / キャラメル
+    </div>
+
+    <button class="btn" id="retry-btn">もう一度遊ぶ</button>
+    <button class="btn btn-secondary" id="share-btn">結果を友達にシェア</button>
+  </div>
+</div>
+
+<script>
+// --- Web Audio API (簡易効果音) ---
+const AudioCtx = window.AudioContext || window.webkitAudioContext;
+let audioCtx = null;
+
+function playSound(type) {
+  if (!audioCtx) audioCtx = new AudioCtx();
+  if (audioCtx.state === 'suspended') audioCtx.resume();
+
+  const osc = audioCtx.createOscillator();
+  const gain = audioCtx.createGain();
+  osc.connect(gain);
+  gain.connect(audioCtx.destination);
+
+  const now = audioCtx.currentTime;
+
+  if (type === 'pop') {
+    osc.type = 'sine';
+    osc.frequency.setValueAtTime(400, now);
+    osc.frequency.exponentialRampToValueAtTime(800, now + 0.08);
+    gain.gain.setValueAtTime(0.3, now);
+    gain.gain.linearRampToValueAtTime(0.01, now + 0.08);
+    osc.start(now);
+    osc.stop(now + 0.08);
+  } else if (type === 'bad') {
+    osc.type = 'sawtooth';
+    osc.frequency.setValueAtTime(180, now);
+    osc.frequency.linearRampToValueAtTime(110, now + 0.15);
+    gain.gain.setValueAtTime(0.3, now);
+    gain.gain.linearRampToValueAtTime(0.01, now + 0.15);
+    osc.start(now);
+    osc.stop(now + 0.15);
+  } else if (type === 'star') {
+    osc.type = 'triangle';
+    osc.frequency.setValueAtTime(600, now);
+    osc.frequency.exponentialRampToValueAtTime(1200, now + 0.15);
+    gain.gain.setValueAtTime(0.4, now);
+    gain.gain.linearRampToValueAtTime(0.01, now + 0.15);
+    osc.start(now);
+    osc.stop(now + 0.15);
+  }
+}
+
+// --- ゲーム本体 ---
+const canvas = document.getElementById('gameCanvas');
+const ctx = canvas.getContext('2d');
+
+// キャンバスリサイズ設定
+function resizeCanvas() {
+  const container = document.getElementById('game-container');
+  canvas.width = container.clientWidth;
+  canvas.height = container.clientHeight - 24; // 屋根分マイナス
+}
+window.addEventListener('resize', resizeCanvas);
+resizeCanvas();
+
+// ゲーム状態
+let gameState = 'START'; // START, PLAYING, RESULT
+let score = 0;
+let timeLeft = 20;
+let lastSpawnTime = 0;
+let timerInterval = null;
+
+// オブジェクト配列
+let items = [];
+let particles = [];
+let floatTexts = [];
+
+// ポップコーンの種類定義
+const TYPES = {
+  NORMAL: { type: 'NORMAL', pts: 10, color: '#FFF59D', border: '#FBC02D', label: '🍿', radius: 24 },
+  CARAMEL: { type: 'CARAMEL', pts: 30, color: '#FFB74D', border: '#E65100', label: '🍯', radius: 22 },
+  STAR: { type: 'STAR', pts: 50, color: '#81D4FA', border: '#0288D1', label: '⭐', radius: 26 },
+  BAD: { type: 'BAD', pts: -20, color: '#757575', border: '#212121', label: '💣', radius: 24 }
+};
+
+// スポーン処理
+function spawnItem() {
+  const x = Math.random() * (canvas.width - 60) + 30;
+  const rand = Math.random();
+  let itemType = TYPES.NORMAL;
+
+  if (rand < 0.55) itemType = TYPES.NORMAL;
+  else if (rand < 0.78) itemType = TYPES.CARAMEL;
+  else if (rand < 0.88) itemType = TYPES.STAR;
+  else itemType = TYPES.BAD;
+
+  items.push({
+    x: x,
+    y: -30,
+    speed: Math.random() * 2 + 2.5,
+    rotation: Math.random() * Math.PI * 2,
+    rotSpeed: (Math.random() - 0.5) * 0.05,
+    ...itemType
+  });
+}
+
+// エフェクト生成
+function createBurst(x, y, color) {
+  for (let i = 0; i < 10; i++) {
+    particles.push({
+      x: x,
+      y: y,
+      vx: (Math.random() - 0.5) * 8,
+      vy: (Math.random() - 0.5) * 8,
+      radius: Math.random() * 4 + 2,
+      color: color,
+      alpha: 1,
+      life: 0.04
+    });
+  }
+}
+
+function createFloatText(x, y, text, color) {
+  floatTexts.push({
+    x: x,
+    y: y,
+    text: text,
+    color: color,
+    alpha: 1,
+    vy: -2
+  });
+}
+
+// ゲーム開始
+function startGame() {
+  score = 0;
+  timeLeft = 20;
+  items = [];
+  particles = [];
+  floatTexts = [];
+  gameState = 'PLAYING';
+
+  document.getElementById('start-screen').classList.add('hidden');
+  document.getElementById('result-screen').classList.add('hidden');
+
+  clearInterval(timerInterval);
+  timerInterval = setInterval(() => {
+    timeLeft--;
+    if (timeLeft <= 0) {
+      endGame();
+    }
+  }, 1000);
+
+  requestAnimationFrame(gameLoop);
+}
+
+// ゲーム終了
+function endGame() {
+  clearInterval(timerInterval);
+  gameState = 'RESULT';
+
+  document.getElementById('final-score').innerText = `${score} PTS`;
+
+  // ランク判定
+  const rankBadge = document.getElementById('rank-badge');
+  const couponText = document.getElementById('coupon-text');
+
+  if (score >= 400) {
+    rankBadge.innerText = 'メガ盛り級 👑';
+    rankBadge.style.background = 'linear-gradient(45deg, #FFD700, #FFA000)';
+    couponText.innerText = '【特大サイズへ無料サイズアップ】＋【トッピング全乗せ】';
+  } else if (score >= 200) {
+    rankBadge.innerText = '大盛り級 🔥';
+    rankBadge.style.background = '#ff9800';
+    couponText.innerText = '【トッピング1種無料】＋【50円引き】';
+  } else {
+    rankBadge.innerText = 'ノーマル級 🍿';
+    rankBadge.style.background = '#4fc3f7';
+    couponText.innerText = '【ポップコーン50円引きクーポン】';
+  }
+
+  document.getElementById('result-screen').classList.remove('hidden');
+}
+
+// メインゲームループ
+function gameLoop(timestamp) {
+  if (gameState !== 'PLAYING') return;
+
+  ctx.clearRect(0, 0, canvas.width, canvas.height);
+
+  // アイテムスポーン
+  if (timestamp - lastSpawnTime > 350) {
+    spawnItem();
+    lastSpawnTime = timestamp;
+  }
+
+  // アイテム更新＆描画
+  for (let i = items.length - 1; i >= 0; i--) {
+    let item = items[i];
+    item.y += item.speed;
+    item.rotation += item.rotSpeed;
+
+    // 描画
+    ctx.save();
+    ctx.translate(item.x, item.y);
+    ctx.rotate(item.rotation);
+
+    ctx.beginPath();
+    ctx.arc(0, 0, item.radius, 0, Math.PI * 2);
+    ctx.fillStyle = item.color;
+    ctx.fill();
+    ctx.lineWidth = 3;
+    ctx.strokeStyle = item.border;
+    ctx.stroke();
+
+    ctx.font = `${item.radius * 1.1}px sans-serif`;
+    ctx.textAlign = 'center';
+    ctx.textBaseline = 'middle';
+    ctx.fillText(item.label, 0, 2);
+
+    ctx.restore();
+
+    // 画面外削除
+    if (item.y > canvas.height + 40) {
+      items.splice(i, 1);
+    }
+  }
+
+  // パーティクル描画
+  for (let i = particles.length - 1; i >= 0; i--) {
+    let p = particles[i];
+    p.x += p.vx;
+    p.y += p.vy;
+    p.alpha -= p.life;
+
+    if (p.alpha <= 0) {
+      particles.splice(i, 1);
+      continue;
+    }
+
+    ctx.save();
+    ctx.globalAlpha = p.alpha;
+    ctx.beginPath();
+    ctx.arc(p.x, p.y, p.radius, 0, Math.PI * 2);
+    ctx.fillStyle = p.color;
+    ctx.fill();
+    ctx.restore();
+  }
+
+  // フロートテキスト描画
+  for (let i = floatTexts.length - 1; i >= 0; i--) {
+    let ft = floatTexts[i];
+    ft.y += ft.vy;
+    ft.alpha -= 0.02;
+
+    if (ft.alpha <= 0) {
+      floatTexts.splice(i, 1);
+      continue;
+    }
+
+    ctx.save();
+    ctx.globalAlpha = ft.alpha;
+    ctx.font = 'bold 20px Arial';
+    ctx.fillStyle = ft.color;
+    ctx.textAlign = 'center';
+    ctx.fillText(ft.text, ft.x, ft.y);
+    ctx.restore();
+  }
+
+  // UI（スコア・タイマー）描画
+  ctx.fillStyle = '#333';
+  ctx.font = 'bold 18px Arial';
+  ctx.textAlign = 'left';
+  ctx.fillText(`TIME: ${timeLeft}s`, 15, 30);
+
+  ctx.textAlign = 'right';
+  ctx.fillStyle = '#d32f2f';
+  ctx.fillText(`SCORE: ${score}`, canvas.width - 15, 30);
+
+  requestAnimationFrame(gameLoop);
+}
+
+// タップ/クリック判定
+function handleTap(clientX, clientY) {
+  if (gameState !== 'PLAYING') return;
+
+  const rect = canvas.getBoundingClientRect();
+  const tapX = clientX - rect.left;
+  const tapY = clientY - rect.top;
+
+  for (let i = items.length - 1; i >= 0; i--) {
+    let item = items[i];
+    let dist = Math.hypot(item.x - tapX, item.y - tapY);
+
+    if (dist < item.radius + 15) { // 判定広め
+      score += item.pts;
+      
+      if (item.pts > 0) {
+        playSound(item.type === 'STAR' ? 'star' : 'pop');
+        createFloatText(item.x, item.y, `+${item.pts}`, '#f57c00');
+      } else {
+        playSound('bad');
+        createFloatText(item.x, item.y, `${item.pts}`, '#d32f2f');
+      }
+
+      createBurst(item.x, item.y, item.color);
+      items.splice(i, 1);
+      break;
+    }
+  }
+}
+
+// イベントリスナー
+canvas.addEventListener('touchstart', (e) => {
+  e.preventDefault();
+  for (let i = 0; i < e.changedTouches.length; i++) {
+    handleTap(e.changedTouches[i].clientX, e.changedTouches[i].clientY);
+  }
+}, { passive: false });
+
+canvas.addEventListener('mousedown', (e) => {
+  handleTap(e.clientX, e.clientY);
+});
+
+document.getElementById('start-btn').addEventListener('click', startGame);
+document.getElementById('retry-btn').addEventListener('click', startGame);
+
+document.getElementById('share-btn').addEventListener('click', () => {
+  const text = `🍿ポップコーン・キャッチ＆バーストで【${score}点】ゲット！屋台のお得クーポンを獲得したよ！ #和纏祭 #ポップコーン屋台`;
+  if (navigator.share) {
+    navigator.share({ title: 'ポップコーン・キャッチ＆バースト', text: text });
+  } else {
+    alert('結果をコピーしました！SNSに投稿してね：\n' + text);
+  }
+});
+</script>
+
+</body>
+</html>

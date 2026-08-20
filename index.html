@@ -1,0 +1,229 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover">
+<meta name="theme-color" content="#e2453c">
+<title>和纏祭 ポップコーン屋台 Webゲーム企画コンペ｜応募作品一覧</title>
+<meta name="description" content="和纏祭ポップコーン屋台（社学・松林ゼミ）のWebゲーム活用マーケティング企画コンペ。応募作品をブラウザでそのまま試遊できます。">
+<meta property="og:title" content="和纏祭 ポップコーン屋台 Webゲーム企画コンペ">
+<meta property="og:description" content="応募作品をブラウザでそのまま試遊できます。">
+<style>
+:root{
+  --cream:#f7efd9;
+  --paper:#fffaf0;
+  --ink:#4a3520;
+  --ink-soft:#7b6242;
+  --stripe:#e2453c;
+  --butter:#f4c14a;
+  --pop:#ff8a2b;
+  --leaf:#2f8c3c;
+}
+*{box-sizing:border-box;}
+html{-webkit-text-size-adjust:100%;}
+body{
+  margin:0;background:var(--cream);color:var(--ink);
+  font-family:"Hiragino Maru Gothic ProN","ヒラギノ丸ゴ ProN W4","Yu Gothic UI","Yu Gothic",-apple-system,BlinkMacSystemFont,"Segoe UI",Roboto,"Noto Sans JP",sans-serif;
+  font-weight:700;line-height:1.7;
+}
+.wrap{max-width:760px;margin:0 auto;padding:0 18px 64px;}
+
+/* ── 屋台のテント（この頁の顔） ───────────────── */
+.awning{
+  height:34px;
+  background:repeating-linear-gradient(-45deg,var(--stripe) 0 18px,#fff 18px 36px);
+  border-bottom:4px solid var(--ink);
+}
+.awning-scallop{
+  height:22px;margin-bottom:26px;
+  background:
+    radial-gradient(circle at 11px 0, transparent 11px, var(--stripe) 11.5px) repeat-x;
+  background-size:22px 22px;
+  filter:drop-shadow(0 3px 0 rgba(74,53,32,.18));
+}
+header{text-align:center;padding-top:6px;}
+.eyebrow{
+  display:inline-block;font-size:12px;letter-spacing:.22em;
+  background:var(--ink);color:var(--cream);padding:5px 14px;border-radius:999px;
+}
+h1{
+  font-size:clamp(25px,6.4vw,38px);line-height:1.25;margin:14px 0 6px;
+  color:#c93a31;
+  -webkit-text-stroke:7px #fff;paint-order:stroke fill;
+}
+h1 small{display:block;font-size:.44em;color:var(--ink);-webkit-text-stroke:5px #fff;paint-order:stroke fill;letter-spacing:.04em;}
+.lede{font-size:15px;color:var(--ink-soft);max-width:50ch;margin:8px auto 0;font-weight:700;}
+.host{
+  margin:18px auto 0;display:inline-flex;gap:10px;align-items:center;flex-wrap:wrap;justify-content:center;
+  font-size:13px;color:var(--ink-soft);
+}
+.host b{background:#fff;border:2px solid var(--ink);border-radius:999px;padding:3px 12px;color:var(--ink);}
+
+/* ── 見出し ────────────────────────────── */
+h2{
+  font-size:19px;margin:44px 0 4px;display:flex;align-items:center;gap:10px;
+}
+h2::after{content:"";flex:1;height:4px;background:var(--ink);border-radius:2px;}
+.h2note{font-size:13px;color:var(--ink-soft);margin:0 0 18px;font-weight:700;}
+
+/* ── 応募作品＝引換券のカード ───────────────── */
+.entries{display:flex;flex-direction:column;gap:22px;}
+.entry{
+  position:relative;background:var(--paper);
+  border:3px solid var(--ink);border-radius:20px;
+  padding:20px 22px 22px;
+  box-shadow:0 6px 0 rgba(74,53,32,.2);
+}
+/* 券のミシン目 */
+.entry::before,.entry::after{
+  content:"";position:absolute;width:20px;height:20px;border-radius:50%;
+  background:var(--cream);border:3px solid var(--ink);
+}
+.entry::before{left:-13px;top:76px;}
+.entry::after{right:-13px;top:76px;}
+.entry-head{display:flex;align-items:flex-start;gap:12px;flex-wrap:wrap;}
+.stub{
+  flex:0 0 auto;font-size:11px;letter-spacing:.16em;
+  background:var(--butter);border:2px solid var(--ink);border-radius:8px;
+  padding:3px 10px;transform:rotate(-2deg);
+}
+.entry h3{
+  font-size:clamp(21px,5.2vw,27px);margin:6px 0 2px;width:100%;
+  color:var(--pop);-webkit-text-stroke:6px #fff;paint-order:stroke fill;
+}
+.by{font-size:13px;color:var(--ink-soft);margin:0 0 12px;}
+.by em{font-style:normal;background:#f0e6cc;border-radius:5px;padding:1px 7px;}
+.catch{
+  font-size:15px;margin:0 0 16px;padding:11px 14px;
+  background:#fff3d4;border-left:6px solid var(--pop);border-radius:0 10px 10px 0;
+}
+dl{margin:0 0 18px;display:grid;grid-template-columns:auto 1fr;gap:7px 14px;font-size:14px;}
+dt{
+  color:var(--ink-soft);font-size:12px;white-space:nowrap;
+  border-right:3px dotted #d9c9a5;padding-right:14px;
+}
+dd{margin:0;}
+.play{
+  display:inline-flex;align-items:center;gap:9px;
+  font-size:18px;text-decoration:none;
+  background:var(--leaf);color:#fff;
+  border:3px solid var(--ink);border-radius:999px;
+  padding:11px 30px;box-shadow:0 5px 0 var(--ink);
+  transition:transform .07s ease,box-shadow .07s ease;
+}
+.play:hover{filter:brightness(1.06);}
+.play:active{transform:translateY(5px);box-shadow:0 0 0 var(--ink);}
+.play:focus-visible{outline:3px solid var(--stripe);outline-offset:4px;}
+.play span{font-size:22px;line-height:1;}
+.hint{font-size:12px;color:var(--ink-soft);margin:10px 0 0;}
+
+/* ── 審査の観点 ─────────────────────────── */
+.criteria{
+  background:#fff;border:3px dashed var(--ink);border-radius:18px;padding:18px 22px;
+}
+.criteria ul{margin:0;padding-left:1.15em;font-size:14px;}
+.criteria li{margin-bottom:7px;}
+.criteria li::marker{color:var(--pop);}
+
+footer{
+  margin-top:52px;padding-top:20px;border-top:4px solid var(--ink);
+  font-size:12px;color:var(--ink-soft);text-align:center;
+}
+@media (max-width:520px){
+  dl{grid-template-columns:1fr;gap:2px 0;}
+  dt{border-right:0;border-left:5px solid #e6d7b4;padding:0 0 0 10px;margin-top:9px;}
+  .entry::before,.entry::after{display:none;}
+}
+@media (prefers-reduced-motion:reduce){*{transition-duration:.01s !important;}}
+</style>
+</head>
+<body>
+
+<div class="awning"></div>
+<div class="awning-scallop"></div>
+
+<div class="wrap">
+  <header>
+    <span class="eyebrow">和 纏 祭 2 0 2 6</span>
+    <h1>ポップコーン屋台<small>Webゲーム活用マーケティング企画コンペ</small></h1>
+    <p class="lede">「遊んでもらって、来てもらって、買ってもらう」。屋台への集客をWebゲームで設計する企画コンペです。応募作品はこのページからそのまま試遊できます。</p>
+    <p class="host"><b>社学・松林ゼミ</b><b>テント2番</b><b>ポップコーン 1個 300円</b></p>
+  </header>
+
+  <h2>応募作品</h2>
+  <p class="h2note">スマートフォンでの試遊を推奨します。所要時間はどちらも1回30秒程度です。</p>
+
+  <div class="entries">
+
+    <!-- ============ 応募作品 A ============ -->
+    <article class="entry">
+      <div class="entry-head">
+        <span class="stub">ENTRY A</span>
+        <h3>弾けろ！パーフェクトポップ</h3>
+      </div>
+      <p class="by">企画・上田佳奈</p>
+
+      <p class="catch">目指せパーフェクトなポップコーン！「1+1券」をゲットしよう！</p>
+
+      <dl>
+        <dt>ゲーム内容</dt>
+        <dd>フライパンの火力をタップで調整し、30秒で焦がさずコーンを弾けさせるタイミングアクション。適温ゾーンが高温側・低温側にランダムで動くので、追いかけてキープするとフィーバーで大量得点。混ざり込む白い羊や雲はタップで取り除かないと終了時に減点。</dd>
+
+        <dt>集客の仕掛け</dt>
+        <dd>高得点で「1+1券（1個買うともう1個無料）」を発行し、ひとりで来るより誰かを誘いたくなる動機をつくる。50円引き・20円引きの2段構えと、2人とも基準点を超えるとさらに30円引きになるペア割。</dd>
+
+        <dt>狙う成果</dt>
+        <dd>グループ単位での来店・購入の最大化。参加200人、クーポン利用80組、販売300個。</dd>
+      </dl>
+
+      <a class="play" href="perfect-pop/"><span>🍿</span>遊んでみる</a>
+      <p class="hint">結果画面に照合コード付きのクーポンが出ます。運営設定から難易度とボーダーをその場で変更できます。</p>
+    </article>
+
+    <!-- ============ 応募作品 B ============ -->
+    <article class="entry">
+      <div class="entry-head">
+        <span class="stub">ENTRY B</span>
+        <h3>ポップコーン・キャッチ＆バースト！</h3>
+      </div>
+      <p class="by">企画・<em>応募者名を記入してください</em></p>
+
+      <p class="catch">スマホで連打！はじけるポップコーン！</p>
+
+      <dl>
+        <dt>ゲーム内容</dt>
+        <dd>次々にはじけ飛ぶポップコーンをタップで捕まえる連打アクション。通常のポップコーンに加え、キャラメル（+30pt）とスター（+50pt）が高得点、焦げポップコーン（−20pt）は触ると減点。</dd>
+
+        <dt>集客の仕掛け</dt>
+        <dd>スコアに応じてノーマル級・大盛り級・メガ盛り級のランクを表示し、獲得したクーポンを屋台スタッフに提示してもらう。結果のシェア機能で口コミを狙う。</dd>
+
+        <dt>狙う成果</dt>
+        <dd>ランク表示で競争心を刺激し、友達同士のスコア比べとシェアから認知を広げる。</dd>
+      </dl>
+
+      <a class="play" href="catch-burst/"><span>🍿</span>遊んでみる</a>
+      <p class="hint">上の説明文は暫定です。企画書の記述に合わせて書き換えてください。</p>
+    </article>
+
+  </div>
+
+  <h2>審査の観点</h2>
+  <p class="h2note">企画書の様式に沿って、次の点から総合的に判断します。</p>
+  <div class="criteria">
+    <ul>
+      <li><b>導線が具体的か</b> — 認知からQR読取、プレイ、来店、購入、拡散までが途切れずつながっているか</li>
+      <li><b>特典が採算に合うか</b> — 値引きや無料配布の原価と、それを上回る売上増の見込みが説明できているか</li>
+      <li><b>30秒で伝わるか</b> — 屋台の行列や移動中に、説明なしで遊び始められるか</li>
+      <li><b>数字で検証できるか</b> — 成否を判断する指標と測定方法が用意されているか</li>
+      <li><b>当日運用できるか</b> — レジでのクーポン確認や難易度調整が、店員の負担なく回るか</li>
+    </ul>
+  </div>
+
+  <footer>
+    和纏祭 ポップコーン屋台（社学・松林ゼミ／テント2番）<br>
+    Webゲーム活用マーケティング企画コンペ 応募作品一覧
+  </footer>
+</div>
+
+</body>
+</html>
