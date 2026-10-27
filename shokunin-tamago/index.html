@@ -4,7 +4,7 @@
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no">
 <meta name="theme-color" content="#140d08">
-<!-- shokunin-tamago v9 -->
+<!-- shokunin-tamago v10 -->
 <meta name="format-detection" content="telephone=no">
 <title>職人 ― たまご料理の巨匠</title>
 <style>
@@ -62,9 +62,9 @@ button{font:inherit;color:inherit;border:0;background:none;cursor:pointer;touch-
 .chip b{width:44px;height:44px;border-radius:50%;border:1px solid rgba(216,180,106,.55);background:rgba(20,12,6,.8);display:flex;align-items:center;justify-content:center}
 .chip b svg{width:24px;height:24px}
 .arrow{align-self:center;color:var(--gold);font-size:12px;margin-top:-16px}
-.tips{position:absolute;left:24px;right:24px;top:476px;font-size:14px;line-height:1.9;text-align:center;color:var(--ink)}
+.tips{position:absolute;left:20px;right:20px;top:470px;font-size:13px;line-height:1.75;text-align:center;color:var(--ink)}
 .tips em{font-style:normal;color:var(--gold2);border:1px solid rgba(216,180,106,.6);border-radius:4px;padding:0 5px}
-.keys{position:absolute;left:10px;right:10px;top:566px;text-align:center;font-size:11px;color:var(--dim)}
+.keys{position:absolute;left:10px;right:10px;top:588px;text-align:center;font-size:11px;color:var(--dim)}
 #bGo{position:absolute;left:65px;top:640px}
 .limit{position:absolute;left:0;right:0;top:716px;text-align:center;font-size:12px;color:var(--dim)}
 /* hud */
@@ -1582,8 +1582,7 @@ const CONFIG={
   chickSpeedUp:0.3,   // 調理が進むほど速くなる量（px/秒 ÷ 秒）
   baitRadius:160,     // ポップコーンに気づく距離（これより遠いと無視される）
   baitEat:1.6,        // ポップコーンを食べている秒数
-  swingPeriod:2.2,    // 発射機の針が1往復する秒数
-  powerPeriod:1.7     // 発射エネルギーが上下する周期（秒）
+  swingPeriod:2.2     // 発射機の針が1往復する秒数（パワーはプレイヤーがメーターで調整）
 };
 /* ============================================================================ */
 const W=450,H=800,TAU=Math.PI*2;
@@ -2053,7 +2052,7 @@ function newPlay(dish){
     layer:0,layerC:0,layerOn:false,logs:[],rollPts:[],rollDir:0,logSide:0,wrongA:0,
     press:false,fill:0,pressA:0,
     plateOff:null,platePts:null,slideA:0,res:null,
-    chickEsc:null,ck:null,pops:[],fireCool:0,lT:0,cookT:0,eaten:false,eatenFrom:'',aim:null});
+    chickEsc:null,ck:null,pops:[],fireCool:0,lT:0,cookT:0,eaten:false,eatenFrom:'',aim:null,power:(typeof G.lastPower==='number'?G.lastPower:.5)});
   $('heat').value=0; heatLabel();
 }
 function goPhase(ph){ P.phase=ph; P.pt=0; P.wait=0; }
@@ -2105,10 +2104,11 @@ function plateSwing(){ return P.pt>.5?tri((P.pt-.5)/3)*100:0; }
 function plateTap(){ if(P.phase!=='plate'||P.pt<.6||P.plateOff!==null) return; const off=plateSwing(); P.plateOff=off; const q=lin(Math.abs(off),0,16,1,70); P.platePts=10*q; P.cooking=false; P.res=buildRes(); P.slideA=.0001; sfx.plate(); popWord(q,225,380); }
 /* ---------- ひよこ と ポップコーン発射機 ---------- */
 const CHICK_PH=['cook1','flip','shape','cookL','rollA','pourWait'];
-const LAUNCH={x:64,y:566,center:36*Math.PI/180,swing:58*Math.PI/180};
+const LAUNCH={x:100,y:566,center:30*Math.PI/180,swing:58*Math.PI/180};
+const PWR={x1:84,y0:418,y1:600,top:452,h:126}; // パワーメーター（指で上下して出力を調整）
 function dishXY(){ return P.dish==='omelette'?{x:215,y:360,rx:118,ry:92}:{x:225,y:350,rx:130,ry:98}; }
 function onDish(x,y,k){ const d=dishXY(); k=k||1; return Math.pow((x-d.x)/(d.rx*k),2)+Math.pow((y-d.y)/(d.ry*k),2)<1; }
-function launcherNow(){ const ang=LAUNCH.center+Math.sin(P.lT*TAU/CONFIG.swingPeriod)*LAUNCH.swing, pow=.5-.5*Math.cos(P.lT*TAU/CONFIG.powerPeriod); const d=70+pow*460;
+function launcherNow(){ const ang=LAUNCH.center+Math.sin(P.lT*TAU/CONFIG.swingPeriod)*LAUNCH.swing, pow=clamp(P.power,0,1); const d=70+pow*460;
   return {ang,pow,x:clamp(LAUNCH.x+Math.sin(ang)*d,-30,480),y:clamp(LAUNCH.y-Math.cos(ang)*d,40,600)}; }
 function fireEnabled(){ return G.state==='play'&&!P.done&&CHICK_PH.includes(P.phase)&&P.fireCool<=0&&P.pops.filter(q=>!q.landed).length<3; }
 function firePop(){ if(!fireEnabled()) return; const L=launcherNow(); P.pops.push({sx:LAUNCH.x,sy:LAUNCH.y-10,tx:L.x,ty:L.y,t:0,T:.5+L.pow*.3,landed:false,age:0,eaten:false,dish:false,rot:Math.random()*6}); P.fireCool=.55; sfx.pop(); }
@@ -2353,10 +2353,16 @@ function drawCookExtras(c){
   const wg=c.createLinearGradient(-6,0,6,0); wg.addColorStop(0,'#6b4422'); wg.addColorStop(.5,'#c08a50'); wg.addColorStop(1,'#5a3818'); c.fillStyle=wg; rr(c,-5,-58,10,58,4); c.fill();
   drawPopcorn(c,0,-62,.85,0); c.restore();
   c.fillStyle='#3a2414'; c.beginPath(); c.ellipse(LAUNCH.x,LAUNCH.y,26,14,0,0,TAU); c.fill(); c.strokeStyle='#d8b46a'; c.lineWidth=1.5; c.stroke();
-  // パワーメーター
-  const mx=20,my0=470,mh=110; c.fillStyle='rgba(0,0,0,.6)'; rr(c,mx-2,my0-2,16,mh+4,7); c.fill();
-  const pg=c.createLinearGradient(0,my0+mh,0,my0); pg.addColorStop(0,'#3f7fd6'); pg.addColorStop(.6,'#e8b84a'); pg.addColorStop(1,'#d5422a'); c.fillStyle=pg; rr(c,mx,my0+mh*(1-L.pow),12,mh*L.pow,5); c.fill();
-  c.font=`11px ${SANS}`; c.fillStyle='#cbb892'; c.textAlign='center'; c.fillText('パワー',mx+6,my0-10);
+  // パワーメーター（指で上下に動かして出力を決める）
+  c.globalAlpha=1;
+  const mx=24,mw=24,my0=PWR.top,mh=PWR.h, ky=my0+mh*(1-L.pow);
+  c.fillStyle='rgba(20,12,6,.75)'; rr(c,mx-8,my0-30,mw+16,mh+42,10); c.fill(); c.strokeStyle='rgba(216,180,106,.6)'; c.lineWidth=1.2; rr(c,mx-8,my0-30,mw+16,mh+42,10); c.stroke();
+  c.fillStyle='rgba(0,0,0,.6)'; rr(c,mx,my0,mw,mh,8); c.fill();
+  const pg=c.createLinearGradient(0,my0+mh,0,my0); pg.addColorStop(0,'#3f7fd6'); pg.addColorStop(.6,'#e8b84a'); pg.addColorStop(1,'#d5422a'); c.fillStyle=pg; rr(c,mx+3,ky,mw-6,my0+mh-ky,6); c.fill();
+  c.strokeStyle='rgba(255,255,255,.25)'; c.lineWidth=1; for(let i=1;i<4;i++){ c.beginPath(); c.moveTo(mx+3,my0+mh*i/4); c.lineTo(mx+mw-3,my0+mh*i/4); c.stroke(); }
+  c.fillStyle='#fff3cf'; c.strokeStyle='#5a3818'; c.lineWidth=2; c.beginPath(); c.arc(mx+mw/2,ky,11,0,TAU); c.fill(); c.stroke();
+  c.fillStyle='#5a3818'; c.font=`bold 10px ${SANS}`; c.textAlign='center'; c.textBaseline='middle'; c.fillText('↕',mx+mw/2,ky+1);
+  c.font=`11px ${SANS}`; c.fillStyle='#f3dca0'; c.fillText('パワー',mx+mw/2,my0-20); c.fillText(Math.round(L.pow*100)+'%',mx+mw/2,my0-7);
   c.restore();
 }
 function drawBowlScene(c){
@@ -2601,9 +2607,9 @@ const ENTER={
                   :[['egg','割る'],['whisk','溶く'],['fire','温める'],['pour','流す'],['rollL','巻く×3'],['press','押さえる'],['plate','盛る'],['corn','投げる']];
     $('exSteps').innerHTML=steps.map(s=>`<div class="chip"><b>${svg(s[0])}</b>${s[1]}</div>`).join('');
     $('exTips').innerHTML=(om?'温度は <em>適温</em> をキープ、焼きゲージが <em>返しどき</em> で ↑スワイプ'
-                            :'温度は <em>適温</em> をキープ、焼きゲージが <em>巻きどき</em> で ←→スワイプ')+'<br>🐣 ひよこが味見に来たら、<em>🍿 投げる</em> で気をそらそう。料理の上に落とすと逆効果、遠すぎると気づかない！';
-    $('exKeys').textContent=om?'PC：Space＝操作 ／ F＝🍿投げる ／ ↑＝返す ／ ←→＝溶く ／ Q・E＝火加減'
-                              :'PC：Space＝操作（長押し可） ／ F＝🍿投げる ／ ←→＝巻く・溶く ／ Q・E＝火加減';
+                            :'温度は <em>適温</em> をキープ、焼きゲージが <em>巻きどき</em> で ←→スワイプ')+'<br>🐣 ひよこが来たら、左下の <em>パワー</em> で距離を決め、向きが合った瞬間に <em>🍿 投げる</em>（料理の上は逆効果）';
+    $('exKeys').textContent=om?'PC：Space＝操作 ／ F＝🍿投げる ／ Z・X＝パワー ／ ↑＝返す ／ ←→＝溶く ／ Q・E＝火加減'
+                              :'PC：Space＝操作（長押し可） ／ F＝🍿投げる ／ Z・X＝パワー ／ ←→＝巻く・溶く ／ Q・E＝火加減';
     drawMinis();
   },
   countdown(){ newPlay(G.dish); G.cd=0; },
@@ -2686,8 +2692,14 @@ function drawMinis(){
 const ptr={id:null,x0:0,y0:0,t0:0,x:0,y:0};
 function toBase(e){ const r=cv.getBoundingClientRect(); return {x:(e.clientX-r.left)/r.width*W,y:(e.clientY-r.top)/r.height*Hs-OY}; }
 function inBowl(p){ return Math.pow((p.x-225)/150,2)+Math.pow((p.y-395)/105,2)<1.25; }
+let pwrId=null;
+function pwrActive(){ return G.state==='play'&&!P.done&&(CHICK_PH.includes(P.phase)||P.phase==='heat'); }
+function inPwr(p){ return p.x<PWR.x1&&p.y>PWR.y0&&p.y<PWR.y1; }
+function setPwrY(y){ P.power=clamp(1-(y-PWR.top)/PWR.h,0,1); G.lastPower=P.power; }
 cv.addEventListener('pointerdown',e=>{
-  audioInit(); if(G.state!=='play'||ptr.id!==null) return; e.preventDefault();
+  audioInit(); if(G.state!=='play') return;
+  if(pwrActive()&&pwrId===null){ const p0=toBase(e); if(inPwr(p0)){ e.preventDefault(); pwrId=e.pointerId; try{cv.setPointerCapture(e.pointerId);}catch(_){} setPwrY(p0.y); return; } }
+  if(ptr.id!==null) return; e.preventDefault();
   ptr.id=e.pointerId; try{cv.setPointerCapture(e.pointerId);}catch(_){}
   const p=toBase(e); ptr.x0=ptr.x=p.x; ptr.y0=ptr.y=p.y; ptr.t0=performance.now();
   switch(P.phase){
@@ -2698,11 +2710,13 @@ cv.addEventListener('pointerdown',e=>{
   }
 });
 cv.addEventListener('pointermove',e=>{
+  if(e.pointerId===pwrId){ if(pwrActive()) setPwrY(toBase(e).y); return; }
   if(e.pointerId!==ptr.id) return; const p=toBase(e), d=Math.hypot(p.x-ptr.x,p.y-ptr.y);
   if(G.state==='play'&&P.phase==='whisk'&&inBowl(p)){ whiskAdd(d*.05); P.whA+=d*.02; P.wx=p.x; P.wy=p.y; }
   ptr.x=p.x; ptr.y=p.y;
 });
 function ptrEnd(e){
+  if(e.pointerId===pwrId){ pwrId=null; return; }
   if(e.pointerId!==ptr.id) return; ptr.id=null; if(G.state!=='play') return;
   const dx=ptr.x-ptr.x0, dy=ptr.y-ptr.y0, dt=performance.now()-ptr.t0;
   if(dt<900&&P.phase!=='whisk'){ if(dy<-40&&Math.abs(dy)>Math.abs(dx)*1.1) swipe('up'); else if(Math.abs(dx)>40&&Math.abs(dx)>Math.abs(dy)*1.1) swipe(dx<0?'left':'right'); }
@@ -2728,6 +2742,7 @@ document.addEventListener('keydown',e=>{
   if(G.state==='play'){
     if(k===' '||k==='Enter'){ e.preventDefault(); if(!e.repeat) actPress(); return; }
     if(k==='f'||k==='F'||k==='Shift'){ e.preventDefault(); if(!e.repeat) firePop(); return; }
+    if(k==='z'||k==='Z'||k==='x'||k==='X'){ e.preventDefault(); P.power=clamp((P.power||0)+((k==='x'||k==='X')?.05:-.05),0,1); G.lastPower=P.power; return; }
     if(k==='ArrowUp'||k==='w'||k==='W'){ e.preventDefault(); if(!e.repeat) swipe('up'); return; }
     if(k==='ArrowLeft'||k==='ArrowRight'){ e.preventDefault(); if(e.repeat&&P.phase!=='whisk') return; if(P.phase==='whisk') keyWhisk(k); else swipe(k==='ArrowLeft'?'left':'right'); return; }
     if(k==='q'||k==='Q'||k==='e'||k==='E'||k==='ArrowDown'){ e.preventDefault(); const d=(k==='e'||k==='E')?6:-6; heat.value=clamp(+heat.value+d,0,100); heatLabel(); return; }
