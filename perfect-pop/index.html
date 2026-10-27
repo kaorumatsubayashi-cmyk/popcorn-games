@@ -4,8 +4,8 @@
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no, viewport-fit=cover">
 <meta name="theme-color" content="#f7efd9">
-<title>弾けろ！パーフェクトポップ｜和纏祭 社学・松林ゼミ</title>
-<meta name="description" content="30秒で焦がさずコーンを弾けさせろ！高得点で「1+1券」をGET。和纏祭 テント2番 社学・松林ゼミ ポップコーン屋台。">
+<title>弾けろ！パーフェクトポップ｜割引抽選券チャレンジ</title>
+<meta name="description" content="30秒で焦がさずコーンを弾けさせろ！115点でハズレなしのガラポン抽選券をGET。和纏祭 テント2番 社学・松林ゼミ ポップコーン屋台。">
 <style>
   :root{
     --cream:#f7efd9;
@@ -233,6 +233,55 @@
   @media (prefers-reduced-motion:reduce){
     *{animation-duration:.001s !important;transition-duration:.06s !important;}
   }
+
+
+/* ===== v2 抽選券仕様・共通結果画面 ===== */
+#title .title-win{display:inline-block;color:#b32920;font-size:15px;background:#fff5e4;border-radius:8px;padding:3px 7px;margin-top:5px}
+#title .catch{max-width:355px;line-height:1.55}
+.title-foot{flex-wrap:wrap}
+#btnTicketRestore[hidden], #winSection[hidden]{display:none!important}
+.target-points{font:800 12px/1.1 sans-serif;color:#614f37;-webkit-text-stroke:0;white-space:nowrap}
+#stage{height:auto;width:auto;max-width:100%;max-height:100%;aspect-ratio:480/660}
+.stage-wrap{display:flex;align-items:center;justify-content:center;min-height:0;overflow:hidden}
+#result .result-scroll{display:flex;flex-direction:column;gap:12px;padding:12px 13px 18px}
+.event-head{text-align:center;font-size:12px;font-weight:900;color:#805b3b}
+.verdict{text-align:center;box-shadow:0 4px 0 #aa8b68;border-radius:17px;background:linear-gradient(135deg,#fffaf0,#ffe7bb)}
+.verdict.lost{background:#f5efe5;border-color:#8e8171}
+.verdict .small-label{font-size:12px;color:#896d4c}
+.big-score{font-size:48px;line-height:1.15;color:#d9681b;font-weight:900}
+.big-score small{font-size:17px}
+.verdict h1{font-size:clamp(21px,6vw,28px);margin:4px auto;color:#8d3a20}
+.verdict p{font-size:14px;line-height:1.55;margin:4px 0 7px}
+.score-breakdown{font-size:12px;color:#86664e}
+.prize-box{background:#fff1d7;border:3px solid #f2a24a;border-radius:17px;padding:12px;color:#53351b;text-align:center;margin:0 0 12px}
+.prize-box h2{margin:1px 0 5px;font-size:clamp(19px,5.4vw,25px);color:#ae291b}
+.minimum-prize{background:#be3824;color:white;padding:8px 6px;font-size:clamp(15px,4.8vw,20px);font-weight:900;border-radius:999px}
+.prize-grid{display:grid;grid-template-columns:repeat(2,1fr);gap:7px;margin:10px 0}
+.prize-grid>div{background:white;border:2px solid #efd2a6;border-radius:10px;font-size:17px;font-weight:900;padding:11px 4px;min-height:68px;display:flex;flex-direction:column;align-items:center;justify-content:center}
+.prize-grid>div:last-child{font-size:12px;line-height:1.4}
+.prize-grid span{font-weight:900;color:#ad3528;font-size:13px}
+.prize-box p{font-size:12px;line-height:1.5;margin:5px 0 0}
+.ticket-v2{background:#fffdfa;border:3px dashed #d9944b;border-radius:16px;padding:13px 11px;text-align:center}
+.ticket-heading{font-size:24px;color:#a24525;font-weight:900}
+.ticket-rules{background:#fff0e6;border-radius:9px;color:#b1221c;font-size:15px;font-weight:900;padding:9px 3px;margin:10px 0}
+.qr-paper{width:fit-content;background:white;border:2px solid #ddd;border-radius:10px;padding:9px;margin:8px auto}
+#ticketQR{width:min(256px,70vw);height:auto;aspect-ratio:1;display:block;image-rendering:pixelated}
+.ticket-code{font:800 12px/1.6 monospace;overflow-wrap:anywhere;color:#6e5136}
+.ticket-time{font-size:13px;color:#77583d;margin:5px 0;font-weight:800}
+.ticket-use{font-size:13px;line-height:1.5;margin:9px 0 2px}
+.ticket-help{font-size:11px;line-height:1.45;color:#8b715c}
+.info-card{background:#fffcf6;border:2px solid #bc8e5c;border-radius:13px;padding:12px;color:#4d3926}
+.info-card h2{text-align:center;font-size:18px;margin:0 0 8px;color:#874a24}
+.menu-row{display:flex;align-items:center;justify-content:space-between;gap:10px;padding:9px 1px;border-bottom:1px dashed #d1baa1;font-size:13px}
+.menu-row span{text-align:right;font-weight:700}
+.small-caption{font-size:11px;line-height:1.5;color:#795d47;margin:8px 0 0}
+.station-map{display:block;width:100%;height:auto;border:1px solid #dec3a1;border-radius:10px}
+.tent-loc{text-align:center;font-size:17px;font-weight:900;color:#a04422;margin:9px 0 0}
+#result .res-actions{display:flex;flex-direction:column;gap:10px}
+#result .res-actions .btn{box-shadow:0 4px 0 #6a5038}
+@media(max-height:610px){#title .title-art{max-height:120px}#title .title-body{justify-content:flex-start;overflow-y:auto}#title .title-art{flex:0 0 auto}#title .catch{font-size:11px}.start-btn{font-size:19px}}
+@media(max-width:340px){.fire{font-size:19px;padding:12px 0}.fire small{font-size:11px}.hud{padding:4px 7px}.hud b{font-size:19px}.controls{padding:5px 8px 9px;gap:8px}.prize-grid>div{font-size:15px}}
+
 </style>
 </head>
 <body>
@@ -273,15 +322,15 @@
         </g>
       </svg>
       <div class="tips">
-        <span class="tip">タイミングよくタップ！</span>
+        <span class="tip">火力を長押し調整！</span>
         <span class="tip">焦がさずポップ！</span>
         <span class="tip">異物混入注意！</span>
       </div>
       <button class="btn start-btn" id="btnStart">START<small>（<span id="durLabel">30</span>秒勝負！）</small></button>
-      <p class="catch">目指せパーフェクトなポップコーン！<br>高得点で<b>「1+1券」</b>をゲットしよう！</p>
+      <p class="catch">目指せ <b>115点以上！</b><br>クリアで <b>🎟 割引抽選券</b> をGET！<br><strong class="title-win">ガラポンはハズレなし・最低10円引き！</strong><br><small>※抽選券は大学祭当日のみ有効・1回限り</small></p>
       <div class="title-foot">
         <button class="btn ghost" id="btnHowTo">あそびかた</button>
-        <button class="btn ghost" id="btnSettings">⚙ 運営設定</button>
+        <button class="btn ghost" id="btnTicketRestore" hidden>🎟 本日の抽選券を再表示</button>
       </div>
     </div>
     <div class="footer-note">WEBブラウザで遊ぶ</div>
@@ -290,7 +339,7 @@
   <!-- ================= ゲーム ================= -->
   <section class="screen" id="game">
     <div class="hud">
-      <b>SCORE: <i id="hudScore">0</i></b>
+      <b>SCORE: <i id="hudScore">0</i> <small class="target-points">/ 115</small></b>
       <b>TIME: <i id="hudTime">30</i>s</b>
     </div>
     <div class="stage-wrap"><canvas id="stage" width="480" height="660"></canvas></div>
@@ -298,91 +347,1343 @@
       <button class="btn fire" id="btnUp">火力UP<small>おしっぱなしで加熱</small></button>
       <button class="btn fire" id="btnDown">火力DOWN<small>おしっぱなしで冷ます</small></button>
     </div>
-    <div class="footer-note">WEBブラウザで遊ぶ</div>
+    <div class="footer-note">115点で即クリア！ 緑の適温をキープ・異物はタップで除去</div>
   </section>
 
-  <!-- ================= 結果 ================= -->
+  <!-- ================= 抽選券・結果 ================= -->
   <section class="screen" id="result">
     <div class="result-scroll">
-      <h1 class="res-title">結果<span>発表</span></h1>
-
-      <div class="score-card">
-        <span class="score-label">獲得スコア</span>
-        <div class="row">
-          <svg class="icon" viewBox="0 0 24 24"><g stroke="#4a3520" stroke-width="2" fill="#fff"><circle cx="12" cy="9" r="5"/><circle cx="7" cy="14" r="4.2"/><circle cx="17" cy="14" r="4.2"/><circle cx="12" cy="16" r="4.2"/></g></svg>
-          <span class="nm">ポップコーン</span><span class="ct" id="rCornCt"></span>
-          <span class="pt plus" id="rCorn">0pt</span>
-        </div>
-        <div class="row">
-          <svg class="icon" viewBox="0 0 24 24"><g stroke="#4a3520" stroke-width="2" fill="#5a3b22"><circle cx="12" cy="10" r="5"/><circle cx="8" cy="15" r="3.8"/><circle cx="16" cy="15" r="3.8"/></g></svg>
-          <span class="nm">焦がし</span><span class="ct" id="rBurnCt">0回</span>
-          <span class="pt minus" id="rBurn">0pt</span>
-        </div>
-        <div class="row">
-          <svg class="icon" viewBox="0 0 24 24"><g stroke="#4a3520" stroke-width="2"><circle cx="12" cy="12" r="9" fill="#fff"/><path d="M8 8l8 8M16 8l-8 8" stroke="#e2453c" stroke-width="2.6"/></g></svg>
-          <span class="nm">異物混入</span><span class="ct" id="rFornCt">0個</span>
-          <span class="pt minus" id="rForn">0pt</span>
-        </div>
-        <hr class="sep">
-        <div class="final"><span class="lb">最終スコア</span><span class="vl" id="rFinal">0pt</span></div>
-        <p class="rank" id="rRank"></p>
+      <div class="event-head">和纏祭 ｜ 社学・松林ゼミ ｜ テント２番</div>
+      <div class="score-card verdict" id="verdict" aria-live="polite">
+        <div class="small-label">パーフェクトポップ 結果発表</div>
+        <div class="big-score"><span id="rFinal">0</span><small>点</small></div>
+        <h1 id="rVerdict">結果発表</h1>
+        <p id="rSub"></p>
+        <div class="score-breakdown" id="rBreakdown"></div>
       </div>
-
-      <div class="ticket-area">
-        <div class="ticket" id="ticket">
-          <div class="fes" id="tFes">和纏祭</div>
-          <div class="big" id="tName">［ 1+1券 ］</div>
-          <div class="sub" id="tSub">社学・松林ゼミ<br>テント2番にて有効</div>
-          <span class="code" id="tCode">P-0000</span>
+      <div id="winSection" hidden>
+        <div class="prize-box">
+          <h2>🎊 ガラポンはハズレなし！</h2>
+          <div class="minimum-prize">必ず何か当たる！ 最低でも10円引き</div>
+          <div class="prize-grid">
+            <div>10円引き</div><div>50円引き</div><div>100円引き</div>
+            <div>ハーフ＆ハーフの<br>オプション料100円が無料<br><span>または50円引き</span></div>
+          </div>
+          <p>どの特典になるかは、テント２番でガラポンを回して決まります。</p>
         </div>
-        <div class="map">
-          <svg viewBox="0 0 100 92" aria-label="屋台の場所を示す簡易地図">
-            <rect x="0" y="0" width="100" height="92" fill="#eef4ea"/>
-            <g fill="#cfe3c6"><rect x="4" y="6" width="34" height="26" rx="3"/><rect x="4" y="54" width="34" height="32" rx="3"/><rect x="62" y="6" width="34" height="26" rx="3"/></g>
-            <g stroke="#fff" stroke-width="7"><path d="M50 0 V92 M0 44 H100"/></g>
-            <rect x="62" y="54" width="34" height="32" rx="3" fill="#ffd9a3" stroke="#4a3520" stroke-width="2"/>
-            <path d="M79 60 l3.2 6.6 7.3 1-5.3 5.1 1.3 7.2-6.5-3.4-6.5 3.4 1.3-7.2-5.3-5.1 7.3-1z" fill="#ff8a2b" stroke="#4a3520" stroke-width="1.6"/>
-            <text x="79" y="52" font-size="7" text-anchor="middle" fill="#4a3520" font-family="sans-serif" font-weight="bold" id="mapLabel">テント2番</text>
-          </svg>
+        <div class="ticket-v2" id="ticketPanel">
+          <div class="ticket-heading">🎟 割引抽選券</div>
+          <div class="ticket-rules">大学祭当日のみ有効・1回限り使用可</div>
+          <div class="qr-paper"><canvas id="ticketQR" width="256" height="256" aria-label="抽選券照合用QRコード"></canvas></div>
+          <div class="ticket-code" id="ticketCode"></div>
+          <div class="ticket-time" id="ticketTime"></div>
+          <p class="ticket-use">スタッフにこの画面を見せてください。QR照合後、ガラポンを1回まわせます。</p>
+          <p class="ticket-help" id="ticketQrHelp"></p>
         </div>
       </div>
-
-      <p class="staff">🎁 この画面を屋台のスタッフに見せてね！</p>
-      <p class="cta" id="ctaMsg"></p>
-      <p class="pair-note" id="pairNote"></p>
-
+      <div class="info-card">
+        <h2>🍿 ポップコーン・メニュー</h2>
+        <div class="menu-row"><b>ポップコーン</b><span>種類・価格は屋台でご確認ください</span></div>
+        <div class="menu-row"><b>ハーフ＆ハーフ</b><span>オプション料 ＋100円</span></div>
+        <p class="small-caption">※ メニュー表の確定版が未提供のため、価格・味の詳細は店頭案内にしています。</p>
+      </div>
+      <div class="info-card">
+        <h2>📍 屋台の場所</h2>
+        <img class="station-map" alt="大学祭の会場地図。正門を入って2軒目の2番が社学・松林ゼミの屋台。" src="data:image/webp;base64,UklGRjpXAABXRUJQVlA4IC5XAADwFAKdASoMA7wCPnk2mEmkoyqiIvEbcVAPCWVu+8GyP3Lpc1Ps90Nrfuvn4+7w0SmfRfhJx39g/s/5z1OuRfED6vpcf4/Lv3v/x+am9v/2fW5+xfVf8uL2L+cDzZvTt/nPUT/13VPb0J/dv/RlKHw3/U/63/B/s95nf5n/d+Hv5B9a/rP73/m/+r/ifdp0R9sGpN83/LH8v/Mfup7ff9/x5/N/5n/xfl18EH5p/Uv9h6lMcns7QX+tf4X/m6cj9yecS9I8+/qqf6P7Yeqv8y/2n7Z/An/Qf7512if2tZ9FxBnadEmF211AZcZY24QGwoV9riD8cYHwEFoSfwBzZITndyfk2hdCMM6vKVppSfMtkkcbnsZXwThNN8reHZHa36bEo5Uw/4i8b3/xEx2+FEL/h1trycQkTC417LS5cuXLlyyeoKsS2TkYUtfjurx+G+g9wCCXYU2FE0A5AyJt76t/6ujYmY7ir3o/mu2ifLqrnRcu76us+HVP8F9mw9d12gSsRAje/+IvHD0O1WhGWVv3MjzVA4krmyC44geKgQL3VaBaTKm47PzW/rvPU14pj0hst7L9XJf9MrMJDEFBVhCVpw0/0Y0ID8t6at2eCX3fuyRw1ewBhtMs4bYLyK449jNZ9LdkPecZHqKvI4QO6SDDkjBzWAQmTgQwuExnSFSgBGQf+I2UwrXLG8qA12NrlPdPE0+Y7vtTbm9tguzHzLAknroZzFz1/4dRDyIXyAVZxw9DtSIGR56xZn5r7nFJ4Z60jqIU31bov+I1M4xodKrOWTqyJcei0H4wJietKFK7GxcIf2Pxs8/c8l851fVXblB2aFxqIMipGYnOu1fQdQzSeqZDAco9Bpvz6FEybPMWPv1SPzLLJo1tePPUSh62aO9PMCud866IUgTFWcb3/7AiUdpfX3pLnvfDDE2U8TgMoaVC7IOxjsQAgF7HSbuh5zPXNv60i8acs1QL0zg6XJyMZERyGO3hILls+p9KN39nYHTpQKCWPNNlTy8Kl44l+wgp4NtKlaXfyMTfqRhodOXMp+LRt+I9aEo3HFmZBe5m1m7su1lXIRGP2TdjW9TUK0IIb/m9Yr4fOyCv59Vu6v/EXj88rG6XSlNpTWKp/XauYginMojD8XtAsf2K8e+3tBznNASjYwbDhuArRdH1Xl7gUMMOYG8neQt5fbqrCbLGq2mYKkWxVj1jRMo4ZW+oz5qVVB34cvAQ5n63MGpYXwz9QVr4EQ9JqL+x6UQEYAWFWLMVNrluKckL42DvdGAiozfN6JMqmH6oAMIlyk/ntHtbtJzi8O8v8zGF65QOS+L7j5niRo5dprYPWnbbiAmZMur+64GC9KtzczYZVZxvf/EXjfAZy1lCd25fn7v/ko5Hww8j7rEesaN7/4i7aYrpuhjd6UNhDqfFI2IUEnA1Bnnk7p/QlRFqrsaUTinbSYu60Ep14Pz9EVFmFogB7WlcNts4Jkug2/8ReN7/4i8b5HxmlTemUNPuCo2SmglPYrufJiHpLX0utX0XHagISmXEcoj9sdbTzLjJ20VFBBdDhoPVDOv7PihZ2+VEei1rd8n84i8b3/xF43wGctZ9G0lilS+wSan7DKE2mJ0L846VQo3OxgdtyntNHBUi6X2qW6e0PSlz57eMNdFSN6nfiVtvQlY9ShUB59IBen97ON7/4i8b3/xHaLjE0llX3gxIp0G93apsW+KSbujKlSpUqHs8+PNZYOFgv8IwfMQU0u8mme1gniX11zfxs/e5cycya3jjWnpNRf2PSai/sh7zjfNETg5iZDxL6PGWAkY6n8QaaUugRkqRXX+0WpA34WeH7SS/IyPK/PDz5LNo6TciBDU5c+zlfX/xF43v/iLxvf/sniZkbOO1f19NpsT8lda9UJOLHMyMdaPFX2jGLz/n/LjDWDGiBQfmwh8MEI966X0TMwrlsQzysYMOMZLJMzFPxQ/oydX0T/RvmjAhh17Mjb3/xFRZjP1PoM8XDj6Z2+J18foXxe/uUqzOD1WjnSylW6+ZljtRtGKb6OdFHqEVaZEEW/UBOFAZPyZfECP/cfXpInYsZOlt+V/fwGZm+H12JduYgjGPYhesIgA+yclWpDy2fzViML6Pzd/Gov7HT1Yhh3ztwk8XIQmzP2g3K6p3aThdBnQ1FgoC0MYi223jpzCk45VnMqJ5X0KNGj25pNswb+koAfyvU7WgjiQdj7YSednYvt1nN11ERq+ZfgUgJMUYLHJce6JHOyhD6m0ahyUNzQwd8/531JUYMGDBgwX14cLREzkWLcXXlWLd0f/q61uBLllHJEALUt2PQkdVHktPXTMlW6msSdxOYPs+/XOdm+YNpEuNgedB9Doun6IFH7Ue8ZBlGEojX8EkGY2Q3YytPVfzf9iAMzCgHUESDnHav6+4E9wB0+C+2NVBbkQDsr1H1VNmi/4i8lTbAPZMtl3BvuLei0tiDdauxWOBoNT8oZjiFIcPt0Gk7nhDlWabLDfk4rLnlat7k4Bwr+f40+BXTZyEvQ/cWmx+nov+IvGhtwm65vHltcszDiLG2vD3Q1KEHuh7qBPIjX1aD/E6IiFUBoq8nRzLe1Ugq7VP/u2yV0umvh1bG+awbfE6rxrNQwIMekgQFiodHO/A0RUujaprVzJWAZ5DfNJjQJ0K8ojI3GppLhZx2t8alLisVr4L+s/b8v5l1s+NE2SoVb1F8yqA2GL4M20vPsyOdG9/8RYGRN/0tMLo96jzbzbnIfM0o8XxfN3S12EtgjNIH7MyblBh7b+ay6xtyxvYkFDga4xBsRL4YXYflV/oj2tnVwjnncmrWaGzhFU3VtM6H8rAH0i8ajTq5WQnDkSVeoOCz0a+54xOr4baDYKzCX6VRktpkA6tqp7ZVc/95EXwx4gmM5kp6glXTDzsUoCkTBTIpwNKrHaSyRIrl7QIo09OIpHUOn/hO1in6o1dpo3aKcDFLfiW1Kf+Iu9d/TgmieOBt01SX+uJ27nsawPNawRBwP5whtHzUEZqYGv40hs7WrXKjRCToVCKvIua9QLR1g2gE6V51fkbGSW0NBCXX6iqHUaBRDGoTKV1ChZpU33HIDRHNyDfco+3bKZt6e4iTY4fun/iLxvJ5IWYS1QM+j0b0GTJBLS08lmc3bVMvPnUiAFs5EbRTyP/c8qL30UTdCVK0ur1mJ70fQ8J9Dtaz6WfowZxj1pAPKpd/W2Z+R11S33mpZAZXVex51FqgFvyLgkjsnvbVj7mlYaSc+PfpW405QObK3X1xGS40Aac6hACLwmnXMYxDpDkgZRRAxxO0EoqmqP8gtaWGNMzB7mJwXePC23APncp+3h0WewHSfPlc1L75hekPVdhn2ZnxSJRNRrLRuTooEBbcOX1ZaVAutx2JYUu6h+6BkPhckyvOpt5IQh4sgzV0/oyKS8k+p/DmO/BAdsUgX3FSxYF6zYLWV3oZtTW1AtJJ3L4FSR16jsc2BD7enoz8A2aGA++ZFfMMSe8nsHobFtuAApSkLtsIH1t4VxeJNJQau9QcbEF+65Be+vsoQROtAhrCf8VKIWgEBuh9vex+gaQLM9pL7GV7N+DrrT5L2Chuu8aZTHKC9B9pS4NxOrPXr/A0GQW+ttWP9JYMUuk/fuPFZOXQuoNni7YwCN811Zcb/S5JU3p5ClWlYNIt69wYxaVv7kPMFvGoW0nQC45jJBomT2S9Xe8qnh+BnSBth6Hl0Hb20qRrN5bL7qskZCiBHc/rNfqvr6t41NM8kvfPIl2BpyXDGJSoSyAv/Zt3kwkjgfsymZxEohCclc7ISeKa+S3JtsT0FSHPTBqJvrugrhaVa9U+5CQLXCm3xFN/+fvSmMrQQ8onQrAuld0Ka5RAi3slNv637KAE9uBIdmFdseZh77wI08HGAH59CjRpUqVKlSpUqVKlSpUoH5fFjKjOlFjTUEeeNjfWY16Odt8C7ErXmhZpdBNuZkORSOqZDG/kem0oAV2upWcOwnGypYDTg3pqVLnU4XV8PQvzjtX9fb+vy/kHB4hLNHpc5bZwsv/M0woDLKPTLV4Wv+/S3Kg5MGAWb69PA4dTo3tnxTW01fY9JqJu+xvhr5TgnmCJBFDzDMPASxjmKo6muiU3ClpeWTRN9d5MjdCQ2WuWI1pcq/XweqxXLRuZiHGzX7Y0tklx2L6nJoGlxQoYyr/DtTNE/11v1pVnG9/vI5je6ITVJ9gltL3A3/oFZvA/R3X0qEdoStTBR23H1F7Ojbhetd6kxEomHGbzbi29jgpUmIek1F/b++3OcReOHEGbQ+luw4ouWMGL79smFJ9NLcZZLiWOYCnzAmMnCTqoMzxMRO5eio3Ty1q+c/wCjdNNELGY8en/iLxvf/EXje/+IvG15gRCz3ErRjQQwYI3v/a3w/lRCWqTkmdHxSaOTrkn2cnKzTgZmgOIAMV75aW3fMY39OILePcG6+fjNZ9Ldj0mopJxF43wGHCE6L+x6Jln1wUwd6iHOm8lqR//coKmPt6hb4eabNKS9tr0/QBj3wZZRVCNTo8d/uJqU/8RZgEqTIhpkzm/BeiGoU1n0uA13OCj0mom7ZwsZLx1bqYSXbk3/QvHLva2dMhLOB4pi/kBop99m5kjtUEp/urBUTjnobQGdo7Ry1n0tyPF2KV8gnhnVOcEyy5TsBoZBDoFLVFYWY17jiqCd614BkonGlxx4v+I7boJbUp/4e7yaXq99PNQX1wu31I7hemVOygiURCQUeIQoh/8ReQUmXYuBDSRv4R7Cb7JHcVh5tM+IVwLLfRaxuJw267vvDkm1dNyU2UvG9/8ZbNLWZ+1rIYj+5S+KDyAA8o7RoM2/0o1ZLtilLVZHTtBPmOdBdrejEN49OCduhvLdKRVkxD0mpubNm0pr37HpNRjU+7FWr+PongJzHOO1fzKlGmkUrUYvh/Mh3KD15uL/nClh7WWf2XT6WytTANl1yJ+n6lzpQxdvBtwu4Hyg+p+M1n0t2PSai/sek1GADW+YH6QbE6FDGVf5re1i3P2+kP2U0/RofrJ2cRYmvRI2QENbQYhKfsL52s1UGvIlXORVoQ4uPGHP95rxg51n0t2PSai/sd/vPKIhhtxstGw58wv9ku3BI+t5yBi/X2n2fSEKHZtvsCTWMhrdRA05B+yodSZmg2ATj/FtPGnH3FXtRf4WWpFC/4i8b3/xF403JwLLqFTa/0gG9gK6MMXUCavdSrF1KfFfARygjdVf6+JgS/VPNytk4/QtYlb/hpu1NeXYcbKqUNE6F+cdq/r7gT3AqTKPz3Iv4B0w74oD1Z58aQKk+M8VQ2ZBRQWW0LWiKsp2oDGz76KlA7gP5iqT4NtZFaB43cxzjtXzxqRU8hNgdsDlBwb3575yudZPG8Iq+VcPlKwOfC8rGG0KLWNHG6ApcUc0+RrC856S/yzgVbbeA+a0UitiZJKS+agT7MRUr84KnbnH/cBDQsAAxzEn4WcB+pTCXx0wCawWS80DZ+R0pc7bdgp73wqQYqyQoW4XpmRxOYyPnIPa2NzgsPdhx3A1+wb9MJs4Ncb+YG1PcKmIyNC1sjJc00ovj/E7mgdh+nnlEEOM2I8V43bsQeDmadDakEHn/qqzLmQVqtSFvY9L/Da/chKBlA9CMGgvnDui8zhCJGJrvMblamIKe5rQtW9EdKfcLnRKh9UR3kMPp8Q+uQw+8hha4Qo7yGFo7CfR8YeB+5mAAA/v53IA86OmpNzEkYoOCg9zukDSh+lshb+5cJTnTutI6zIgleipJAeVEVptIhVTCReu+5s4txNkBl25V35ixwUpQU0cXxPWFtEfNrKczdGSjjKgexDxwYUSN3DTXgyL85TI7KHkx98xlG6uk6F0Y1kT76JqmOGmNvzHLRWMxxX5b4jJ9TGkS8hab1c6aeubiL0M4tqmwkCOzxa5cGSD0/Sgy0bfae5ez5ZyRbiaWc8VA+Ru8mfahUbVkzWfiLTANxYNdMJ9v4MT1GAm3UACfKA+/TkZdfx8wr8BF0Q6VShfDnCvdqSNBAaEZepvw4inV86VrQauSmrQI62cpMaW8COv7qL5mR0o4Fw0yOCWTgNgQPreJ8lCHWnQNW0k10Wiv4FnoyH4VB19eUU/FFMV9y+BScAA/eso9Rxv9T0bLj4mf8gBwvubBZ7j+cDRUHgGZW0gR/0SR+/53MnDoAtNo2laCAxvYf3GOIIPIZQw2YM1RiShJmgHl6GoIj9EwVRDXnqYywE6SDSs3A8Xn5Ancch2cJf1fzjoBfjg+dY0KwpOizW5d3p9Xpwuml0e8uscG31xLp6Z2NZFjs2qm/fnwcuTXjXEtq4lxjTZdbFVW8Rd39mDcY2WrBIve/qfwn5Evj26KVRm4CWzDXYT+j+7KfdsovlJxpn4aBKDn2wQCSLKcWN9rIKbFU+WoOqHjXNI5yedYTrNYfqS2gYUOUNqtTOQAACIvmOVO10IwtVAltVSpOyvimdu15sf61ZNmiGrXrHw2fnHlc/QOGGZwA0glublY2S4Fiz/PEnBlK74EjQHxdBXb+E8ilkJyIH52Xfbk/QQpEiJmJafeATo8vR0EliYBftyE9YS8CnTdxs9x+BUbxWY2EqeHJhWlcE3IPQgCCUbbNrXEC4gBH/mEArjMANdd+Fx54figcY9oAl2fQY4UvddRH1Cr83/DUOhZ+Ix86b5Jhmasj5SVnnwKJVUlSC0xO4R1FwKRjPgdNKndqild/NgoC7A+9uL60FWmEMgxhc2H4xUOJV1i3uRHSMQbbUdsO89RK10x/J7yFNZy8r++t44uvpUlWjwG/eKOeIbbUULTTbe0Q7UcSvRoKO4tfDSr3LoHDrpjmAwcS+hGWDLru46yBX6AmjY0VU7LWWmyAnkOB66dXg6z03kDfxGM7FVkzF8jE7XbAKr16s3+YPHQABmyWKCdfNGzJL4YmczmN8InBy0Gd5oi4BCJoAE3ff1RKQEy09gKnBkCm0AGS0OUFCIAV0MdEweM4YCqJdVA+2tdERfwyaohhSGtN8QR+p4sPXEWirLFike09H0O1J/z8oMVURyBPnZv4tsXqU5r9gW/tNYNSax5lTxgHlWcaQDNWI6b+b2SifJn7BptMLT9wwtFwCzfo/1gdcjbtS05mni3+80FDa99JRHxd7s5/PoFJJ1qyZnSvuqQIYoQOMeNeFDLsTVn0nh/1bEpy0WWYjYJK0AKe1X4AAHF/Dsa/D/w/+l6tgjA61gczbH3SiHQYHDsFH3o2W0DBlfLDcKi6JXnXv2qTyZIfrK5yma9maZyIbL6msnP0JzqY2FegnUDR3YI5eYZU7hdbagAg+3kUo8P3x5Qv6V+DgnAgcjfsoPoPO5271FNAxKdL1MXdA0cDfspEeYW6YEvGFQD3/SOB7C9nuQK2eyJzKtntdLvyHOLNNH1GJ0M13z43CuSjCa8a+HKb2AfOy/HqbHjk3ZH19/9UqVbOrkFEwfpw8lDpgjMAp/dfnkdoXpQVGqsXG/Ci0aJhhkvYy3Gs9EYWOU69YkBWM+V5HskMM56FVoGe5g5Iidi7oVxp0sBmCxOo6Jr/wAEZh1tzSaXdumlbxAfvtsn6k6CUXRVk5fJ9A8ntUY+OG6L8A3CMOEyFYNgFue61NvwO/As6WcdDXzlFgDLFqmm3SGVaE6EmUzKOumjh5T7H2gtHvT9LQzWlyy0nvWQX0XrcUrxPZkMi3NCmgPakvrDDvRr7JJZegJR5rRO7oQkcEmpy94SMAuSYAOYEPhCgqM852tezQ7VZSuX/EQm5CUk3MtBrmIIg2SRhGtp8Xsqb7nCw5CtvSxDOLqIJRFMCtSHdbirrTEDJUZoWsdlScUd9YkUgd5r/U6DhoLvFqjJECrOoAd0Bp6dQfsyoPDEDC8VHM7LUDsZJNiHW82CTSfbN1FpndkLwxuYYKiWn5pWmuYrJzJ90ZW2RCbjVQX7PWyGoQxvJ26kAGF4KPe/RnS04dfCxLcejl/IVNBqlaLgq4Wka6rk6JkgsITK8+1BAq8hM+1upF4vGZ+G/meJ9daPhQpL19VCAAWMEZQBj9tN47g5hefMCOBq6lFhXwNSZErtJukD7SgiCgfp7d72xIYek2EbxkZe9SWS+msPjcVtnABUNmY1lACdEj9Co35VtgPMXRj+25KyUoXlyrKXGsrPvWLoszWxmLSxKxly1N2TCsFjf12dBsx8H1/M9aQ5k2IPIL/SnJIqPZ+VG2z8hfNTwnZiKAUeSViKQwbdjZ6Y21MmFemZAFOX9S/Ts6FWQrjG0b1SGSkPJHFH9WuuIfmjy6mXug1FoTy0SrwuaIyx3dq7WIyZL6xY3Wfoh9IRaxP+jLnToE2DB7ksmDrHtI15PnjL+uNuTVfYgWWShdlD1Ik6UvDeKsuRKM8D93gPlff5f4cx1i3DbslwcZseLh2pk8JzPeh1r3CRbBPOZy2eYGlL2Hmqo4q83kwdLEGlqfE4SnIJbM+Crgp9a06l1FlvNH1PCs06ErR8oG9IA6df7xs1zzGr+cQUlyS3J+xt6uDRhm6V7xMWNUPh/J40Bou/E0zacJTL/CbhX/FDppzoKGx01P1dJWdwdgYQXlPIcrJXEh7fL+Em0wwkMlMwF4ExdgDTVK6rWu8vDJVA1ta380dn2sDkplt+mIrL8nGPD8JopDuugYDnl8DgS9mFHTxD5C3SApS4cNaQ8h7gkzNwLZQ/JD6kT3gnLVDRNTE3QJl3qiMJ/YtltSEgFUQz9e0SYmDR5/ku+fPkcQLvNwUvIpQNf4OO1riJMkqCdWIyHkmlfwL7asKQS+qShYzrYaYv82e2xEuX6VA0oVANywC81Ocq/ArT8hObZXw//GajGQLuTuI4aTUrfQWZ01gr1k7e0/VaIioag0Vz8BorKnR6wOm/JxXOQeC99uQPUoWceKj7UcFAoTTd7NtD0NX/bEwAAAANPTFAfBxnR7H4S+V5XdxZDedi0HCPmPIVu9xuOqCqtuQaBtrzigDtL42MwYXsgl38O18LNEiZU6QZG3/lY8lxEva0/u0BJrEFpptatpTzcuwLSU+VjDuq9/AN4XwWW6TTgQkIJlqZl3Fj7YkEUKhxhA2ZOKq6dxAhel6mipCDrk61BKXNvPaZd14WxGbl5y0Y8vY7x6FmK/En258vI51WWcQH6xbpdVnh4bhNyD/ABCM6S9VNFAsM3/tgX6ryDXfx/3T2RkzC1Mvk3p7whJQzykS04DRsn9UZ4Dhr+fgk9+Eh6uUaDskaQ2WkT99zN2DvoSMVn/+B1ZZOjYDWg+cgXgUIO5gKvyGA3SRFt8APnOFGG5JwKAaV7+e20PZqhE3Oik4C1YgAkoAAAAFGvYfv0CeQmlyehizvGrx7KhkSXkiXl6cc7LGP6lJ5X2Alf/Ljza1IeEZhZOoCaGjxNi0g6ruHumDjhTRgl0AC7wDxN8CPV8EQAKXpGvgn3D/taSUuHjAOmTTLAtkywy9cPkNak5EfzUlwod4b1fTYgtiVPmAJMEChU2gspq/UCiQAfMiWXZXYmBuV6ukAGt2HRwaFklYRK5amftvhUxJDrM6J5vP8tFP6SlZFMgG0tWkMLFG6ZZki7C+8r54+9alwBYai4I9jx0fPb3pboB5oFb48513DDZO0JwugCLaSm6K3/jJF5sy8YklDY2wvgBxwGwLH3/f9myXlDJI6YClx7adn5QrPS+r5eSjQUccJ8Eame7R/InECbUB+0VD2akGIMPQIJmGHVTumQvFtD6IXe8CwVRBnB5zBHgOrsmHtkVG9uEjWmKk+viFAbR8TNGzEF6ZIBScIcbFOdXKgHO150petDSCP1h1bXzpAAAWBlciOl3y23jrEc4RmFrpzlwBiH7v1LLhJCcyuxUOc/1vR4fABbJrQpOrufIWBneHJPxrKZR4d5TOu+X5pjjvaoGyoA5L+/5IaLzVsLctnDjsu/Hn9oho1Vgz6hV+84ArKSxvH69plDqETlJVlFbszboIv6YpEOo4jmnfl2PlzShwH94Vd8ugDmLfagRbn+MmMIGWmDvz945IiF/dgIvVO9VebOeu8Jy6T0D+BqY3ZXXHEMLXAzPXUovFbohLbRMRKmFWmHdg7Ci2Bl3zKj9IQL6Ks1xRAAAKLEBXjkmn77eVoE026emz5Sec9MIXZKs/nz2EF30pzepeFoahnp2Eyzn8zFHBEJqQ2mhyDgfCh05/C1NimdT2Xtbv7Wik7nFXAkEvZqEzTDQN4L+XklP9PeuEcSMEsbhX9Cvv8TGOxrm2fpS0HeEtvGSgbtH9QxxJJ+Tu0yGCoI+XOV7jjgh4enLhIfpEr8/oOZFbXMA0VtS77Yixll39HIApF5px7Qty5Q8TJ+PUGIQvVtF5cJtro97eEoQn90P+yb3YdT0HiiAAABecMRmJ65UAsOZyvsDSqLkGp+WWDV5zK+q4/bb4PP2ap1cNrcxhgsyGHmu2vCz9jA3GJfMLvrbE/z7brmuIh25bIvukLjTzP1XYGEKmyJiyKZ7XLSvJXsSy49yjozLcRFpfCjquQUW0WQrL1NkX8aN8eiWweGBnvcZ1qYpRFUtTCC/AvOUd86+lDZfncBV4aB3tq+0jIta7XsOrUG0SQYT2MW0bEO3jUQ8EfYAAAGM3iFWOtT2JZg5xMRTs+mK9tyxh1vOJDcUq0Kj5msrYsIsTw7KHJFFKgNevk8IsLx3CS61IbaDBwzAmIrko2kHKHUvR3KpujXJPMVqEdlUWr5+eyA73yFIA/FoBZCR1HB1l0mCbBjjEDexOoy9Oxk773TpPMDJAkGn6rfwaT5dadPaKQofcYD9dWdkOj+PqdnYNPKg5cPo3ZYmlooxwgY7zVxqKswNFMTNE5T3o1u1MO8DNoyBDgRO+SgeOmY33nF1/pGhSH2UieoFvIhnD7JjYmcMfj7oArXPnguU6NYZpKJm+vnf7bQT1LufhOcPR+9YFa+qo1G/Jhh/Nwq/cJbWyyToINhg60nJmry8MIUJ8Yi/7ayvkTMqueTNo5boohoZxpiHXK6y93zhiSMgyGYua6lGVIPBRpm+ripHXUfaZeRBQuvivwLPKL4LVGjPgnMpj49isetXfqdkhtwAZIScRpn9LBIhbKL4dmSGfNwsU3WBgopsgYUk5UyruZOqO9sqT/Y6mQR19mj5+PJVsdJZIjpxSZzZ/xXLybjw+A/lTvIk0uM6PYRFFEboLlAClla8/veHAOUK/00kv1IRDmSfOTfwYVBFIYJaGIPEl1bp+KaO/HKg6tLrVbOEjX90c5QWOEt0VMHIOJcqei32JUlT3Bqb4/AAG1QY68pByY8OBSd5f6MOuXVFpD7RmmuQLgbxDhv1qc7Xm69nC5sPT8WsVzqIiRWyJKjFnBPqUqvMW3Ut5CM1ZaIK+hez8wZYywTfHazgm1d/e55YTgy37a0UZTA34+JkttjK8oNjinMwfro7rT/ooTJDySs8q7lfUxp+65v0hvvgDBri4lmsX4VvkG28+EAHom9VsB56yTEL3p5dF7LML+oJYfR2durlmLluvTa9vTJlWrBH3JrAmG7w/MOtodMciy/y8bNCROvVzfscKXqb89gsDUpNktJxiHGGGGGHPr+9WV0ntJlg7siy5EtNf8t/lOBhmH3jGv75Dx7LYh4smEuOE02Gxh+KEkYBerCvXCjGQ7JfNONmK4YXyffcmlIy6muxr/6Cfd5G3qlInNdqomm5xW6w1hCn1KBYF7/QfxBkwcEY7uATSEkFnNqoEd9koWlTI2BQb15Yt8UQESaa+ai54EbAzytrMJB8/s59p+BoA3XWmZadbj2BztragtRaDo9mDc9D4sgTrk2aulxhEjPZrqF8BK/sMdKPuI6Ja7A84pwY1K8PqAnbQG2d/50YF/BnD2OBP+vsxkFDtHw0A+RAbESjaxVxeaSwOr5fH6HdNrT1WqMpocIVzqOaIxWS8bufoSh7T55dQ8hWq+Uf4sJvl+i28hTFO5pHXRWSYgxEDRFzBc2vMxZQxfkSMqix2hOtY0ghxvMRkjFHEUB7XJP2gbTqZoZhAIVR8yd1euYn39A+sbUeOpStPFsNMo1/L5bcF/jd2/3a61wnW21xu+S1ZmZc3ujvTPfFVxKGS+X2F88d5cYI8XJBNbnmt1jIMwHg6L6Lj3HKZumE5NMb6gvH+8JWZ4rfEu5iVRullJh3Fk27J+ryaHRUPuD6tD38RBOjydHRMLj5Bu6odVahSc6h3ZspvVOdjhoyiB8pPNT/z0ALG2Qayo69J55f2jnYwg6zVSybghGpvqAN+sp8zwM3uesOhG2UJxM+Ryp6SFKsBuQI2hs/x7sgVd3bZQ2LSWKti/6lQOqC3BQ10MJV+NO8VOUOnL4OYTOGFURV5w8YIcIoFMQnIkHylGumH88uP+A0iDQjwi9wROR/MdgsMKhDO6TuPjmwsOqC+Y5ftqHV7T76Oc77nHfXhMB8HbXV1BRtlLRtg9ff8JP23K1xiLhIHTPkjFYuXuA5oXQ0lOhhsKUCtErDAhNM546D0FL5WDPXWk7gU0rpId42OXn39CC/MYmcIsTHlu2MLyfVsVC/105ID3a9bVSEYg0OFmdXM8yWA1qNFXf5gAIX26W+iyW5xcY8/t1H8ZJoK9CqVbPYVPtAwqK1DVoXsWE5nAEtHTBK6edFQhqg1D6UN9uC1qFFcKj5VuNu0UFQPwo+a/BQ6iaLC+M2OzuIrv90ZBYNc5ESjphd6VBqxBe8n0IpT7n71iWJqThuRWAf3Qtwx+Zhbtk5gcMEmYVXNib23OwldW7XrV9CNJrxVawae5lRPqseDs85hiv55Mi2Vu61mXuy7CI45XXemfTRMfOxkg1FoWJfKJ8Ct/fgxgCtWP/v6n4RoUAQoKp6vqwc2ChA6kpBMWnEuQGtws/ndlFWL+HOjlUFLGdOJL27X3aopB0Q3gMWvS0VQ2Q2pMH4lymhE5M8//ZotuzuFgXBLvGaTQa8uRAaFt19LGUznZ4xsPp/BSZWG4y6qndCBVYW6C1YfHjhwnQYDreOQmK9rmLk16ERD8bXMAYo6qdZjEr9dHZ8IS9EBGogPrIzjfr14FvhYs6cBgqYtGAa18kglIQ10Ipqw5HvpcLeVro3sGQAzJUNm6434QYJqVWaFmRTbTTGWI8Zqt/EJMB3M98BBoOJQXvwuNxkTq8M6QLQT+8+bwzU11WviTiZjjsm4TqmKjhX801mcN2iku5pC0Ms7HIjwKCLPnknKClQoic14GBkfrXIREy63L+CbtBJwo9AhbapwGwmw9ueUkIEmtRnDYwr/1X+2hOTyAxymcNha9YtGM52Wx9OeXrwlGeNQcMDuc+4pXEACZLox8zQeEJbAz9B4n6d7rlbLR6LfzmzjGvmUTogvwXIyTMJYSQfCVChSuqKNIkS+RJl9BJ6yuPOSYGiqPdvEyYkKy0A3QnRW+jbhKBciJ2J+z7T3AMxavue8omL5Ne/i8sLe3+3yemETMwWDqG0zAPj5IKpJIGcPdutlsRcnFrWiJ2jzlPZbeAXFL5haxWe2/VmSVNzpPn8kQpqTuYZVWzHeegHH3LFXrbMIOoNXK5ZHoAV2loVEfzOqk9m3Get96dN6w4Pmh/HiRLOvpbN48VdhWcIt1nuZFMnHs9YboI16dhww43876YzIjC9tcfdw2Kx+p7dbRfhMkfl7GTor1mbpHRPGxJXgyKtgC0fZwChwm6AkvG0zc6aWbX3dybBHExnImpJMBCXlikimyplrQOp6yLGJLLyQytyKQ1tlIL3merOEIblxv2G3MUpBultIzBOnCdllc+fYvD9H4MIHISPUqnrP461Cwowf4CSXHSSR2i0G+Vy7tSrzDFcQd/aJdVBLTajO1NwSywrNfZenN416hM73xa2d+L7DapXrGXEGDTJyBdwT+kQraYyQGsxy43kXOwsej5vu+Edc3i8Ra3r8cfbmHPNd3ebf6tLGA9UW3GLZEA07Hgc+hf7CGoz9fVgxuT1Qazp1GhVziZLaYh5GsiU/2xTP8L7Zd68FpqeRZyuauqx2SdAV5thtX6XADBLenTATsRA/RwRm7YResBEOO8Wfr2etrRQV7JwxMsrj+cf+Vq0IAedbfu61rGct+jY2T7P7j6nZMcQiW/MdcSr7x1Gdk33Kpcfa3WdtejAENUdWF4CpiHtk2Cd4v1/3WceLB7pMKVSGL+c8mls7e2uyvqE19etq/6nIgfTEjxYtPQ6zdGv72CtOUZ8VN7jHbyD3Fu0rWMaaZk9/Qf+qyuANm048hJnm55FxO54Xy1KY/eCjqeYEdmPH+t1/qpEFj2WM3w3P3eOxTgDD4HEtYZDM/vGn+KDcGZr4WsCj/DizkX3agu+d0ra3BQfbh3nDd/TLtCXHDgFei5mouR6wMmpOKhEtOArSopG4+bF12WlcO7X0AZX3SWfirL1JvSSJOnGrVT8ZGxBytnqdK6F6jN7PHVEbvUyNGwwY+IyX9WX/G8/Hbq9sdFDme16Jfgn3d+nf5no+VpKG/uNu5FrPG4hW8xLtiPFj2eMVbGDz0BrnE+kTs/n/6Zg+dXbOsvJBHCAZbOtnVfvQKCCzI6BzyGmcWucZ3GNpNtnFRJaWzu6S6qoDc73NePc7zNLczTh8hYpyU/As/CZiQMBnP1QUuMHqrmso/3jJxy1ZRVfn5drCTF2Zf3J9gke9/e9iZj+Wo0rQVjCqO8HKpam3Y6CfkV4vJNpngvtyTomvMcNppZXw2l6AKM6cZi4mSJ6tPQ/EVCXTYwjgDFJKPqX/B/VOSt5Pkz48LWhs3eBQ7udLLHvUKIY2O3tBxtcgfVUXS/4wUa2Wpjmx4NzktzBe5RWX7OMV0pxVSiOaE/gVdM4khjCI6LkVkRf+BrvFswMbS8rUcmFLV7RyXMANiWhO4k9DE9NUiZt9j3/ObFqoAm9cVr/dzPm4QTRxcBPyd3aSK7/D/TovQxtw6X2NueG7v+kI83ZD0EeudN9RcTT9PYfoJSEO166vyRwB0Ml5m9P4I7GVtc/4o7VXfheHj06cGLSMS6KvN/k0hqkH4KjxtmuqJ4MfF6/5Uss5Cil76RMWtJ862WvHJGe5d3p8zUealhHPHrW8H/vmFjYsYFtvoLxr8oW3nBmS/YlF5KZj/Dt1WpcHyT6XKsAAG57iSWaV6xPe4eW0/gfuC5eLukXG6njAF9ICCRNq8gdSrTE8d7all+wK+Ml8l6TjSA5Pi7XKeRZQ9zF6WCdRXFsHHf12E/ZSWwR573KfZmOb5lYKHzf5fIviNretCZBzYnjRMi6KOqNCM7YWKPLp1s9mW1yUQnURk/z3LDEQldfXPSAIAHcy18pxt3lbICWK5Wpy41K1pNpd6gFXYJNwKa9aE98w38wQbaO0BCWxsiHwS7rrBI7qnLBTHLNgRoGWgKx52E88mBVyYy+vhQC26iIZ2iwqmfVlOTxidDw5P9tdezDm6miYFM4+tJbSJtJfolj71xwkATK967y2YMbZeVp3kKNm10IZjWmzMUHFys7bXIJFgdGxLqo5nRUe0P1CuINDVT56h0NRXIg4rvBtKPkb/MM8ODhwpkoc1ISySG6TEmtB/3Qc1WO74njmnSIjFksbsPb/FxGFsyEoIgyhB7EyNZMFrr3XiBmZcqIqRwG+DyBJn+Ng2i3N9ho/hVHoys9Hv2/yTMIsAk368TBvUwUSzRb0fniUP0/LKBOKvF2lUgeoQ5pUM71pwb29zf4zB/A8X9SeV0vJPw4/rfUho2fKowXom9JlyZ8ELRiKOYi0nzxjwuR0V6pFUYW1rav8L0QMvnGGoToS8B/FPbt8p7y+B4jHty2m4EoYkh94/XtJon8eoT2SK4zyHVe1Y07dqmfTdAtvopmndSoOoDreRJ4SuQYha7wFgGO2uupeJ84EZHxwXeiweUw/5yQCGpvjwO1XLlDIcV43IFIp/5yNUh4F+oBcSkK9uhucXCwc8aoiocqrG4rnoe1UOlqdUZIPcdz/5SjSiwJJ/xgqc+iZ1ufejVGdvXnwGtD+huF/TTD4tk4jaKmr8rIXp78FvtjpqUp2LeZuSMQzh3/+5BKT6FYWv85XRGSnoCA0xbVJvV8HYKhU8n2b6/SqSubhUgRHn0z4jjUTUHTf7q+Ffxrfq4ghkBAN29GS0dVYXbA9Jr2av98sKnsC3Zwumh0EEmSRcCtWO+Piv38rq0TkiLyQo5120N2SRlLK8Un4qLhAsbtZReyXzGB5a6m/KksHsJnevkaeV0whIEcv/Tb6fKXJ2V4iZAGSiv+VCEmYOtH1Zts8WYjE3d0IM5AjO9hCsHfi0DpMLm1livxGoetN30dHuTN1/dQDpeL3xHnepVx4JREQrHjf8Xffcrmse4o7fc9FeknqqtaKuibGAZaCje37aCY/cw1G2SgGmC0swJh48OvX5hrrfEyS1VrYm5GyJIFJfvxuFPk9dVZZGg8YAf/lnfNFTIu7O8OYbHbxkxSjk6CrDDbMDijxayAHYtnwUPpqdvrkz9gTFwScm+7hPfhdaIKAWe9YSkOEoz9o4nACqS4lpQZUzNvz5WFpnW/vEKVmwSGDI90HDxNIO89S4fT2gZI+Obrp6+q6VffWDemYDLQHhIPcI8R60MAWlu/uOndFoLrJeORW4+wQYBVKx5TV6NI+rNlMP4Q0kig050ibclL5dmJ/Yy4BevSbWo3XCu9BENNPRdDt3eVNBJAK90uI1rRsoewJNx8jOlSbMTl3cos/w866N1nGbFGYqs6yzWIN/D7srhdDT4Ctyuyn4nMUjyQUzb5SdkF6130C20hB32rz38WmZQO5yC35KRVj/cV8INlqWINzuAm7rm7qS5eGztmGMgxGlzGyaLJh60zBs3AF1J8VJoN+9YNWYp/zErT4Yjgcly8p01RvOemDIopa4uwbKE6oLy7vxwOA6bjU4cRxDnLRJ5qIxdTP8TuG4keDtT1bIb3Tfq3MfF5yUG95jhBdz2Agg/5M2lx83FgmuPjm41iOyxmk7cZau6jw4lBfvTQSNrZSDAcccm6uEEJc3Yb7NopWQMF/Q+eKsfPJKuMybZcU0aCDkQZQ8KkVhv9w/2tQ2iycUzMg8up75ZeFXU3/mI8P8i+a0aEieTcSOCugjcRv2fLj/h03m3XoaRfcfsNCD48qM7ukxJMBb2vNaSyypc933fv9A8EtSalVET5dC5KqnH4i0lYJzCn1nMszTnw6URdA8W9ZSr1t/BKcXOCWfDStw+ypuLQg55o3JufhetfKHArE09li3ZrKEJs3xtLfyphXv9G3xyN6AcUZfyUhPGjBJpClAVpA//FVawqcAMCsgWnlvlSCYvu3nnJT28xSK3mkuc6VmKCBNZwfFY7ZFSiPRX1OzrHdrOwPpC1Vl3gr063MBOV3LqO5IUf4Ec2PsQa7zV+dTJ0C7Vg230t4agmGhCHZJXPYkxnuZdBTYhxxDnYsyL5LgC7n6RKTlSE/GDsj1ndqYzXuezQKTo0FfWmhp+IOjNt9ob3VhxUmV22ARAEf2ib+BeF5XNj0aV6jRii3HJHIE91rORUp1FqJGVjK/NKznQTdy0Db6wJKV1MIP7J/oLnl6insgq5YZjpmRSzen7eZRDrpncBkJJgDwiQZLtCRb3Ktsd7FmMjXNQX0oxLls06X/4S50Lq81IBtD9bKrBalJ1XRBDbL1boKR/Zbulk6RquInfikfYzXEY++uz0PUl/zd151wudYpz+6Emd3hPkrLYj5ySst7CBbhXGpQ3YzUc4l8B/+OEekuWeZb/puOskm+EiqPGX++1jX9CzqbqKjS+lbUF95LVUWbIOQW1sJhfEW9+2H7pf8SGEwm2T/PZq/XN72Qy7uFcgKivBNzN8ESadsLCmj2PgOsiQRhGTXxYNasIqUfWPqsl3RxqyWbDePkVEDjN7d19sKrz+6jq148lZr7RfosuhzDosL6GNITIhjI5WhyH8dG8fgoJH0nXbwWquJgxwOnIQiVCRyt23vvuWJVt1nrGQ/n/7uY6WydiDuy+AmggnOzyyATlcO6D3E/YXe5S1BVnKWpsh5ESAxPKSn90sbxSqke+W+VwaILj4HOXwG5UgBJ747fQvUXPjVl6l1ODkYwK+bPg8Fpm7k1tR2M86I95c7YIw+diJdf3fXd3mnXpQy9nAFEo4fVmAkQabkIWcaDyy4EIfE0Inh3VBzp9CM6zLBGZfxCe/d0szmAtCHQjBdKoTcZIfHX/Y4WGau8Xd6+2yBWeHRXBd2srom/aKBpahebBaHneVCzAd0fzb81WkAY2U5QDtHxobc5/iGOAQ+UGNK1K5u1G4W8azc/Yg3cAUueXMYLZOZsrUW8envG2OroJ6sBZ/hmeyvV9ConX8um899uZTJxLNl9nEbnlWY1VuJFuDZeeN0EWR571uMouwEBXO/Xo1YpM1jetUK4mi4tPqCNzGOtbCJ6lHGf2HWezn1S1cyFQRFgw7xb62patTjUH7Td6N0o6n74hq2hKeqimf1j9N5qeCnJK8jwXucxt/o+Sp+r+y0RrrhcImfk7JmSu16CnadyrMbXLM6v3qPrxdiJPzwBsc1ImlpcIHUYwBA13jR8F0KCGqnLjSryE2IAAAAAAAACQn9z4BPrXF0L478ubAaSqU5+xVKVzVybShvfpVBh+z4+Bx0Ze2guCE8diBUewguU83W+8wd04DRgJE5UviCC4gQ7MSY1TPtozvGfXYTm1cXoZgIiyeH7ouikT3mAuuLZzj6guAhzlRqPTEtMsf0ltxuO0E9PIIa1N6IVQzhSnwQOM+bJDI+JtUfKxAPPiMAFFPagqHbhlL6aZH0QAB+KiHEEp89c4JoI0rkUz96HTKTy3o87l3W2ZGl0MWXxh1znx2jMeMIslfu56/BnzHOkVKgBZcxjtLctxgzfZ1xmxr312UCGh0HKPUJOacPHPpMT+kK5OZuDax0UfzA7zBrMtGwAz+OnKCet+S7YdEFW8deYBCce/YvCzn4CZBSiyRUz4ZVOsWRJ+7keI+QPq8/ah7bk3AWr24WJsseczcfu+skg5i1omwdcOjlybRavujESTEi9i5P0YrRRJXQpz5bSthC/IjF2wPr00XnXBvi0WhoWVRzEvO4Y1fbiO+oHadlMbrFjmI2hZUuEmtMqq0ODMbCN7EM86k2KvqL6ZcwvAdPwzeXiAYqjhgvYdIUusWxGOHb/sx9u2YLXiD/heUpGgixLYveOTp4r3TBQhkoUraNOsN3S/3vui940DjfTpc8B5neUp0NExvwQbbHiQMgdAmZBgpXqITzqk3N5WVKO3rUnAu5Y6UFLrhCTaAK5bgcfQGhMRXvHC8FLkmv1re00BN5rf3BH1q6NQ7+OPih1e/XWJHZhOAYR9/uyUAOlimRStn8W9sSImgajjsPEeLRH+6gv2Q8xRWsrdERD8ZFad/nM1wqQTPpRHQ73UPoE7AqW3TedkArSThCI0j8NG5trw8fPcy4hImKT4KHs+qWbLsvbzB/AHnjYskmj8FH4j0bzxHk/QVORjdg6dTE9nRTrKIu2nEXj7LqZCPxvN0l478KMDr6u1PSMwUadxsazI+lcyW+ztQwNByhTtkj5gyM/hYLkPaGNiBVNjiL7T9Df0Lz3OD5A0CrHrwVszX7gzU7JGBzEU0WErwX877njESy3TNL7q7pRIyXAfgTJLpfbNLeut8xz7S+vsakyWM1s7AagPY9YT736LsXI38r12v2ekzNQmvNC5ei102VkFkDn2m+eQOsoTl8ZiNMbTSHwPu0wvImlhP9jcWnIfTPjICC2nIeKj821O2vv+9wY5P5dOjUt1OPmxcj0haTNBLn+n50lQXOpdGpcg+1wO7hg++UKctvpgmJAUBgow/Uw4CnCN8uDsSS7tl84Xub8HML4K5+cyaC/X+0Cc67awGxuqDqu/E7PNQwqw4wTjkKHoY8BRY3ijtcW77gSPuHwmgvlpirmZFzzLf+V7emTtKxM181Blgmdl9dLG9vgAV1EFSpEBQX1GjX2THJHkpdy4l4cPhQbrJsSFlIxbWGABeByDd1z+h9/HXDc7xlYuJrdXgWqHlBOWncMDRR7GJIZBGQW7fdaDzVLV2RIyn3xmUnUa5cTD1PKFVbBRAKMHEEibcfO2WTS95A9CfU4cgfiHaBKUntF17b4Q7d8uYXBi2S+6jz7Rfyy4iW9qYf5E0Z9b9r6lGMez3MiZ319HZY0IjHrWuvVOxIKEtCSiCYkryoyke1RJSu9/Q1rfEFsA6hOlC0NrsFwjbm4AHaJlDA731FOx5rBu4mgSzTQSS94R8j7ZjYw+kRkDllZOlGrsvxEX9s5e/XIqVzFZB57I0Oqca8rosaOtF3IM5l+PsZ0qfL3n032Iap5TpL+ntv0NNF2AfftUXQtXwGxD6AjLN3gWd9wME/CKN1Fp2rtGuEAVCnm0HX9rwmNjWC1nHNNUQzS7q3Gu+3GqSThjgOuEbea/ZNG5zSF6Am7VBTzelAPiigB84gCHTWOuRo6F/OWLfT2cum26N3LpAGrniJpWSz8qatlzXSFL8OVc20/qq6eq0EqQXDkbA0dGRHy07c9dnSBBeuaPPwiZusJu3G1vt0GFB5KuXD4soc/nDdV34N2f4XswWxv/h/PQiJw+Cf+CZYGq3R3JsI0l5taDQZqkoD6CZDh4b7aoazyIFPaqFNW3R24tGno+1035yDS3x7aqyCUa2nZWWb1y/vnLSehlrghnzNThukT2Yvtd8E6ePaCmtpjW0IAQtgnOApzlCRiXN0Z+8eX+uTNtaJ3omDMWpV17IQLYmL0i9ULa2Gb+YW8vPUBu3rAN0EzuUkftZM97grX/z6wWx8SMhLNTNJuxixGRQ5wEn55tApRdfg6fLKQ6Y25y9vg9nHHDSE6n1ofHG1rXnh62FsMtpDxuWWl3DXFF5WxYheZi5r2Xgox6cXIlP2uG6Eq4K+Wec6xC8iWk09bqsbipK9eyF7MSzWU6aaVuuJMop+ndRO4gDQBwemodvJ7QHYQ1lCf+MPKlZiiySYf1tiV3fxIkP7II/6iPVfM4IfK14rH8OD1n6r4j8AX7hlEgkUobXHUKz6WURepDxfq7Z0uEyIe6gjf2batIq0oH9i7/iuzP5OikmLjDfLjYxOSPcBqRdszzgPnGuhu8T2IiDrasAlKPZgZSx6aA47iBVXCdZY7jhQIMHZ9SBGgdDCpPtexCtQhzjdJUe5o66zwchNkAkPQNO/JMNeIOURqKMtiRo4OaZ6ytdU4p509dW5uggKEgKhCbHqbg5+ZYb8OnTgXcAbNfIxTQOQqWzwpwMDm+E13oQgJnwwi08yFOULtDDIM/ANGP/Ha+7ItJeyb5fXvA01s4SAqhQqtqR3b9yN5uDJ2IVClqapX/wyKPrcaoFRlhAjhl0fyrbYLHgU1DDxVyZsyzHGZl2DnUGeF23ABSNyFk2b43uijLrXR9Ubl7DyOjHIBVuRs+HQMIX8D3o4umbPzfClWyQeC7wWnSQn6SjR9QrsFcNZJIDRMjjs6ROYYELajr+rK0b4/zbwvapl3TAEkC+MksU3/89Pt35wDNnP+TqngVRcYqd5oQPUn1o+uxbHvnZLAnrhCaCO+a2c5HZPKplFBoqfqdRgCb7DBJnFhytJoEtaimFi4GyVm5MG0Y36iO0q7poxH+SQd4W3jY6SQcG1N3IIxqoHXNSg+NTaY4rHzIQiZA7ZSbSSFHIsNuGNixj8BzJEaV2QEaU7q5zNPBB3TRgrrBpgOPFVXhxu0Lw8HHPu5m+V0eUUNYqmflorlrpJ9tHoUXQM+kFarVYViMvd5FGp0+nOa150F/5moy587OynG85Yw01sA4nv1ZgZ9F+YPZX7OoFhlvsaCI/KV4HYMpyvOwHGMMJwwk0Ct8L7f0sStm+FaOWOdqRjAQfE+BuP9UK2vI33FodxPuK5l3o8pqK5oRMtLsoxX5K+BfDWVIf0QEyH+zXDNlz2bpgpLEfLqi3PMXlBugkRa6FQBHvX3YzZwkiE73DOO5dfldJEcit77SR9u5UzXc6vxIPsSjLSBesdwnm6thF8+B8kA8+7BzUAA5EeyoKdlGMyvM2kCmK6AOptrecZmc0rrxkgKhCJemfZ1J56akqOCjcn3DCnggCqzLVcWziibUVh0jbexIBuiCeuKOAnYQB6EGUteFtfqLNwYr5QZqtBFQsoqxIOXoHTDUmpAgkCctgyKwpfOZ14HchrYVllVh4HqZvXP6WX7ZCiqQNfayxP96U+0OwIh6lPCcbAe3676Rwy2zRGC/ow5PuFeDzBoUkbVXu2v841oEc8Zyox9l9cpRzZyNL+yEcqOikPF1p/x/Jev3Onfc4P67HjaC3eMSiya8Kw2xlycA/BjYgnfvbHJOGIfn9hFSUhGKuRuxtxeLXMmITvJgZcqNm8r7i3kiS/5kcgb9NU4XFSjTGkHkBdVVEZ8i1OKL6iFzsMQdtAQalo4EtewYGQk9k78RbRFIxHngX0u3NnSM61EHo8sS6q6WxVpgMJ32do+y8U0DLEnsRwV3HP/IzG4AR5AfPSH5F4LKFkiPE2m8f5KDtMjzOFkBnf60VCkf67dPjy3I0LglWeid34SRfAxAm/iTKdkmOAWlTR227PBW17ZCt/crX+nv4BqxNlgODdanBCqjUvcOr3QInkh5aoGsWf1hGhn6/ynuMdCM2JmwLQXvrXj1bYeUwe0NgineDkrKB3uNBliywL84Bxq5RU4+iaBZPvwLATEMV9tSkX7PS5NNglmj7udoUXbAx7VUPErQCv16QhknIvVSqUsMaPvFgb29vI1eSoxrWUheHpEFzmcn2JZR+kmJoKtqtQv7MGiH7RYpvPYuO18MQwxhK6rya0iux/V3DY+9xOgNkFrl8D0yx4HvxoFSK4U4fgGyqfetKOcBnX78ytKq2AfTAkAfXz/nA9VnqfZOdE/Z7I9YvUVqg32ilprK50CLx+du8/MOszkocFEAM3BFT1hyxTYnx2mQ3gsVgPwtrhSZ7vQ2UkHI/BBrZyFHB7ZS08VYd6awc4JXILomDfMf7RlcrJz7pINboZsQIbbdHrKmex6pgv/3Dpz5ydWLHFbt9tdwWkBh//W5qPtAMY3pE1OL5LwZ7X9ULwQ4Xi7qjs2bSch5jcmJvV0ZYi9gaQE+hNLR1Zls3bPeU2lH1a80tKJ/pTYd18pe72XZvk15TvmCga0ogK9/YnmWcl95tkBjbGgsbvk165DF9IEnNvtqIf0PYI9qas8hir0U7unnufemtWmRZVAeM0lQ/xENDi+6ijgJ6f6/AFz0Q0dSQaDO8mL3i2I7RNIoOxY7iNdrgW8wM73vgEIN/heUcOvoaXtGsqJwOcqElOnKwHGYKdiFDqROYfyodue1c0j8AzyZWWxokp4gTC+yx28qGiiy8Ire6ZaAklUKXVVnlr4NogpgtFxZCir49ArfmYzy8unewlP7k/sXfDezrPj/PvKOLOKx3gBIzROr2RnJ8Xz3RmzSCCzw2UKAohzmaErDjXEVeG9kz6jbbby0aITD6DaGXz1U5PPu6X9it/QopM4oyA1omXiUFJs596zq7NwtV1oKxD3J2VckMV9YGFAuLhY75baEefLDPyqrCTEFQmhIINkMbRiZq+9041+1BJvnsB6+cA7jjvLg4uwT25FaY3xq3CAC85SSJLu7cSiIbfvH1BwAhQXUq/nTobwps1AeldhWshtNXv60L+ET0uvOhrb66CF/b2D2LNHg3Eahu6nhTcN8w9UxMODT8YChq3AO5Tx7TNyGZ9gv/NE3IrIxs+3hv3j9JvBQBBiAWlAWAAAAAAvqsTquZFH0K+dOFnEHXjFuWJkt6ijPYs+dz/Q30uYM3/ELQv1M5KKvln97bcTdC/aWlffMEblTOh/M7k9TR/8Bp4ByMRNWmJHeWZBez30ic2BGYL2ZAs3iE0k1dl5XfwLSysobHA1ToAUdyuHO++cvjAJDBKw9RbfceJlZzHjLmu8Fg+jG5yLBGbpQCRNCGoRx3ZQ2pVHkQpwpuad92NYI253bfXlh4qLlvqOWfQoTlg20Nlz7zFOBGZERC4gvu5L5fya327QmUA1remusHzjTmDzIYZj1ONpEKj92JvkxKke5FQqcRqdar1gx00niyUh2yIBhjBvo9GJVjwHxQ0JoAiutp7alttLtSSsNbB1PJ20sfAu4jR5OulLPnQlBfcOuZYaTcKE2x3Ps8UYzBMWlW8jI7SNZkWp8ndFfuVvRUZLafdvYmiJTHTu76SccZNhVHL1QfG+Ji++vLyr8FEmTtryhphyJS4QmlkIEJz7K9B7uVYTgPGtzmnxX7Wmq0mPpQbp7ThZ+arZKjUzwsSasprjYz9ocI5kUxgcfVMFFZOwdtgXYCaGfkcqwYgeDTvM8dQujexc9ufCE1ritsm70F934yqyHjrwhC7YBZo3KtNAJ7/ry9R1Lxkxf7oBlR5jIP/AJOwgAM3BMiTFSvnUQlsb3n/b+UVxX2JJZmjQpxElY7Ia2QirEksrjYBgUhdTdzf4ZYuSWYaQ9b7GYV/JHj12t+BxEB6Wn/fZXMYhyKgCWDpgq9RWxPnJHoEjB0ujw71FzORVbDnFs3DBy7XrvCDsMSsvnubu1glSo7YWlnCFKUbcTyElz0u6rEBT01CSO0YSPi9CP0jZZh8H39TE/X98RHgtheTbuFjiz0ar/oZIVZRHYA8Mtcn5Ij/PNc6Wy7E+wmgMhw20ZaF6nNWkLubMU/v1tU75WH7ARAXAABi+AHAwJP8yyuCRzr6wY6qelEo/fH0/cPX7UK/nNNXtuNRh4KwVvjDs7bavtcL0kCjPw4VZMfiiaqkQDEAaTjlGx40EEp5YyVYfJF5v4yBNX19KmKjI/X0LLJKihzeNVWFCO0Et3smNUafMf0QQwUQeI6ZZpDeKKg2jq56sXvwaWur1cDfjJjipPYJdaXqRuGd78VaPr2jurzojHvI8lWAVD5qfRnMhN+16U4TTH7X7BPAASy1gsEFAQz74vuT06bnmknks00WZOobRsaWilkqERnjcArhaZtF0+6T+TwlJuYQcVyB6ykIRB06REzS8NU3hkHUT/Vxb0egO9fLzYVf28opkPLOohYnFt5xhhL+EzoKJPBNporKsSsbh/Hx3/xvSfK+Pma/IzJVp7SsL43a/r4SCKt64pkAe2Pa4sUvfwWvek7BLmD5WQpLcnh+aCcrORD9D1SHMyzC0sQrO4L6zLOrgNW1d3f8axYJmG/arTOz9CSra/oyx/oqQOAUZ0aF4a67opKmifVjP76+PTzAKeh0+w040f5TYnPz2C51yMHt8zwMuRMaoBQHsXGJwEAtZBSU6y8v/WafePsouMQfvDTKuDGgW9QUoYjWEtXcOZWPKFOXLSDXin+n2iZOJCrlJDAVGgUya17uhA95nrG7/g4ThzRGzUi7gsWyg3+YnyGJRaCo0a4YAP18qBzsRgz9zBpCuLIg37xVrgkwXn5GhR51qgkNndyMvfK9D9uifRB6jKxHVAB/Fp6HRtuAyEkFviSNHbe1hWEHjKkRMYg1jgcd/FL0G4dk2epssnQe+BGWsXyN9p2ZXpjkm7I7Z3tJ0KGelNIwa79YVQl4YQCGtfzZDoGUKgYoft6YAH4lJ4B4E3hJBoBWHHzjSPu2+6izsz9l28N88+uDYkvMSPavg8tpOZIg0w62fTxQeanbkrdhDymlsMlFPkn31lqY/8+K4gpdNlyLzuEb8XFuBY76lK6OoPL7CNSQbZcQM56ypLvuH1mLMl4HRx/dfzgks/zaXa0f+bT6t1M+4WJ/Hsa/m1xpJeffDkV1mkn3dSZpPM1Q3nz10Cw67+HEsl/wmYoGp9mt7WBBZYzHRWfN0cINsjzTQz+luYZ6wPPC3SSMzqBDZTBwcF01vePt9/JeWsPfhQflB/w54QVvWZZ1e8PxZqI2BpE2xgMs/RMRflrUefBbwBGyhp5rloMRckd3uPfFFmHUtQCXZi73wA8q6MGVH7ow4SSTGoI0sWHuM16cA0EnmUPcWE52rl1vibQ13yxiSHPwYiek9Hujv55a/kpsgAAAAAHH786fmJYW0/E+3PNxM9Ta0v/gSn/MOrx/UL/XwJkiJH4R+PgLOENPWj76XwbiN1Sa9jH3AQ4+svxLwBSmVQZalrA7l7BeBog1jbNTThHqwZihLS6OjsbcmPHm6nAFNA5Rx/Yhip0FpPg+roZPjckwStv8lyaxCwlpUnPH3Vu8N/eD35JmyTlDpMINpR5+e+p3vGTrlz+bLLVyzY9fbUdNW89UIH+QrLRhgz+qFoD1VrBtRecy9KQXEjOdHf/dZlB0L/7cIbsbAtxhZDxHGSs1RYdojGwYrw4aNV2MvoRmAr4FUMM83owKSGJ6AJISysh96XqrFIJH2C6Jn26dvH6AD19jyZVj2EWr5wZa3pki1uNUAC49Dk81FMGnXmNr4d3yKbgO1hBopl1DqoG0AGT711ycosWhLq0EbWStUPGF9fi+7n5JV+kqshTmvz87eICQb5zS4h35JpPYTm7BjFD+7Hl6l+/zF/8j5hyg9lcQzyDqinM8WAweqDQnkzXfr/owpVS6SUtklXuXRThtKfkWKvlN7piOufOXBwzyzPGMzz0ya5Gd9ZTe2tgClYcPePCHD0uEgd1pPbwOKHsAbmB1EwjWxfSVMJkheuIe53Qbqav3GcxZPQukcXEH4kb3h0qAmuN+AAN4fgtJWAAADs85v/VX4PHuxyuWd0RfLlqsiuuBAB7WCpdTo4gLLSaZDq6Etac6r3cv4VUaFkSr3iAB6T+Dm4xowkHElW7oNbs7XA2u8M1BmU8m1QwKRNav5YecBDXdJsr7r9h2ZrzBEsipo1YHElOOAKXWeaFOvp9ENzjC2GsZyeO3jl6dcE+L57Rggl+v6e4OTskQu3hJ9EgOCjccByimuYF7IkygwV4l8M/olC+PWf0VdlnAoI8bcB6/QEKRtUTujgYGold74jfY6CChLUSV2suyAKRTzu87qx2iBL5GFMdoZuXx8n2/ftYDsTm/g1fzYnXT51hwIa8LCDUFNEH0qp+MJV+tCR7WPIOszN+0jrYEW4XwXJipy1fFYhKR9o2WKXDctllsHy2oyr39N8gpmQmFbddlO+DTPBwqfRmpgkg3CFkpPOgdTON3rpO5VhKugk7Ny2GcdDfMWfcYQqCEPpOwSpoHe2HvkqbA1A7RZD7Dt7ZpjtFpK1ksPHOc9o3ln+oQNOL3X4m2h4cRejWs7IlvIVyng5eAX/+pnWcyjgEkZTjeLJamHN1ReiFEbVEvM+Wu9yhDeIyxoB2Yq/GCuczaGcj5WKtR83igy0d4eLiVZ/bbUjYkPRGAWhL/CCG5NhIG2ThlnSkrz8kCasJM0COrC79eB8rsruj0vbhWnA4PVXybk2324DMpARbZ5/tfe/vx3surIMsPii1q1om3HJ4+eh+jjvBrm98LUPb9ESTY4hThuqw0QHNoKP1ivDjUEjVwNkD6B++JVHOT+TDGKgDMfEHrPWZi3lQpM7bnhjTphlIZfoeVHmWvNo4v99OB/KwaVFXT1Uo2Sw+Vrt5HVjPddC33A8FbZdYDqwZky2+BT+AA9Jt7M3N0vjsqUMCA4V9NWWbqBcunamVOV/UKrCdcQZEgcC7kfFzeG/qK/kP20F/AAtTDd3GCUj7T/mR35IZydttGevn/twLqVBEv5SX/qe8gPGYTr71/9VVCXtVOBb/9mjCIysBldQ8HRh4sMkvL7USx/oIYqQjTzXEHvuKZOt/3uf8DuDpOKFdj7JUYNSu6K+Y8Un0LfFYRnXMRYRHFex73amkmbBeh+kFIjiEhIS8OHnpkNI8EoALtAAAA/V4HiMqpnD/H0XIT4ej+wBy+eTypewqNdo5BW21mgBwa9qnFVhsXo+KmK/CNK7IvCMNaoFLzv+YP7noQvDRN5X5OG1j4p+KYBHCfZ0o1Nj2MgRsZqic2cNVtdK+DJ3YIF4ZkxzqisL5Jwp016Qf8Mjd0+cuvSwbbxzkfNIn5Rs373QlFqXE0kKGerbqI4MJxO1Q8kqtNom/+H8u+ZsItp5T+ODTeHcH38WCoNdscz1x+P8mpj8NSj8sEO7FLC71O0KFCunXSMmSWyJH/fRf07O3La4/YrkcohA0vXSYKy3W3KsV+Y9vk9zuAAAACMd8Col/2MaJIK2Pf5SFVlTZA7gWLA/D53Sqvu3HMWiKUyCRUgkx6Q5iTTG6VZJrWuJKXkZKtIY9QOgBT1B2VUphRTeh5jPDkXatx6nW9wD/VjKBP0iuX9aA1aQuH3BsW43e41hcxBy5/LqS8uiDXRfGTpTB36hcWmYV6s9hjb9ylSkxox/YlzkC4+erS7/py4QOMDs93wSL/+rZtLKZ1VLo6WQ+uvLOsmIByY7RJJOXGsEwqwftSjLXNyN6ShrzIdtHTgtpllOyY6b/PXh1MUBiKr8TSlZ/ZOiKl/7Un9Ry9wvBXOCudAXQgAARVCRD5AboJW6Fv4BlJgIRUHUwzjOINlAjbAgT9g3Vrsbd/k1AsShJHArJ3zkBu1sErfZw314HlDNhXYy+/+M7naLCD4Q7JwT6u2myiGSknq/NPI4XK6VtSgtSdbQ2YSFlzgaTLps/6YGrTQEvOwX3nth81jkc9pJbn25HXCebN57bQ23HZvA097x1DDqkIclJ/rUv6ZJVG7icQc6vraLCj+fY2USpqcO+6yOatEN7yUJvYXagHrLOaAVt1acUhiz+1Lb0XRPVCVUPFKLfMx1wtPZWtBlqRiiNfgAAIOsRcTnNrxs3RBuufEleW8bNa3WVMPZmTf5mKhs+HBGRFyCJqf4TR+3a1fX87E4pP0VfdPnqdX9pSRcaGpewh7c2I9EZ4IpwEJclEmQS2Xx5BfzHgV7pPSzr7+7klSdmB8kvruLF2N5rZHcfL8kIhfY4eS0v7sjUD8ARosJ8dpaOnpU+HDYqQrZkhPGVaQsTcoAoMpab0d5I/cyERUKn1+JWOAERGZ02cJWdNKtto9gjNfi1Xov71xoiU6kI9ZLBYkGcn1fwFOHUr8aCoOlFaDqAZrVTY46pgkCGQ9neWlL3oCWVBEq63RqtS/lKq00sBy/szCvhPQ5+N3YDu/qu5IO3E0fbsFekuVMSuovFvyWywBR4lEPX8fh1nSwPkE2vOubq4RJsEMqqHScr2MM8su1g0VDKNiFLS/+//HiS45Tp48KNCkLL59KhqiwqG/eOIus4jLpAKl+aGJr/hA0EFS/eZmCxED4SQWr2orqiDOEbLoKV5njDOFpnV7zqB6vf3kI84kvr/yGEsE43VruAyjzxyexbU2SbaCxb1EsqVRQ/qUf5tHTCrrmcMNo6IeNg2AhIUL6xWtUVKANbP7cKKQbCY/RVDxkHWrkaBPt97mAEw16hPuL/e1QkUm6WuosLh2f+CGap0qFROxINItidjX2crQgOcBssH7liH46Yq+UR2WIFP18es18IWEl5lkhC2gvtfdjjnpMQYRUwOjA0FnKJ9yYXYB8CyucgZ2SgACDNnspVK9pVs0jMrJABpky924uiUioC3J7jqOLYYow0hBFP0BfcIvpIljeFNfLmvQAHZIIdZ5gj+d9WMRBBb4pM3VjmFZKkdbYxouCoh7TAuI8vQOyqHBv8Gj9VRbWYXfnV4IEn+12c2m/zcygHS10ENLwIATo8A/Jw3LQqirPRcIYvWzvpKQIjEHvYzoBpp6R1QgTuYqkVhslgWP+8H0lkSQUpYQ3rlayrJOKVr+GNGLibeHGJkNC44xGPf2JcnMAqGQUiMt6H2LIOk1zdjbb+7rh+zFAIeCs1YF7pzw/VPN+kYN1wGe+e+dF9blorrk9sMTOr3adoLDLwvYUXTX29aMFL4MgAAAA">
+        <p class="tent-loc">正門を入って２軒目！ テント２番</p>
+      </div>
       <div class="res-actions">
         <button class="btn primary retry" id="btnRetry">もう一度挑戦！</button>
-        <button class="btn share" id="btnShare">👫 友達にシェア<br>「1+1券GET！一緒に行ってくれる人募集！」</button>
-        <button class="btn ghost" id="btnHome" style="align-self:center;">タイトルへ戻る</button>
+        <button class="btn share" id="btnShare">結果を友達にシェア</button>
+        <button class="btn ghost" id="btnHome">タイトルへ戻る</button>
       </div>
     </div>
-    <div class="footer-note">WEBブラウザで遊ぶ</div>
+    <div class="footer-note">和纏祭・社学 松林ゼミ</div>
   </section>
-
-  <!-- ================= 運営設定 ================= -->
-  <div id="settings">
-    <div class="sheet">
-      <h2>⚙ 運営設定（当日調整用）</h2>
-      <p>難易度・クーポン境界・屋台情報をその場で調整できます。リロードすると初期値に戻ります。恒久的に変えるときは HTML 冒頭の <b>CONFIG</b> を書き換えてください。</p>
-      <div class="field"><label for="setDur">制限時間（秒）</label><input id="setDur" type="number" min="10" max="120" step="5"></div>
-      <div class="field"><label for="setD">1+1券のボーダー（pt）</label><input id="setD" type="number" min="0" step="10"></div>
-      <div class="field"><label for="set50">50円引きのボーダー（pt）</label><input id="set50" type="number" min="0" step="10"></div>
-      <div class="field"><label for="set20">20円引きのボーダー（pt）</label><input id="set20" type="number" min="0" step="10"></div>
-      <div class="field"><label for="setPair">ペア割のボーダー（pt）</label><input id="setPair" type="number" min="0" step="10"></div>
-      <div class="field"><label for="setZone">適温ゾーンの広さ（±）</label><input id="setZone" type="number" min="3" max="20" step="1"></div>
-      <div class="field"><label for="setShop">屋台名</label><input id="setShop" type="text"></div>
-      <div class="field"><label for="setTent">場所</label><input id="setTent" type="text"></div>
-      <div class="sheet-actions">
-        <button class="btn" id="setReset">初期値に戻す</button>
-        <button class="btn primary" id="setClose">この設定で遊ぶ</button>
-      </div>
-    </div>
-  </div>
 
   <div class="toast" id="toast"></div>
 </div>
 
+<script>
+/* QRCode for JavaScript, copyright (c) 2009 Kazuhiko Arase, MIT License.
+Permission is hereby granted, free of charge, to any person obtaining a copy
+of this software and associated documentation files (the "Software"), to deal
+in the Software without restriction, including without limitation the rights
+to use, copy, modify, merge, publish, distribute, sublicense, and/or sell
+copies of the Software, and to permit persons to whom the Software is
+furnished to do so, subject to the following conditions:
+The above copyright notice and this permission notice shall be included in
+all copies or substantial portions of the Software.
+THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND, EXPRESS
+OR IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF MERCHANTABILITY,
+FITNESS FOR A PARTICULAR PURPOSE AND NONINFRINGEMENT. IN NO EVENT SHALL
+THE AUTHORS OR COPYRIGHT HOLDERS BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER
+LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM,
+OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN
+THE SOFTWARE.
+*/
+(function(global){
+const modules={};
+function define(key,fn){modules[key]={fn,exports:{},loaded:false};}
+function require(key){const m=modules[key];if(!m)throw Error('QR dependency: '+key);if(!m.loaded){m.loaded=true;m.fn(m,m.exports,require);}return m.exports;}
+define("./QRMode",function(module,exports,require){
+module.exports = {
+    MODE_NUMBER :       1 << 0,
+    MODE_ALPHA_NUM :    1 << 1,
+    MODE_8BIT_BYTE :    1 << 2,
+    MODE_KANJI :        1 << 3
+};
+
+});
+define("./QR8bitByte",function(module,exports,require){
+var QRMode = require('./QRMode');
+
+function QR8bitByte(data) {
+	this.mode = QRMode.MODE_8BIT_BYTE;
+	this.data = data;
+}
+
+QR8bitByte.prototype = {
+
+	getLength : function() {
+		return this.data.length;
+	},
+	
+	write : function(buffer) {
+		for (var i = 0; i < this.data.length; i++) {
+			// not JIS ...
+			buffer.put(this.data.charCodeAt(i), 8);
+		}
+	}
+};
+
+module.exports = QR8bitByte;
+
+});
+define("./QRBitBuffer",function(module,exports,require){
+function QRBitBuffer() {
+	this.buffer = [];
+	this.length = 0;
+}
+
+QRBitBuffer.prototype = {
+
+	get : function(index) {
+		var bufIndex = Math.floor(index / 8);
+		return ( (this.buffer[bufIndex] >>> (7 - index % 8) ) & 1) == 1;
+	},
+	
+	put : function(num, length) {
+		for (var i = 0; i < length; i++) {
+			this.putBit( ( (num >>> (length - i - 1) ) & 1) == 1);
+		}
+	},
+	
+	getLengthInBits : function() {
+		return this.length;
+	},
+	
+	putBit : function(bit) {
+	
+		var bufIndex = Math.floor(this.length / 8);
+		if (this.buffer.length <= bufIndex) {
+			this.buffer.push(0);
+		}
+	
+		if (bit) {
+			this.buffer[bufIndex] |= (0x80 >>> (this.length % 8) );
+		}
+	
+		this.length++;
+	}
+};
+
+module.exports = QRBitBuffer;
+
+});
+define("./QRErrorCorrectLevel",function(module,exports,require){
+module.exports = {
+	L : 1,
+	M : 0,
+	Q : 3,
+	H : 2
+};
+
+
+});
+define("./QRMaskPattern",function(module,exports,require){
+module.exports = {
+	PATTERN000 : 0,
+	PATTERN001 : 1,
+	PATTERN010 : 2,
+	PATTERN011 : 3,
+	PATTERN100 : 4,
+	PATTERN101 : 5,
+	PATTERN110 : 6,
+	PATTERN111 : 7
+};
+
+});
+define("./QRMath",function(module,exports,require){
+var QRMath = {
+
+	glog : function(n) {
+	
+		if (n < 1) {
+			throw new Error("glog(" + n + ")");
+		}
+		
+		return QRMath.LOG_TABLE[n];
+	},
+	
+	gexp : function(n) {
+	
+		while (n < 0) {
+			n += 255;
+		}
+	
+		while (n >= 256) {
+			n -= 255;
+		}
+	
+		return QRMath.EXP_TABLE[n];
+	},
+	
+	EXP_TABLE : new Array(256),
+	
+	LOG_TABLE : new Array(256)
+
+};
+	
+for (var i = 0; i < 8; i++) {
+	QRMath.EXP_TABLE[i] = 1 << i;
+}
+for (var i = 8; i < 256; i++) {
+	QRMath.EXP_TABLE[i] = QRMath.EXP_TABLE[i - 4]
+		^ QRMath.EXP_TABLE[i - 5]
+		^ QRMath.EXP_TABLE[i - 6]
+		^ QRMath.EXP_TABLE[i - 8];
+}
+for (var i = 0; i < 255; i++) {
+	QRMath.LOG_TABLE[QRMath.EXP_TABLE[i] ] = i;
+}
+
+module.exports = QRMath;
+
+});
+define("./QRPolynomial",function(module,exports,require){
+var QRMath = require('./QRMath');
+
+function QRPolynomial(num, shift) {
+	if (num.length === undefined) {
+		throw new Error(num.length + "/" + shift);
+	}
+
+	var offset = 0;
+
+	while (offset < num.length && num[offset] === 0) {
+		offset++;
+	}
+
+	this.num = new Array(num.length - offset + shift);
+	for (var i = 0; i < num.length - offset; i++) {
+		this.num[i] = num[i + offset];
+	}
+}
+
+QRPolynomial.prototype = {
+
+	get : function(index) {
+		return this.num[index];
+	},
+	
+	getLength : function() {
+		return this.num.length;
+	},
+	
+	multiply : function(e) {
+	
+		var num = new Array(this.getLength() + e.getLength() - 1);
+	
+		for (var i = 0; i < this.getLength(); i++) {
+			for (var j = 0; j < e.getLength(); j++) {
+				num[i + j] ^= QRMath.gexp(QRMath.glog(this.get(i) ) + QRMath.glog(e.get(j) ) );
+			}
+		}
+	
+		return new QRPolynomial(num, 0);
+	},
+	
+	mod : function(e) {
+	
+		if (this.getLength() - e.getLength() < 0) {
+			return this;
+		}
+	
+		var ratio = QRMath.glog(this.get(0) ) - QRMath.glog(e.get(0) );
+	
+		var num = new Array(this.getLength() );
+		
+		for (var i = 0; i < this.getLength(); i++) {
+			num[i] = this.get(i);
+		}
+		
+		for (var x = 0; x < e.getLength(); x++) {
+			num[x] ^= QRMath.gexp(QRMath.glog(e.get(x) ) + ratio);
+		}
+	
+		// recursive call
+		return new QRPolynomial(num, 0).mod(e);
+	}
+};
+
+module.exports = QRPolynomial;
+
+});
+define("./QRRSBlock",function(module,exports,require){
+var QRErrorCorrectLevel = require('./QRErrorCorrectLevel');
+
+function QRRSBlock(totalCount, dataCount) {
+	this.totalCount = totalCount;
+	this.dataCount  = dataCount;
+}
+
+QRRSBlock.RS_BLOCK_TABLE = [
+
+	// L
+	// M
+	// Q
+	// H
+
+	// 1
+	[1, 26, 19],
+	[1, 26, 16],
+	[1, 26, 13],
+	[1, 26, 9],
+	
+	// 2
+	[1, 44, 34],
+	[1, 44, 28],
+	[1, 44, 22],
+	[1, 44, 16],
+
+	// 3
+	[1, 70, 55],
+	[1, 70, 44],
+	[2, 35, 17],
+	[2, 35, 13],
+
+	// 4		
+	[1, 100, 80],
+	[2, 50, 32],
+	[2, 50, 24],
+	[4, 25, 9],
+	
+	// 5
+	[1, 134, 108],
+	[2, 67, 43],
+	[2, 33, 15, 2, 34, 16],
+	[2, 33, 11, 2, 34, 12],
+	
+	// 6
+	[2, 86, 68],
+	[4, 43, 27],
+	[4, 43, 19],
+	[4, 43, 15],
+	
+	// 7		
+	[2, 98, 78],
+	[4, 49, 31],
+	[2, 32, 14, 4, 33, 15],
+	[4, 39, 13, 1, 40, 14],
+	
+	// 8
+	[2, 121, 97],
+	[2, 60, 38, 2, 61, 39],
+	[4, 40, 18, 2, 41, 19],
+	[4, 40, 14, 2, 41, 15],
+	
+	// 9
+	[2, 146, 116],
+	[3, 58, 36, 2, 59, 37],
+	[4, 36, 16, 4, 37, 17],
+	[4, 36, 12, 4, 37, 13],
+	
+	// 10		
+	[2, 86, 68, 2, 87, 69],
+	[4, 69, 43, 1, 70, 44],
+	[6, 43, 19, 2, 44, 20],
+	[6, 43, 15, 2, 44, 16],
+
+	// 11
+	[4, 101, 81],
+	[1, 80, 50, 4, 81, 51],
+	[4, 50, 22, 4, 51, 23],
+	[3, 36, 12, 8, 37, 13],
+
+	// 12
+	[2, 116, 92, 2, 117, 93],
+	[6, 58, 36, 2, 59, 37],
+	[4, 46, 20, 6, 47, 21],
+	[7, 42, 14, 4, 43, 15],
+
+	// 13
+	[4, 133, 107],
+	[8, 59, 37, 1, 60, 38],
+	[8, 44, 20, 4, 45, 21],
+	[12, 33, 11, 4, 34, 12],
+
+	// 14
+	[3, 145, 115, 1, 146, 116],
+	[4, 64, 40, 5, 65, 41],
+	[11, 36, 16, 5, 37, 17],
+	[11, 36, 12, 5, 37, 13],
+
+	// 15
+	[5, 109, 87, 1, 110, 88],
+	[5, 65, 41, 5, 66, 42],
+	[5, 54, 24, 7, 55, 25],
+	[11, 36, 12],
+
+	// 16
+	[5, 122, 98, 1, 123, 99],
+	[7, 73, 45, 3, 74, 46],
+	[15, 43, 19, 2, 44, 20],
+	[3, 45, 15, 13, 46, 16],
+
+	// 17
+	[1, 135, 107, 5, 136, 108],
+	[10, 74, 46, 1, 75, 47],
+	[1, 50, 22, 15, 51, 23],
+	[2, 42, 14, 17, 43, 15],
+
+	// 18
+	[5, 150, 120, 1, 151, 121],
+	[9, 69, 43, 4, 70, 44],
+	[17, 50, 22, 1, 51, 23],
+	[2, 42, 14, 19, 43, 15],
+
+	// 19
+	[3, 141, 113, 4, 142, 114],
+	[3, 70, 44, 11, 71, 45],
+	[17, 47, 21, 4, 48, 22],
+	[9, 39, 13, 16, 40, 14],
+
+	// 20
+	[3, 135, 107, 5, 136, 108],
+	[3, 67, 41, 13, 68, 42],
+	[15, 54, 24, 5, 55, 25],
+	[15, 43, 15, 10, 44, 16],
+
+	// 21
+	[4, 144, 116, 4, 145, 117],
+	[17, 68, 42],
+	[17, 50, 22, 6, 51, 23],
+	[19, 46, 16, 6, 47, 17],
+
+	// 22
+	[2, 139, 111, 7, 140, 112],
+	[17, 74, 46],
+	[7, 54, 24, 16, 55, 25],
+	[34, 37, 13],
+
+	// 23
+	[4, 151, 121, 5, 152, 122],
+	[4, 75, 47, 14, 76, 48],
+	[11, 54, 24, 14, 55, 25],
+	[16, 45, 15, 14, 46, 16],
+
+	// 24
+	[6, 147, 117, 4, 148, 118],
+	[6, 73, 45, 14, 74, 46],
+	[11, 54, 24, 16, 55, 25],
+	[30, 46, 16, 2, 47, 17],
+
+	// 25
+	[8, 132, 106, 4, 133, 107],
+	[8, 75, 47, 13, 76, 48],
+	[7, 54, 24, 22, 55, 25],
+	[22, 45, 15, 13, 46, 16],
+
+	// 26
+	[10, 142, 114, 2, 143, 115],
+	[19, 74, 46, 4, 75, 47],
+	[28, 50, 22, 6, 51, 23],
+	[33, 46, 16, 4, 47, 17],
+
+	// 27
+	[8, 152, 122, 4, 153, 123],
+	[22, 73, 45, 3, 74, 46],
+	[8, 53, 23, 26, 54, 24],
+	[12, 45, 15, 28, 46, 16],
+
+	// 28
+	[3, 147, 117, 10, 148, 118],
+	[3, 73, 45, 23, 74, 46],
+	[4, 54, 24, 31, 55, 25],
+	[11, 45, 15, 31, 46, 16],
+
+	// 29
+	[7, 146, 116, 7, 147, 117],
+	[21, 73, 45, 7, 74, 46],
+	[1, 53, 23, 37, 54, 24],
+	[19, 45, 15, 26, 46, 16],
+
+	// 30
+	[5, 145, 115, 10, 146, 116],
+	[19, 75, 47, 10, 76, 48],
+	[15, 54, 24, 25, 55, 25],
+	[23, 45, 15, 25, 46, 16],
+
+	// 31
+	[13, 145, 115, 3, 146, 116],
+	[2, 74, 46, 29, 75, 47],
+	[42, 54, 24, 1, 55, 25],
+	[23, 45, 15, 28, 46, 16],
+
+	// 32
+	[17, 145, 115],
+	[10, 74, 46, 23, 75, 47],
+	[10, 54, 24, 35, 55, 25],
+	[19, 45, 15, 35, 46, 16],
+
+	// 33
+	[17, 145, 115, 1, 146, 116],
+	[14, 74, 46, 21, 75, 47],
+	[29, 54, 24, 19, 55, 25],
+	[11, 45, 15, 46, 46, 16],
+
+	// 34
+	[13, 145, 115, 6, 146, 116],
+	[14, 74, 46, 23, 75, 47],
+	[44, 54, 24, 7, 55, 25],
+	[59, 46, 16, 1, 47, 17],
+
+	// 35
+	[12, 151, 121, 7, 152, 122],
+	[12, 75, 47, 26, 76, 48],
+	[39, 54, 24, 14, 55, 25],
+	[22, 45, 15, 41, 46, 16],
+
+	// 36
+	[6, 151, 121, 14, 152, 122],
+	[6, 75, 47, 34, 76, 48],
+	[46, 54, 24, 10, 55, 25],
+	[2, 45, 15, 64, 46, 16],
+
+	// 37
+	[17, 152, 122, 4, 153, 123],
+	[29, 74, 46, 14, 75, 47],
+	[49, 54, 24, 10, 55, 25],
+	[24, 45, 15, 46, 46, 16],
+
+	// 38
+	[4, 152, 122, 18, 153, 123],
+	[13, 74, 46, 32, 75, 47],
+	[48, 54, 24, 14, 55, 25],
+	[42, 45, 15, 32, 46, 16],
+
+	// 39
+	[20, 147, 117, 4, 148, 118],
+	[40, 75, 47, 7, 76, 48],
+	[43, 54, 24, 22, 55, 25],
+	[10, 45, 15, 67, 46, 16],
+
+	// 40
+	[19, 148, 118, 6, 149, 119],
+	[18, 75, 47, 31, 76, 48],
+	[34, 54, 24, 34, 55, 25],
+	[20, 45, 15, 61, 46, 16]
+];
+
+QRRSBlock.getRSBlocks = function(typeNumber, errorCorrectLevel) {
+	
+	var rsBlock = QRRSBlock.getRsBlockTable(typeNumber, errorCorrectLevel);
+	
+	if (rsBlock === undefined) {
+		throw new Error("bad rs block @ typeNumber:" + typeNumber + "/errorCorrectLevel:" + errorCorrectLevel);
+	}
+
+	var length = rsBlock.length / 3;
+	
+	var list = [];
+	
+	for (var i = 0; i < length; i++) {
+
+		var count = rsBlock[i * 3 + 0];
+		var totalCount = rsBlock[i * 3 + 1];
+		var dataCount  = rsBlock[i * 3 + 2];
+
+		for (var j = 0; j < count; j++) {
+			list.push(new QRRSBlock(totalCount, dataCount) );	
+		}
+	}
+	
+	return list;
+};
+
+QRRSBlock.getRsBlockTable = function(typeNumber, errorCorrectLevel) {
+
+	switch(errorCorrectLevel) {
+	case QRErrorCorrectLevel.L :
+		return QRRSBlock.RS_BLOCK_TABLE[(typeNumber - 1) * 4 + 0];
+	case QRErrorCorrectLevel.M :
+		return QRRSBlock.RS_BLOCK_TABLE[(typeNumber - 1) * 4 + 1];
+	case QRErrorCorrectLevel.Q :
+		return QRRSBlock.RS_BLOCK_TABLE[(typeNumber - 1) * 4 + 2];
+	case QRErrorCorrectLevel.H :
+		return QRRSBlock.RS_BLOCK_TABLE[(typeNumber - 1) * 4 + 3];
+	default :
+		return undefined;
+	}
+};
+
+module.exports = QRRSBlock;
+
+});
+define("./QRUtil",function(module,exports,require){
+var QRMode = require('./QRMode');
+var QRPolynomial = require('./QRPolynomial');
+var QRMath = require('./QRMath');
+var QRMaskPattern = require('./QRMaskPattern');
+
+var QRUtil = {
+
+    PATTERN_POSITION_TABLE : [
+        [],
+        [6, 18],
+        [6, 22],
+        [6, 26],
+        [6, 30],
+        [6, 34],
+        [6, 22, 38],
+        [6, 24, 42],
+        [6, 26, 46],
+        [6, 28, 50],
+        [6, 30, 54],        
+        [6, 32, 58],
+        [6, 34, 62],
+        [6, 26, 46, 66],
+        [6, 26, 48, 70],
+        [6, 26, 50, 74],
+        [6, 30, 54, 78],
+        [6, 30, 56, 82],
+        [6, 30, 58, 86],
+        [6, 34, 62, 90],
+        [6, 28, 50, 72, 94],
+        [6, 26, 50, 74, 98],
+        [6, 30, 54, 78, 102],
+        [6, 28, 54, 80, 106],
+        [6, 32, 58, 84, 110],
+        [6, 30, 58, 86, 114],
+        [6, 34, 62, 90, 118],
+        [6, 26, 50, 74, 98, 122],
+        [6, 30, 54, 78, 102, 126],
+        [6, 26, 52, 78, 104, 130],
+        [6, 30, 56, 82, 108, 134],
+        [6, 34, 60, 86, 112, 138],
+        [6, 30, 58, 86, 114, 142],
+        [6, 34, 62, 90, 118, 146],
+        [6, 30, 54, 78, 102, 126, 150],
+        [6, 24, 50, 76, 102, 128, 154],
+        [6, 28, 54, 80, 106, 132, 158],
+        [6, 32, 58, 84, 110, 136, 162],
+        [6, 26, 54, 82, 110, 138, 166],
+        [6, 30, 58, 86, 114, 142, 170]
+    ],
+
+    G15 : (1 << 10) | (1 << 8) | (1 << 5) | (1 << 4) | (1 << 2) | (1 << 1) | (1 << 0),
+    G18 : (1 << 12) | (1 << 11) | (1 << 10) | (1 << 9) | (1 << 8) | (1 << 5) | (1 << 2) | (1 << 0),
+    G15_MASK : (1 << 14) | (1 << 12) | (1 << 10)    | (1 << 4) | (1 << 1),
+
+    getBCHTypeInfo : function(data) {
+        var d = data << 10;
+        while (QRUtil.getBCHDigit(d) - QRUtil.getBCHDigit(QRUtil.G15) >= 0) {
+            d ^= (QRUtil.G15 << (QRUtil.getBCHDigit(d) - QRUtil.getBCHDigit(QRUtil.G15) ) );    
+        }
+        return ( (data << 10) | d) ^ QRUtil.G15_MASK;
+    },
+
+    getBCHTypeNumber : function(data) {
+        var d = data << 12;
+        while (QRUtil.getBCHDigit(d) - QRUtil.getBCHDigit(QRUtil.G18) >= 0) {
+            d ^= (QRUtil.G18 << (QRUtil.getBCHDigit(d) - QRUtil.getBCHDigit(QRUtil.G18) ) );    
+        }
+        return (data << 12) | d;
+    },
+
+    getBCHDigit : function(data) {
+
+        var digit = 0;
+
+        while (data !== 0) {
+            digit++;
+            data >>>= 1;
+        }
+
+        return digit;
+    },
+
+    getPatternPosition : function(typeNumber) {
+        return QRUtil.PATTERN_POSITION_TABLE[typeNumber - 1];
+    },
+
+    getMask : function(maskPattern, i, j) {
+        
+        switch (maskPattern) {
+            
+        case QRMaskPattern.PATTERN000 : return (i + j) % 2 === 0;
+        case QRMaskPattern.PATTERN001 : return i % 2 === 0;
+        case QRMaskPattern.PATTERN010 : return j % 3 === 0;
+        case QRMaskPattern.PATTERN011 : return (i + j) % 3 === 0;
+        case QRMaskPattern.PATTERN100 : return (Math.floor(i / 2) + Math.floor(j / 3) ) % 2 === 0;
+        case QRMaskPattern.PATTERN101 : return (i * j) % 2 + (i * j) % 3 === 0;
+        case QRMaskPattern.PATTERN110 : return ( (i * j) % 2 + (i * j) % 3) % 2 === 0;
+        case QRMaskPattern.PATTERN111 : return ( (i * j) % 3 + (i + j) % 2) % 2 === 0;
+
+        default :
+            throw new Error("bad maskPattern:" + maskPattern);
+        }
+    },
+
+    getErrorCorrectPolynomial : function(errorCorrectLength) {
+
+        var a = new QRPolynomial([1], 0);
+
+        for (var i = 0; i < errorCorrectLength; i++) {
+            a = a.multiply(new QRPolynomial([1, QRMath.gexp(i)], 0) );
+        }
+
+        return a;
+    },
+
+    getLengthInBits : function(mode, type) {
+
+        if (1 <= type && type < 10) {
+
+            // 1 - 9
+
+            switch(mode) {
+            case QRMode.MODE_NUMBER     : return 10;
+            case QRMode.MODE_ALPHA_NUM  : return 9;
+            case QRMode.MODE_8BIT_BYTE  : return 8;
+            case QRMode.MODE_KANJI      : return 8;
+            default :
+                throw new Error("mode:" + mode);
+            }
+
+        } else if (type < 27) {
+
+            // 10 - 26
+
+            switch(mode) {
+            case QRMode.MODE_NUMBER     : return 12;
+            case QRMode.MODE_ALPHA_NUM  : return 11;
+            case QRMode.MODE_8BIT_BYTE  : return 16;
+            case QRMode.MODE_KANJI      : return 10;
+            default :
+                throw new Error("mode:" + mode);
+            }
+
+        } else if (type < 41) {
+
+            // 27 - 40
+
+            switch(mode) {
+            case QRMode.MODE_NUMBER     : return 14;
+            case QRMode.MODE_ALPHA_NUM  : return 13;
+            case QRMode.MODE_8BIT_BYTE  : return 16;
+            case QRMode.MODE_KANJI      : return 12;
+            default :
+                throw new Error("mode:" + mode);
+            }
+
+        } else {
+            throw new Error("type:" + type);
+        }
+    },
+
+    getLostPoint : function(qrCode) {
+        
+        var moduleCount = qrCode.getModuleCount();
+        var lostPoint = 0;
+        var row = 0; 
+        var col = 0;
+
+        
+        // LEVEL1
+        
+        for (row = 0; row < moduleCount; row++) {
+
+            for (col = 0; col < moduleCount; col++) {
+
+                var sameCount = 0;
+                var dark = qrCode.isDark(row, col);
+
+                for (var r = -1; r <= 1; r++) {
+
+                    if (row + r < 0 || moduleCount <= row + r) {
+                        continue;
+                    }
+
+                    for (var c = -1; c <= 1; c++) {
+
+                        if (col + c < 0 || moduleCount <= col + c) {
+                            continue;
+                        }
+
+                        if (r === 0 && c === 0) {
+                            continue;
+                        }
+
+                        if (dark === qrCode.isDark(row + r, col + c) ) {
+                            sameCount++;
+                        }
+                    }
+                }
+
+                if (sameCount > 5) {
+                    lostPoint += (3 + sameCount - 5);
+                }
+            }
+        }
+
+        // LEVEL2
+
+        for (row = 0; row < moduleCount - 1; row++) {
+            for (col = 0; col < moduleCount - 1; col++) {
+                var count = 0;
+                if (qrCode.isDark(row,     col    ) ) count++;
+                if (qrCode.isDark(row + 1, col    ) ) count++;
+                if (qrCode.isDark(row,     col + 1) ) count++;
+                if (qrCode.isDark(row + 1, col + 1) ) count++;
+                if (count === 0 || count === 4) {
+                    lostPoint += 3;
+                }
+            }
+        }
+
+        // LEVEL3
+
+        for (row = 0; row < moduleCount; row++) {
+            for (col = 0; col < moduleCount - 6; col++) {
+                if (qrCode.isDark(row, col) && 
+                        !qrCode.isDark(row, col + 1) && 
+                         qrCode.isDark(row, col + 2) && 
+                         qrCode.isDark(row, col + 3) && 
+                         qrCode.isDark(row, col + 4) && 
+                        !qrCode.isDark(row, col + 5) && 
+                         qrCode.isDark(row, col + 6) ) {
+                    lostPoint += 40;
+                }
+            }
+        }
+
+        for (col = 0; col < moduleCount; col++) {
+            for (row = 0; row < moduleCount - 6; row++) {
+                if (qrCode.isDark(row, col) &&
+                        !qrCode.isDark(row + 1, col) &&
+                         qrCode.isDark(row + 2, col) &&
+                         qrCode.isDark(row + 3, col) &&
+                         qrCode.isDark(row + 4, col) &&
+                        !qrCode.isDark(row + 5, col) &&
+                         qrCode.isDark(row + 6, col) ) {
+                    lostPoint += 40;
+                }
+            }
+        }
+
+        // LEVEL4
+        
+        var darkCount = 0;
+
+        for (col = 0; col < moduleCount; col++) {
+            for (row = 0; row < moduleCount; row++) {
+                if (qrCode.isDark(row, col) ) {
+                    darkCount++;
+                }
+            }
+        }
+        
+        var ratio = Math.abs(100 * darkCount / moduleCount / moduleCount - 50) / 5;
+        lostPoint += ratio * 10;
+
+        return lostPoint;       
+    }
+
+};
+
+module.exports = QRUtil;
+
+});
+define("./index",function(module,exports,require){
+//---------------------------------------------------------------------
+// QRCode for JavaScript
+//
+// Copyright (c) 2009 Kazuhiko Arase
+//
+// URL: http://www.d-project.com/
+//
+// Licensed under the MIT license:
+//   http://www.opensource.org/licenses/mit-license.php
+//
+// The word "QR Code" is registered trademark of 
+// DENSO WAVE INCORPORATED
+//   http://www.denso-wave.com/qrcode/faqpatent-e.html
+//
+//---------------------------------------------------------------------
+// Modified to work in node for this project (and some refactoring)
+//---------------------------------------------------------------------
+
+var QR8bitByte = require('./QR8bitByte');
+var QRUtil = require('./QRUtil');
+var QRPolynomial = require('./QRPolynomial');
+var QRRSBlock = require('./QRRSBlock');
+var QRBitBuffer = require('./QRBitBuffer');
+
+function QRCode(typeNumber, errorCorrectLevel) {
+	this.typeNumber = typeNumber;
+	this.errorCorrectLevel = errorCorrectLevel;
+	this.modules = null;
+	this.moduleCount = 0;
+	this.dataCache = null;
+	this.dataList = [];
+}
+
+QRCode.prototype = {
+	
+	addData : function(data) {
+		var newData = new QR8bitByte(data);
+		this.dataList.push(newData);
+		this.dataCache = null;
+	},
+	
+	isDark : function(row, col) {
+		if (row < 0 || this.moduleCount <= row || col < 0 || this.moduleCount <= col) {
+			throw new Error(row + "," + col);
+		}
+		return this.modules[row][col];
+	},
+
+	getModuleCount : function() {
+		return this.moduleCount;
+	},
+	
+	make : function() {
+		// Calculate automatically typeNumber if provided is < 1
+		if (this.typeNumber < 1 ){
+			var typeNumber = 1;
+			for (typeNumber = 1; typeNumber < 40; typeNumber++) {
+				var rsBlocks = QRRSBlock.getRSBlocks(typeNumber, this.errorCorrectLevel);
+
+				var buffer = new QRBitBuffer();
+				var totalDataCount = 0;
+				for (var i = 0; i < rsBlocks.length; i++) {
+					totalDataCount += rsBlocks[i].dataCount;
+				}
+
+				for (var x = 0; x < this.dataList.length; x++) {
+					var data = this.dataList[x];
+					buffer.put(data.mode, 4);
+					buffer.put(data.getLength(), QRUtil.getLengthInBits(data.mode, typeNumber) );
+					data.write(buffer);
+				}
+				if (buffer.getLengthInBits() <= totalDataCount * 8)
+					break;
+			}
+			this.typeNumber = typeNumber;
+		}
+		this.makeImpl(false, this.getBestMaskPattern() );
+	},
+	
+	makeImpl : function(test, maskPattern) {
+		
+		this.moduleCount = this.typeNumber * 4 + 17;
+		this.modules = new Array(this.moduleCount);
+		
+		for (var row = 0; row < this.moduleCount; row++) {
+			
+			this.modules[row] = new Array(this.moduleCount);
+			
+			for (var col = 0; col < this.moduleCount; col++) {
+				this.modules[row][col] = null;//(col + row) % 3;
+			}
+		}
+	
+		this.setupPositionProbePattern(0, 0);
+		this.setupPositionProbePattern(this.moduleCount - 7, 0);
+		this.setupPositionProbePattern(0, this.moduleCount - 7);
+		this.setupPositionAdjustPattern();
+		this.setupTimingPattern();
+		this.setupTypeInfo(test, maskPattern);
+		
+		if (this.typeNumber >= 7) {
+			this.setupTypeNumber(test);
+		}
+	
+		if (this.dataCache === null) {
+			this.dataCache = QRCode.createData(this.typeNumber, this.errorCorrectLevel, this.dataList);
+		}
+	
+		this.mapData(this.dataCache, maskPattern);
+	},
+
+	setupPositionProbePattern : function(row, col)  {
+		
+		for (var r = -1; r <= 7; r++) {
+			
+			if (row + r <= -1 || this.moduleCount <= row + r) continue;
+			
+			for (var c = -1; c <= 7; c++) {
+				
+				if (col + c <= -1 || this.moduleCount <= col + c) continue;
+				
+				if ( (0 <= r && r <= 6 && (c === 0 || c === 6) ) || 
+                     (0 <= c && c <= 6 && (r === 0 || r === 6) ) || 
+                     (2 <= r && r <= 4 && 2 <= c && c <= 4) ) {
+					this.modules[row + r][col + c] = true;
+				} else {
+					this.modules[row + r][col + c] = false;
+				}
+			}		
+		}		
+	},
+	
+	getBestMaskPattern : function() {
+	
+		var minLostPoint = 0;
+		var pattern = 0;
+	
+		for (var i = 0; i < 8; i++) {
+			
+			this.makeImpl(true, i);
+	
+			var lostPoint = QRUtil.getLostPoint(this);
+	
+			if (i === 0 || minLostPoint >  lostPoint) {
+				minLostPoint = lostPoint;
+				pattern = i;
+			}
+		}
+	
+		return pattern;
+	},
+	
+	createMovieClip : function(target_mc, instance_name, depth) {
+	
+		var qr_mc = target_mc.createEmptyMovieClip(instance_name, depth);
+		var cs = 1;
+	
+		this.make();
+
+		for (var row = 0; row < this.modules.length; row++) {
+			
+			var y = row * cs;
+			
+			for (var col = 0; col < this.modules[row].length; col++) {
+	
+				var x = col * cs;
+				var dark = this.modules[row][col];
+			
+				if (dark) {
+					qr_mc.beginFill(0, 100);
+					qr_mc.moveTo(x, y);
+					qr_mc.lineTo(x + cs, y);
+					qr_mc.lineTo(x + cs, y + cs);
+					qr_mc.lineTo(x, y + cs);
+					qr_mc.endFill();
+				}
+			}
+		}
+		
+		return qr_mc;
+	},
+
+	setupTimingPattern : function() {
+		
+		for (var r = 8; r < this.moduleCount - 8; r++) {
+			if (this.modules[r][6] !== null) {
+				continue;
+			}
+			this.modules[r][6] = (r % 2 === 0);
+		}
+	
+		for (var c = 8; c < this.moduleCount - 8; c++) {
+			if (this.modules[6][c] !== null) {
+				continue;
+			}
+			this.modules[6][c] = (c % 2 === 0);
+		}
+	},
+	
+	setupPositionAdjustPattern : function() {
+	
+		var pos = QRUtil.getPatternPosition(this.typeNumber);
+		
+		for (var i = 0; i < pos.length; i++) {
+		
+			for (var j = 0; j < pos.length; j++) {
+			
+				var row = pos[i];
+				var col = pos[j];
+				
+				if (this.modules[row][col] !== null) {
+					continue;
+				}
+				
+				for (var r = -2; r <= 2; r++) {
+				
+					for (var c = -2; c <= 2; c++) {
+					
+						if (Math.abs(r) === 2 || 
+                            Math.abs(c) === 2 ||
+                            (r === 0 && c === 0) ) {
+							this.modules[row + r][col + c] = true;
+						} else {
+							this.modules[row + r][col + c] = false;
+						}
+					}
+				}
+			}
+		}
+	},
+	
+	setupTypeNumber : function(test) {
+	
+		var bits = QRUtil.getBCHTypeNumber(this.typeNumber);
+        var mod;
+	
+		for (var i = 0; i < 18; i++) {
+			mod = (!test && ( (bits >> i) & 1) === 1);
+			this.modules[Math.floor(i / 3)][i % 3 + this.moduleCount - 8 - 3] = mod;
+		}
+	
+		for (var x = 0; x < 18; x++) {
+			mod = (!test && ( (bits >> x) & 1) === 1);
+			this.modules[x % 3 + this.moduleCount - 8 - 3][Math.floor(x / 3)] = mod;
+		}
+	},
+	
+	setupTypeInfo : function(test, maskPattern) {
+	
+		var data = (this.errorCorrectLevel << 3) | maskPattern;
+		var bits = QRUtil.getBCHTypeInfo(data);
+        var mod;
+	
+		// vertical		
+		for (var v = 0; v < 15; v++) {
+	
+			mod = (!test && ( (bits >> v) & 1) === 1);
+	
+			if (v < 6) {
+				this.modules[v][8] = mod;
+			} else if (v < 8) {
+				this.modules[v + 1][8] = mod;
+			} else {
+				this.modules[this.moduleCount - 15 + v][8] = mod;
+			}
+		}
+	
+		// horizontal
+		for (var h = 0; h < 15; h++) {
+	
+			mod = (!test && ( (bits >> h) & 1) === 1);
+			
+			if (h < 8) {
+				this.modules[8][this.moduleCount - h - 1] = mod;
+			} else if (h < 9) {
+				this.modules[8][15 - h - 1 + 1] = mod;
+			} else {
+				this.modules[8][15 - h - 1] = mod;
+			}
+		}
+	
+		// fixed module
+		this.modules[this.moduleCount - 8][8] = (!test);
+	
+	},
+	
+	mapData : function(data, maskPattern) {
+		
+		var inc = -1;
+		var row = this.moduleCount - 1;
+		var bitIndex = 7;
+		var byteIndex = 0;
+		
+		for (var col = this.moduleCount - 1; col > 0; col -= 2) {
+	
+			if (col === 6) col--;
+	
+			while (true) {
+	
+				for (var c = 0; c < 2; c++) {
+					
+					if (this.modules[row][col - c] === null) {
+						
+						var dark = false;
+	
+						if (byteIndex < data.length) {
+							dark = ( ( (data[byteIndex] >>> bitIndex) & 1) === 1);
+						}
+	
+						var mask = QRUtil.getMask(maskPattern, row, col - c);
+	
+						if (mask) {
+							dark = !dark;
+						}
+						
+						this.modules[row][col - c] = dark;
+						bitIndex--;
+	
+						if (bitIndex === -1) {
+							byteIndex++;
+							bitIndex = 7;
+						}
+					}
+				}
+								
+				row += inc;
+	
+				if (row < 0 || this.moduleCount <= row) {
+					row -= inc;
+					inc = -inc;
+					break;
+				}
+			}
+		}
+		
+	}
+
+};
+
+QRCode.PAD0 = 0xEC;
+QRCode.PAD1 = 0x11;
+
+QRCode.createData = function(typeNumber, errorCorrectLevel, dataList) {
+	
+	var rsBlocks = QRRSBlock.getRSBlocks(typeNumber, errorCorrectLevel);
+	
+	var buffer = new QRBitBuffer();
+	
+	for (var i = 0; i < dataList.length; i++) {
+		var data = dataList[i];
+		buffer.put(data.mode, 4);
+		buffer.put(data.getLength(), QRUtil.getLengthInBits(data.mode, typeNumber) );
+		data.write(buffer);
+	}
+
+	// calc num max data.
+	var totalDataCount = 0;
+	for (var x = 0; x < rsBlocks.length; x++) {
+		totalDataCount += rsBlocks[x].dataCount;
+	}
+
+	if (buffer.getLengthInBits() > totalDataCount * 8) {
+		throw new Error("code length overflow. (" + 
+            buffer.getLengthInBits() + 
+            ">" +  
+            totalDataCount * 8 + 
+            ")");
+	}
+
+	// end code
+	if (buffer.getLengthInBits() + 4 <= totalDataCount * 8) {
+		buffer.put(0, 4);
+	}
+
+	// padding
+	while (buffer.getLengthInBits() % 8 !== 0) {
+		buffer.putBit(false);
+	}
+
+	// padding
+	while (true) {
+		
+		if (buffer.getLengthInBits() >= totalDataCount * 8) {
+			break;
+		}
+		buffer.put(QRCode.PAD0, 8);
+		
+		if (buffer.getLengthInBits() >= totalDataCount * 8) {
+			break;
+		}
+		buffer.put(QRCode.PAD1, 8);
+	}
+
+	return QRCode.createBytes(buffer, rsBlocks);
+};
+
+QRCode.createBytes = function(buffer, rsBlocks) {
+
+	var offset = 0;
+	
+	var maxDcCount = 0;
+	var maxEcCount = 0;
+	
+	var dcdata = new Array(rsBlocks.length);
+	var ecdata = new Array(rsBlocks.length);
+	
+	for (var r = 0; r < rsBlocks.length; r++) {
+
+		var dcCount = rsBlocks[r].dataCount;
+		var ecCount = rsBlocks[r].totalCount - dcCount;
+
+		maxDcCount = Math.max(maxDcCount, dcCount);
+		maxEcCount = Math.max(maxEcCount, ecCount);
+		
+		dcdata[r] = new Array(dcCount);
+		
+		for (var i = 0; i < dcdata[r].length; i++) {
+			dcdata[r][i] = 0xff & buffer.buffer[i + offset];
+		}
+		offset += dcCount;
+		
+		var rsPoly = QRUtil.getErrorCorrectPolynomial(ecCount);
+		var rawPoly = new QRPolynomial(dcdata[r], rsPoly.getLength() - 1);
+
+		var modPoly = rawPoly.mod(rsPoly);
+		ecdata[r] = new Array(rsPoly.getLength() - 1);
+		for (var x = 0; x < ecdata[r].length; x++) {
+            var modIndex = x + modPoly.getLength() - ecdata[r].length;
+			ecdata[r][x] = (modIndex >= 0)? modPoly.get(modIndex) : 0;
+		}
+
+	}
+	
+	var totalCodeCount = 0;
+	for (var y = 0; y < rsBlocks.length; y++) {
+		totalCodeCount += rsBlocks[y].totalCount;
+	}
+
+	var data = new Array(totalCodeCount);
+	var index = 0;
+
+	for (var z = 0; z < maxDcCount; z++) {
+		for (var s = 0; s < rsBlocks.length; s++) {
+			if (z < dcdata[s].length) {
+				data[index++] = dcdata[s][z];
+			}
+		}
+	}
+
+	for (var xx = 0; xx < maxEcCount; xx++) {
+		for (var t = 0; t < rsBlocks.length; t++) {
+			if (xx < ecdata[t].length) {
+				data[index++] = ecdata[t][xx];
+			}
+		}
+	}
+
+	return data;
+
+};
+
+module.exports = QRCode;
+
+});
+global.WFQRCode=require("./index"); global.WFQRLevel=require("./QRErrorCorrectLevel");
+})(window);
+</script>
 <script>
 "use strict";
 /* =====================================================================
@@ -417,12 +1718,8 @@ const CONFIG = {
   // --- 異物 ---
   foreignSpawn: 3.4,     // 異物の出現間隔（秒）
   foreignMax: 4,         // 同時に存在できる異物の数
-  // --- クーポン境界（当日の難易度に応じて調整）
-  //     30秒・現行パラメータでの検証値：中央値 約83pt／上位20% 約115pt／上位10% 約135pt
-  //     → 1+1券は上位10〜20%相当の 120pt に設定 ---
-  border: { plusone: 120, yen50: 85, yen20: 55, pair: 85 },
-  // --- 屋台情報 ---
-  shop: { fes:"和纏祭", name:"社学・松林ゼミ", place:"テント2番", price:300 }
+  // --- 新抽選券はこの下の WF_CLEAR_SCORE=115 で判定（旧固定割引券は廃止） ---
+  shop: { fes:"和纏祭", name:"社学・松林ゼミ", place:"テント2番" }
 };
 
 /* ---------- 便利関数 ---------- */
@@ -461,7 +1758,7 @@ const G = {
 };
 
 function resetGame(){
-  G.running = true; G.t = 0; G.left = CONFIG.duration;
+  G.running = true; G.t = 0; G.left = CONFIG.duration; G.deadline=performance.now()+CONFIG.duration*1000;
   G.temp = 25; G.up = G.down = false;
   G.zoneC = 42; G.zoneTarget = 42; G.zoneTimer = 0; G.zoneNext = rand(CONFIG.zoneMoveMin,CONFIG.zoneMoveMax); G.zoneMoveT = 0;
   G.popT = 0; G.burnT = 0; G.keepT = 0; G.fever = 0; G.feverFlash = 0;
@@ -496,7 +1793,7 @@ function inZone(){ return G.temp >= zoneLo() && G.temp <= zoneHi(); }
    ===================================================================== */
 function update(dt){
   G.t += dt;
-  G.left -= dt;
+  G.left = Math.max(0,(G.deadline-performance.now())/1000);
   if(G.left <= 0){ G.left = 0; finish(); return; }
 
   /* --- 温度 --- */
@@ -574,8 +1871,9 @@ function update(dt){
   for(const c of G.corns) if(c.pop < 1) c.pop = Math.min(1, c.pop + dt*5);
   if(G.shake > 0) G.shake -= dt;
 
-  $("hudScore").textContent = Math.max(0, G.score);
+  $("hudScore").textContent = wfCurrentScore();
   $("hudTime").textContent = Math.ceil(G.left);
+  if(wfCurrentScore() >= WF_CLEAR_SCORE){ finish(); return; }
 }
 
 /* =====================================================================
@@ -876,152 +2174,74 @@ cv.addEventListener("pointerdown", e => {
 cv.addEventListener("touchstart", e => e.preventDefault(), { passive:false });
 document.addEventListener("gesturestart", e => e.preventDefault());
 
-/* =====================================================================
-   終了・結果表示
-   ===================================================================== */
-function couponOf(score){
-  const b = CONFIG.border;
-  if(score >= b.plusone) return { id:"plusone", name:"［ 1+1券 ］", note:"1個買ったら もう1個無料！",
-    cta:`【1+1券】を獲得しました！ 友達を誘って屋台へ行こう！1個（${CONFIG.shop.price}円）買うともう1個プレゼント！ ${CONFIG.shop.place}「${CONFIG.shop.name}」でお待ちしています☆彡` };
-  if(score >= b.yen50) return { id:"yen50", name:"［ 50円引き券 ］", note:"ポップコーンが50円引き",
-    cta:`【50円引き券】を獲得しました！ ${CONFIG.shop.place}「${CONFIG.shop.name}」のポップコーンが${CONFIG.shop.price}円 → ${CONFIG.shop.price-50}円。ぜひ食べに来てね！` };
-  if(score >= b.yen20) return { id:"yen20", name:"［ 20円引き券 ］", note:"ポップコーンが20円引き",
-    cta:`【20円引き券】を獲得しました！ ${CONFIG.shop.place}「${CONFIG.shop.name}」のポップコーンが${CONFIG.shop.price}円 → ${CONFIG.shop.price-20}円。ぜひ食べに来てね！` };
-  return { id:"none", name:"あと少し…！", note:"もう一度挑戦してクーポンをGET",
-    cta:`今回はクーポンなし。でも大丈夫、何度でも挑戦できます！ ${CONFIG.shop.place}「${CONFIG.shop.name}」のポップコーンは1個${CONFIG.shop.price}円。屋台の前でもう一戦どうぞ！` };
-}
-function makeCode(id){
-  const head = { plusone:"PP", yen50:"F5", yen20:"F2", none:"NN" }[id];
-  const n = Math.floor(Math.random()*46656).toString(36).toUpperCase().padStart(3,"0");
-  const t = (Date.now() % 1296).toString(36).toUpperCase().padStart(2,"0");
-  return `${head}-${n}${t}`;
-}
-
-let lastResult = null;
-function finish(){
-  G.running = false;
-  G.up = G.down = false;
-  $("btnUp").classList.remove("hold"); $("btnDown").classList.remove("hold");
-
-  const burnPt   = G.burns * CONFIG.burnPenalty;
-  const leftForn = G.foreigns.filter(f => f.dead === 0).length;
-  const fornPt   = leftForn * CONFIG.foreignPenalty;
-  // ポップ得点＝現在スコア＋減点分（除去ボーナス込み）
-  const gross = G.score + burnPt;
-  const final = Math.max(0, gross - burnPt - fornPt);
-
-  const cp = couponOf(final);
-  const code = makeCode(cp.id);
-  lastResult = { final, cp, code };
-
-  $("rCornCt").textContent = G.pops + "粒";
-  $("rCorn").textContent   = gross + "pt";
-  $("rBurnCt").textContent = G.burns + "回";
-  $("rBurn").textContent   = (burnPt ? "-" + burnPt : "0") + "pt";
-  $("rFornCt").textContent = leftForn + "個";
-  $("rForn").textContent   = (fornPt ? "-" + fornPt : "0") + "pt";
-  $("rFinal").textContent  = final + "pt";
-
-  const b = CONFIG.border;
-  let rank;
-  if(cp.id === "plusone") rank = "パーフェクト達成！ 焦がさず弾けさせる腕前、見事です。";
-  else if(cp.id === "yen50") rank = `あと ${b.plusone - final}pt で「1+1券」に手が届きます。`;
-  else if(cp.id === "yen20") rank = `あと ${b.yen50 - final}pt で「50円引き券」です。`;
-  else rank = `あと ${b.yen20 - final}pt でクーポン獲得。もう一度いけます。`;
-  $("rRank").textContent = rank;
-
-  const tk = $("ticket");
-  tk.classList.toggle("none", cp.id === "none");
-  $("tFes").textContent  = CONFIG.shop.fes;
-  $("tName").textContent = cp.name;
-  $("tSub").innerHTML    = cp.note + "<br>" + CONFIG.shop.name + "<br>" + CONFIG.shop.place + "にて有効";
-  $("tCode").textContent = code;
-  $("tCode").style.display = cp.id === "none" ? "none" : "inline-block";
-  $("mapLabel").textContent = CONFIG.shop.place;
-  $("ctaMsg").textContent = `スコア ${final}pt！ ` + cp.cta;
-  $("pairNote").textContent = `※ 友達と一緒にプレイして2人とも ${b.pair}pt を超えたら、レジでさらに30円引き（ペア割）。`;
-  $("btnShare").innerHTML = cp.id === "plusone"
-    ? '👫 友達にシェア<br>「1+1券GET！一緒に行ってくれる人募集！」'
-    : '👫 友達にシェア<br>「スコア' + final + 'pt！ 誰か勝てる人いる？」';
-
-  show("result");
-  $("result").querySelector(".result-scroll").scrollTop = 0;
-}
 
 /* =====================================================================
-   画面遷移・共有
+   割引抽選券・共通 WF1 仕様 (PP / 115点)
+   サーバー照合なし：同一端末・同一ブラウザの使用済み記録は受付アプリが保持
    ===================================================================== */
-function start(){
-  resetGame();
-  show("game");
-  $("hudScore").textContent = "0";
-  $("hudTime").textContent = CONFIG.duration;
-}
-$("btnStart").addEventListener("click", start);
-$("btnRetry").addEventListener("click", start);
-$("btnHome").addEventListener("click", () => show("title"));
-$("btnHowTo").addEventListener("click", () => {
-  toast("火力UP/DOWNで温度を緑ゾーンにキープ。混ざった異物はタップで除去！");
-});
-$("btnShare").addEventListener("click", async () => {
-  const r = lastResult; if(!r) return;
-  const text = r.cp.id === "plusone"
-    ? `【1+1券GET！一緒に行ってくれる人募集！】\n「弾けろ！パーフェクトポップ」で${r.final}pt！ ${CONFIG.shop.fes} ${CONFIG.shop.place}「${CONFIG.shop.name}」のポップコーンが1個買うともう1個無料に。誰か一緒に行こう！`
-    : `「弾けろ！パーフェクトポップ」で${r.final}pt！ ${CONFIG.shop.fes} ${CONFIG.shop.place}「${CONFIG.shop.name}」のポップコーン屋台のゲーム、誰か勝てる人いる？`;
-  const url = location.href.split("#")[0];
-  try{
-    if(navigator.share){ await navigator.share({ title:"弾けろ！パーフェクトポップ", text, url }); return; }
-    await navigator.clipboard.writeText(text + "\n" + url);
-    toast("シェア用の文をコピーしました。SNSに貼り付けてね！");
-  }catch(err){
-    toast("コピーできませんでした。画面のスクリーンショットでシェアしてね！");
+const WF_GAME_ID='PP', WF_CLEAR_SCORE=115;
+const WF_SCANNER_FILE='watamatsuri-qr-scanner-v2.html';
+const WF_SCANNER_URL_OVERRIDE=''; // 公開フォルダが違う場合のみ HTTPS URL を指定
+const WF_LAST_KEY='WATAMATSURI_PP_LAST_TICKET_V1';
+let wfLastTicket=null;
+let lastResult=null;
+function wfFnv1a32(s){let h=0x811c9dc5;for(let i=0;i<s.length;i++){h^=s.charCodeAt(i);h=Math.imul(h,0x01000193)>>>0;}return(h>>>0).toString(16).toUpperCase().padStart(8,'0');}
+function wfJstParts(t){const q=new Intl.DateTimeFormat('en-US',{timeZone:'Asia/Tokyo',year:'numeric',month:'2-digit',day:'2-digit',hour:'2-digit',minute:'2-digit',second:'2-digit',hourCycle:'h23'}).formatToParts(new Date(t));const o={};for(const p of q)o[p.type]=p.value;return o;}
+function wfJstId(t){const p=wfJstParts(t);return p.year+p.month+p.day+p.hour+p.minute+p.second;}
+function wfJstDisplay(t){const p=wfJstParts(t);return `${p.year}/${p.month}/${p.day} ${p.hour}:${p.minute}:${p.second}（日本時間）`;}
+function wfSameDay(a,b){return wfJstId(a).slice(0,8)===wfJstId(b).slice(0,8);}
+function wfRandomNonce(){const b=new Uint8Array(5);if(crypto&&crypto.getRandomValues)crypto.getRandomValues(b);else for(let i=0;i<5;i++)b[i]=Math.floor(Math.random()*256);return [...b].map(n=>n.toString(16).toUpperCase().padStart(2,'0')).join('');}
+function wfNewTicket(score){const t=Date.now(),s=`WF1|PP|${wfJstId(t)}|${score}|${wfRandomNonce()}`;return {code:s+'|'+wfFnv1a32(s),issuedAt:t,score};}
+function wfStoreTicket(t){wfLastTicket=t;try{localStorage.setItem(WF_LAST_KEY,JSON.stringify(t));}catch(e){console.warn('端末への抽選券保存不可',e);}wfRefreshRestore();}
+function wfRecoverTicket(){try{const t=JSON.parse(localStorage.getItem(WF_LAST_KEY)||'null');if(!t||typeof t.code!=='string'||!Number.isFinite(t.issuedAt)||!Number.isFinite(t.score)||t.score<115||!wfSameDay(t.issuedAt,Date.now()))return;const p=t.code.split('|');if(p.length!==6||p[0]!=='WF1'||p[1]!=='PP'||p[2]!==wfJstId(t.issuedAt)||p[3]!==String(t.score)||!/^[A-F0-9]{10}$/.test(p[4])||wfFnv1a32(p.slice(0,5).join('|'))!==p[5])return;wfLastTicket=t;}catch(e){}wfRefreshRestore();}
+function wfRefreshRestore(){$('btnTicketRestore').hidden=!(wfLastTicket&&wfSameDay(wfLastTicket.issuedAt,Date.now()));}
+function wfScannerURL(){let u=WF_SCANNER_URL_OVERRIDE.trim();if(!u&&location.protocol==='https:')u=new URL(WF_SCANNER_FILE,location.href).href;try{if(u){const o=new URL(u);if(o.protocol==='https:')return o.href.split('#')[0];}}catch(e){}return '';}
+function wfQRData(t){const url=wfScannerURL();return url?url+'#ticket='+encodeURIComponent(t.code):t.code;}
+function wfDrawQR(data){const qr=new WFQRCode(-1,WFQRLevel.M);qr.addData(data);qr.make();const n=qr.getModuleCount(),margin=4,s=Math.max(4,Math.floor(300/(n+2*margin))),w=(n+2*margin)*s;const canvas=$('ticketQR');canvas.width=canvas.height=w;const c=canvas.getContext('2d');c.fillStyle='#fff';c.fillRect(0,0,w,w);c.fillStyle='#111';for(let y=0;y<n;y++)for(let x=0;x<n;x++)if(qr.isDark(y,x))c.fillRect((x+margin)*s,(y+margin)*s,s,s);}
+function wfCurrentScore(){const left=G.foreigns.filter(f=>f.dead===0).length;return Math.max(0,Math.round(G.score-left*CONFIG.foreignPenalty));}
+function wfOpenSaved(){if(!wfLastTicket||!wfSameDay(wfLastTicket.issuedAt,Date.now())){wfRefreshRestore();toast('本日有効な抽選券がありません');return;}lastResult={final:wfLastTicket.score,ticket:wfLastTicket,pops:0,burns:0,foreign:0,saved:true};showOutcome(lastResult);}
+function showOutcome(r){
+  const ok=!!r.ticket;
+  $('rFinal').textContent=r.final;
+  $('verdict').classList.toggle('lost',!ok);
+  $('rVerdict').textContent=ok?'🎉 115点達成！抽選券を獲得！':'残念！再チャレンジをお待ちしております';
+  $('rSub').textContent=ok?'テント２番のガラポンを1回まわせます。ハズレなし、最低10円引き！':`クリアラインは115点。あと${Math.max(0,115-r.final)}点！ もう一度挑戦しよう！`;
+  $('rBreakdown').textContent=r.saved?'本日獲得した抽選券を再表示中':`ポップ ${r.pops}粒 ／ 焦がし ${r.burns}回 ／ 未除去の異物 ${r.foreign}個`;
+  $('winSection').hidden=!ok;
+  if(ok){
+    $('ticketCode').textContent=r.ticket.code;
+    $('ticketTime').textContent='クリア日時：'+wfJstDisplay(r.ticket.issuedAt);
+    $('ticketQrHelp').textContent='';
+    try{wfDrawQR(wfQRData(r.ticket));$('ticketQrHelp').textContent=wfScannerURL()?'スタッフ用照合ページがQRから開きます。':'スタッフ用読み取りアプリでQRを読み取ってください。iPhone標準カメラで照合するには、ゲームと照合アプリを同じHTTPSフォルダに配置してください。';}
+    catch(e){console.error('QR描画エラー',e);$('ticketQrHelp').textContent='QRを表示できませんでした。スタッフに上記のコードを直接入力してもらってください。';}
   }
-});
-
-/* =====================================================================
-   運営設定
-   ===================================================================== */
-const DEFAULTS = JSON.parse(JSON.stringify({ duration:CONFIG.duration, border:CONFIG.border, zoneHalf:CONFIG.zoneHalf, shop:CONFIG.shop }));
-function openSettings(){
-  $("setDur").value = CONFIG.duration;
-  $("setD").value = CONFIG.border.plusone;
-  $("set50").value = CONFIG.border.yen50;
-  $("set20").value = CONFIG.border.yen20;
-  $("setPair").value = CONFIG.border.pair;
-  $("setZone").value = CONFIG.zoneHalf;
-  $("setShop").value = CONFIG.shop.name;
-  $("setTent").value = CONFIG.shop.place;
-  $("settings").classList.add("on");
+  show('result');$('result').querySelector('.result-scroll').scrollTop=0;
 }
-$("btnSettings").addEventListener("click", openSettings);
-$("setClose").addEventListener("click", () => {
-  CONFIG.duration = clamp(+$("setDur").value || 30, 10, 120);
-  CONFIG.border.plusone = Math.max(0, +$("setD").value || 0);
-  CONFIG.border.yen50 = Math.max(0, +$("set50").value || 0);
-  CONFIG.border.yen20 = Math.max(0, +$("set20").value || 0);
-  CONFIG.border.pair = Math.max(0, +$("setPair").value || 0);
-  CONFIG.zoneHalf = clamp(+$("setZone").value || 7, 3, 20);
-  CONFIG.shop.name = $("setShop").value.trim() || DEFAULTS.shop.name;
-  CONFIG.shop.place = $("setTent").value.trim() || DEFAULTS.shop.place;
-  $("durLabel").textContent = CONFIG.duration;
-  $("settings").classList.remove("on");
-  toast("設定を反映しました");
+function finish(){
+  if(!G.running)return;
+  G.running=false;G.up=G.down=false;
+  $('btnUp').classList.remove('hold');$('btnDown').classList.remove('hold');
+  const final=wfCurrentScore();
+  const ticket=final>=WF_CLEAR_SCORE?wfNewTicket(final):null;
+  if(ticket)wfStoreTicket(ticket);
+  lastResult={final,ticket,pops:G.pops,burns:G.burns,foreign:G.foreigns.filter(f=>f.dead===0).length};
+  showOutcome(lastResult);
+}
+function start(){resetGame();G.deadline=performance.now()+CONFIG.duration*1000;show('game');$('hudScore').textContent=0;$('hudTime').textContent=CONFIG.duration;}
+$('btnStart').addEventListener('click',start);
+$('btnRetry').addEventListener('click',start);
+$('btnHome').addEventListener('click',()=>{show('title');wfRefreshRestore();});
+$('btnTicketRestore').addEventListener('click',wfOpenSaved);
+$('btnHowTo').addEventListener('click',()=>toast('火力UP/DOWNの長押しで温度を緑色に保つ！異物はタップで除去！'));
+$('btnShare').addEventListener('click',async()=>{
+  if(!lastResult)return;
+  const text=lastResult.ticket?`パーフェクトポップで${lastResult.final}点！割引抽選券GET！テント２番でガラポンはハズレなし、最低10円引き！`:`パーフェクトポップで${lastResult.final}点！115点目指して挑戦中！`;
+  try{if(navigator.share){await navigator.share({title:'弾けろ！パーフェクトポップ',text,url:location.href.split('#')[0]});return;}await navigator.clipboard.writeText(text+'\n'+location.href.split('#')[0]);toast('結果をコピーしました');}catch(e){toast('共有できませんでした。スコアを友達に教えてね！');}
 });
-$("setReset").addEventListener("click", () => {
-  CONFIG.duration = DEFAULTS.duration;
-  CONFIG.border = JSON.parse(JSON.stringify(DEFAULTS.border));
-  CONFIG.zoneHalf = DEFAULTS.zoneHalf;
-  CONFIG.shop = JSON.parse(JSON.stringify(DEFAULTS.shop));
-  $("durLabel").textContent = CONFIG.duration;
-  openSettings();
-  toast("初期値に戻しました");
-});
-$("settings").addEventListener("click", e => { if(e.target === $("settings")) $("settings").classList.remove("on"); });
-
-/* 起動 */
-$("durLabel").textContent = CONFIG.duration;
-resetGame(); G.running = false;
-raf = requestAnimationFrame(loop);
+/* 起動：プレイ時間は実経過時間でカウントする。 */
+$('durLabel').textContent=CONFIG.duration;
+resetGame();G.running=false;wfRecoverTicket();
+raf=requestAnimationFrame(loop);
 </script>
 </body>
 </html>

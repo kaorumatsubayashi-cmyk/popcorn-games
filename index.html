@@ -4,10 +4,10 @@
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover">
 <meta name="theme-color" content="#e2453c">
-<title>和纏祭 ポップコーン屋台 Webゲーム企画コンペ｜応募作品一覧</title>
-<meta name="description" content="和纏祭ポップコーン屋台（社学・松林ゼミ）のWebゲーム活用マーケティング企画コンペ。応募作品をブラウザでそのまま試遊できます。">
-<meta property="og:title" content="和纏祭 ポップコーン屋台 Webゲーム企画コンペ">
-<meta property="og:description" content="応募作品をブラウザでそのまま試遊できます。">
+<title>和纏祭 ポップコーン屋台｜ミニゲームで遊ぼう</title>
+<meta name="description" content="和纏祭のポップコーン屋台のミニゲーム。スマホのブラウザですぐ遊べます。">
+<meta property="og:title" content="和纏祭 ポップコーン屋台｜ミニゲームで遊ぼう">
+<meta property="og:description" content="スマホのブラウザですぐ遊べるミニゲーム。">
 <style>
 :root{
   --cream:#f7efd9;
@@ -53,11 +53,6 @@ h1{
 }
 h1 small{display:block;font-size:.44em;color:var(--ink);-webkit-text-stroke:5px #fff;paint-order:stroke fill;letter-spacing:.04em;}
 .lede{font-size:15px;color:var(--ink-soft);max-width:50ch;margin:8px auto 0;font-weight:700;}
-.host{
-  margin:18px auto 0;display:inline-flex;gap:10px;align-items:center;flex-wrap:wrap;justify-content:center;
-  font-size:13px;color:var(--ink-soft);
-}
-.host b{background:#fff;border:2px solid var(--ink);border-radius:999px;padding:3px 12px;color:var(--ink);}
 
 /* ── 見出し ────────────────────────────── */
 h2{
@@ -66,7 +61,7 @@ h2{
 h2::after{content:"";flex:1;height:4px;background:var(--ink);border-radius:2px;}
 .h2note{font-size:13px;color:var(--ink-soft);margin:0 0 18px;font-weight:700;}
 
-/* ── 応募作品＝引換券のカード ───────────────── */
+/* ── ゲームのカード（引換券風） ───────────────── */
 .entries{display:flex;flex-direction:column;gap:22px;}
 .entry{
   position:relative;background:var(--paper);
@@ -117,13 +112,6 @@ dd{margin:0;}
 .play span{font-size:22px;line-height:1;}
 .hint{font-size:12px;color:var(--ink-soft);margin:10px 0 0;}
 
-/* ── 審査の観点 ─────────────────────────── */
-.criteria{
-  background:#fff;border:3px dashed var(--ink);border-radius:18px;padding:18px 22px;
-}
-.criteria ul{margin:0;padding-left:1.15em;font-size:14px;}
-.criteria li{margin-bottom:7px;}
-.criteria li::marker{color:var(--pop);}
 
 footer{
   margin-top:52px;padding-top:20px;border-top:4px solid var(--ink);
@@ -145,109 +133,91 @@ footer{
 <div class="wrap">
   <header>
     <span class="eyebrow">和 纏 祭 2 0 2 6</span>
-    <h1>ポップコーン屋台<small>Webゲーム活用マーケティング企画コンペ</small></h1>
-    <p class="lede">「遊んでもらって、来てもらって、買ってもらう」。屋台への集客をWebゲームで設計する企画コンペです。応募作品はこのページからそのまま試遊できます。</p>
-    <p class="host"><b>社学・松林ゼミ</b><b>テント2番</b><b>ポップコーン 1個 300円</b></p>
+    <h1>ポップコーン屋台<small>ミニゲームで遊ぼう！</small></h1>
+    <p class="lede">スマホのブラウザですぐに遊べます。高得点をとると、屋台で使える特典がもらえるゲームもあります。</p>
   </header>
 
-  <h2>応募作品</h2>
-  <p class="h2note">スマートフォンでの試遊を推奨します。所要時間はいずれも1回30秒程度です。</p>
+  <h2>ゲーム一覧</h2>
+  <p class="h2note">ボタンを押すとゲームが始まります。スマートフォンを縦向きにして遊んでください。</p>
 
   <div class="entries">
 
-    <!-- ============ 応募作品 A ============ -->
+    <!-- ============ ゲーム 1 ============ -->
     <article class="entry">
       <div class="entry-head">
-        <span class="stub">ENTRY A</span>
+        <span class="stub">GAME 1</span>
         <h3>弾けろ！パーフェクトポップ</h3>
       </div>
-      <p class="by">企画・上田佳奈</p>
+      <p class="by">作・上田佳奈　／　1回30秒</p>
 
-      <p class="catch">目指せパーフェクトなポップコーン！「1+1券」をゲットしよう！</p>
+      <p class="catch">火加減ひとつでポップコーンが弾ける！ 焦がさず115点を目指そう。</p>
 
       <dl>
         <dt>ゲーム内容</dt>
-        <dd>フライパンの火力をタップで調整し、30秒で焦がさずコーンを弾けさせるタイミングアクション。適温ゾーンが高温側・低温側にランダムで動くので、追いかけてキープするとフィーバーで大量得点。混ざり込む白い羊や雲はタップで取り除かないと終了時に減点。</dd>
+        <dd>フライパンのコーンを、ちょうどいい温度で次々に弾けさせるゲーム。温度計の緑色の「適温」は数秒ごとに上下に動くので、追いかけて温度を合わせ続けよう。適温をしばらくキープすると「FEVER!」になり、得点が2倍に。</dd>
 
-        <dt>集客の仕掛け</dt>
-        <dd>高得点で「1+1券（1個買うともう1個無料）」を発行し、ひとりで来るより誰かを誘いたくなる動機をつくる。50円引き・20円引きの2段構えと、2人とも基準点を超えるとさらに30円引きになるペア割。</dd>
+        <dt>遊び方</dt>
+        <dd>「火力UP」を長押しすると温度が上がり、「火力DOWN」を長押しすると下がります。熱くしすぎると黒こげになって減点。フライパンに羊や雲など、ポップコーンではないモノが混ざったらタップで取り除こう（そのままにすると最後に減点）。</dd>
 
-        <dt>狙う成果</dt>
-        <dd>グループ単位での来店・購入の最大化。参加200人、クーポン利用80組、販売300個。</dd>
+        <dt>クリア</dt>
+        <dd>115点に届いたらクリア！ 割引抽選券が出て、屋台でガラポンを1回まわせます（ハズレなし）。抽選券は大学祭当日のみ有効・1回限りです。</dd>
       </dl>
 
-      <a class="play" href="perfect-pop/"><span>🍿</span>遊んでみる</a>
-      <p class="hint">結果画面に照合コード付きのクーポンが出ます。運営設定から難易度とボーダーをその場で変更できます。</p>
+      <a class="play" href="perfect-pop/"><span>🍿</span>遊ぶ</a>
     </article>
 
-    <!-- ============ 応募作品 B ============ -->
+    <!-- ============ ゲーム 2 ============ -->
     <article class="entry">
       <div class="entry-head">
-        <span class="stub">ENTRY B</span>
+        <span class="stub">GAME 2</span>
         <h3>ポップコーン・キャッチ＆バースト！</h3>
       </div>
-      <p class="by">企画・<em>応募者名を記入してください</em></p>
+      <p class="by">1回20秒</p>
 
-      <p class="catch">スマホで連打！はじけるポップコーン！</p>
+      <p class="catch">はじけて降ってくるポップコーンを、指で連打してキャッチ！</p>
 
       <dl>
         <dt>ゲーム内容</dt>
-        <dd>次々にはじけ飛ぶポップコーンをタップで捕まえる連打アクション。通常のポップコーンに加え、キャラメル（+30pt）とスター（+50pt）が高得点、焦げポップコーン（−20pt）は触ると減点。</dd>
+        <dd>画面に次々と降ってくるポップコーンをタップして集めるゲーム。ふつうのポップコーンは10点、キャラメルは30点、スターは50点。黒い焦げポップコーンに触ると20点のマイナスです。</dd>
 
-        <dt>集客の仕掛け</dt>
-        <dd>スコアに応じてノーマル級・大盛り級・メガ盛り級のランクを表示し、獲得したクーポンを屋台スタッフに提示してもらう。結果のシェア機能で口コミを狙う。</dd>
+        <dt>遊び方</dt>
+        <dd>「ゲームスタート！」を押したら、20秒間ひたすらタップ。点の高いキャラメルとスターをねらい、焦げはよけよう。</dd>
 
-        <dt>狙う成果</dt>
-        <dd>ランク表示で競争心を刺激し、友達同士のスコア比べとシェアから認知を広げる。</dd>
+        <dt>結果</dt>
+        <dd>スコアに応じて「ノーマル級」「大盛り級」「メガ盛り級」のランクが決まり、屋台で使えるクーポンが表示されます。注文のときに画面をスタッフに見せてね。</dd>
       </dl>
 
-      <a class="play" href="catch-burst/"><span>🍿</span>遊んでみる</a>
-      <p class="hint">上の説明文は暫定です。企画書の記述に合わせて書き換えてください。</p>
+      <a class="play" href="catch-burst/"><span>🍿</span>遊ぶ</a>
     </article>
 
-
-    <!-- ============ 応募作品 C ============ -->
+    <!-- ============ ゲーム 3 ============ -->
     <article class="entry">
       <div class="entry-head">
-        <span class="stub">ENTRY C</span>
+        <span class="stub">GAME 3</span>
         <h3>職人 ― たまご料理の巨匠</h3>
       </div>
-      <p class="by">企画・<em>応募者名を記入してください</em></p>
+      <p class="by">1回1〜2分</p>
 
-      <p class="catch">焼き加減は職人の勘。80点で、ポップコーンの種が育つ。</p>
+      <p class="catch">焼き加減は職人の勘。80点で、ポップコーンが育つ。</p>
 
       <dl>
         <dt>ゲーム内容</dt>
-        <dd>オムレツか卵焼きを選び、火加減と返しのタイミングを見極めて一皿を仕上げる調理アクション。仕上がりは100点満点で採点され、80点以上でポップコーンの種がひとつ手に入る。種が3つそろうとポップコーンが完成し、屋台の割引券を受け取れる。</dd>
+        <dd>オムレツか卵焼きを選んで、卵を割るところから一皿を仕上げる料理ゲーム。火加減、焼き加減、返すタイミング、形、盛り付けの5つで100点満点の採点。80点以上をとるとポップコーンが1段階育ち、3回で収穫できます。</dd>
 
-        <dt>集客の仕掛け</dt>
-        <dd>1回では完結せず、3回の高得点で特典に届く段階設計。行列や移動の合間に何度も挑戦させ、屋台に着くまでに「あと1個」の状態をつくる。料理2種で腕を競わせ、自己ベストの更新を持ち帰りの動機にする。</dd>
+        <dt>遊び方</dt>
+        <dd>卵をタップして割り、ボウルを指でくるくるして溶きます。下の火加減スライダーで温度計の「適温」を保ち、焼きゲージが「返しどき」になったら上にスワイプ（オムレツ）、「巻きどき」になったら左右にスワイプ（卵焼き）。最後はお皿の真上で「盛る」を押そう。</dd>
 
-        <dt>狙う成果</dt>
-        <dd>1人あたりのプレイ回数を増やし、割引券の発行から来店までを短くつなぐ。リピートによる滞在時間の延長と、屋台前での待ち時間の体感短縮。</dd>
+        <dt>特典</dt>
+        <dd>ポップコーンを収穫すると、屋台の割引券が表示されます。スタッフに画面を見せてください。育てた記録は遊んだスマホに保存されます。</dd>
       </dl>
 
-      <a class="play" href="shokunin-tamago/"><span>🍿</span>遊んでみる</a>
-      <p class="hint">高得点のライン（既定80点）はファイル冒頭のCONFIGで変更できます。上の説明文は暫定です。企画書の記述に合わせて書き換えてください。</p>
+      <a class="play" href="shokunin-tamago/"><span>🍿</span>遊ぶ</a>
     </article>
 
-  </div>
-
-  <h2>審査の観点</h2>
-  <p class="h2note">企画書の様式に沿って、次の点から総合的に判断します。</p>
-  <div class="criteria">
-    <ul>
-      <li><b>導線が具体的か</b> — 認知からQR読取、プレイ、来店、購入、拡散までが途切れずつながっているか</li>
-      <li><b>特典が採算に合うか</b> — 値引きや無料配布の原価と、それを上回る売上増の見込みが説明できているか</li>
-      <li><b>30秒で伝わるか</b> — 屋台の行列や移動中に、説明なしで遊び始められるか</li>
-      <li><b>数字で検証できるか</b> — 成否を判断する指標と測定方法が用意されているか</li>
-      <li><b>当日運用できるか</b> — レジでのクーポン確認や難易度調整が、店員の負担なく回るか</li>
-    </ul>
   </div>
 
   <footer>
-    和纏祭 ポップコーン屋台（社学・松林ゼミ／テント2番）<br>
-    Webゲーム活用マーケティング企画コンペ 応募作品一覧
+    和纏祭 2026 ポップコーン屋台
   </footer>
 </div>
 
