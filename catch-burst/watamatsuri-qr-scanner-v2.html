@@ -1,0 +1,139 @@
+<!doctype html>
+<html lang="ja">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1,viewport-fit=cover">
+<meta name="theme-color" content="#5f2636">
+<title>和纏祭｜割引抽選券 照合</title>
+<style>
+:root{--red:#6c3044;--deep:#4c2030;--cream:#fbf7ed;--ink:#352b2a;--muted:#766d68;--line:#e4d9c9;--green:#15734f;--error:#b53439;--warn:#946017;--shadow:0 8px 30px rgba(59,33,31,.07)}
+*{box-sizing:border-box}html{background:var(--cream)}body{margin:0;color:var(--ink);font-family:-apple-system,BlinkMacSystemFont,"Hiragino Kaku Gothic ProN","Yu Gothic",Meiryo,sans-serif}button,input{font:inherit}button{cursor:pointer}button:focus-visible,input:focus-visible{outline:3px solid #68a6f2;outline-offset:2px}button:disabled{opacity:.45;cursor:not-allowed}
+.app{max-width:680px;min-height:100dvh;margin:auto;background:#fffefa;box-shadow:0 0 30px #4c203009;padding-bottom:env(safe-area-inset-bottom)}
+header{padding:18px 18px 15px;background:var(--red);color:white}header small{font-size:12px;letter-spacing:.16em;opacity:.9}header h1{font-size:23px;line-height:1.25;margin:3px 0 2px;letter-spacing:.05em}header p{margin:0;font-size:12px;opacity:.88}
+nav{display:grid;grid-template-columns:1fr 1fr 1fr;border-bottom:1px solid var(--line);background:white;position:sticky;top:0;z-index:10}nav button{background:none;border:none;border-bottom:4px solid transparent;padding:14px 4px 11px;color:#726768;font-size:15px;font-weight:800}nav button[aria-selected="true"]{border-color:var(--red);color:var(--deep)}
+.page{display:none;padding:15px 16px 28px}.page.active{display:block}.card{border:1px solid var(--line);border-radius:16px;background:#fff;box-shadow:var(--shadow);padding:16px;margin-bottom:14px}.card h2{font-size:17px;margin:0 0 8px}.hint{font-size:13px;line-height:1.65;color:var(--muted)}.hint p{margin:4px 0}.button{display:inline-flex;align-items:center;justify-content:center;gap:5px;min-height:46px;border:0;border-radius:11px;background:var(--red);color:#fff;font-weight:800;padding:10px 15px}.button.alt{background:#f4edf0;color:var(--deep);border:1px solid #d8bec8}.button.gray{background:#eee9e1;color:#372c25}.button.danger{background:var(--error)}.button.full{width:100%}.group{display:flex;gap:8px;flex-wrap:wrap}.group>.button{flex:1}.divider{height:1px;background:var(--line);margin:16px 0}.eyebrow{font-size:12px;font-weight:800;letter-spacing:.06em;color:var(--muted);margin:0 0 5px}
+.video-wrap{position:relative;background:#171c20;border-radius:14px;aspect-ratio:4/3;overflow:hidden;margin:10px auto}video{width:100%;height:100%;object-fit:cover;display:block}.aim{pointer-events:none;position:absolute;inset:17% 18%;border:3px solid #f3d793;border-radius:18px;box-shadow:0 0 0 200px rgba(0,0,0,.12)}.camera-state{margin:8px 0;font-size:13px;color:var(--muted);text-align:center}
+input[type=text]{display:block;width:100%;min-width:0;border:1.5px solid #cfc0bf;border-radius:10px;padding:12px 10px;letter-spacing:.02em;font-size:16px}.file-label{display:inline-flex;align-items:center;justify-content:center;min-height:46px;border:1px solid #d8bec8;border-radius:11px;padding:9px 15px;background:#f4edf0;font-weight:800;color:var(--deep);cursor:pointer}.file-label input{position:absolute;opacity:0;width:1px;height:1px}
+.result{border:3px solid #cfc8bf;background:#f5f1eb;border-radius:16px;padding:20px 15px;text-align:center;margin-bottom:15px}.result h2{font-size:32px;margin:5px 0 10px}.result p{font-size:14px;line-height:1.6;margin:5px 0}.result .chip{display:inline-block;font-weight:900;font-size:12px;border-radius:999px;padding:4px 10px;background:#e8e5e0}.result.ok{border-color:#31a574;background:#eafbf2}.result.ok h2{color:var(--green)}.result.duplicate{border-color:#d75355;background:#fff0f0}.result.duplicate h2{color:var(--error)}.result.invalid{border-color:#edbf6d;background:#fff7e7}.result.invalid h2{color:var(--warn)}.data-grid{display:grid;grid-template-columns:minmax(90px,1fr) 1.4fr;gap:8px 12px;margin:14px auto 2px;text-align:left;max-width:470px;font-size:14px;word-break:break-word}.data-grid dt{color:#6e6361}.data-grid dd{margin:0;font-weight:800}.code{font-family:ui-monospace,SFMono-Regular,Consolas,monospace;font-size:11px;overflow-wrap:anywhere;background:#fff9;padding:8px;border-radius:7px}
+.summary{display:grid;grid-template-columns:repeat(3,1fr);gap:7px}.stat{padding:13px 6px;background:#f5eee7;border-radius:12px;text-align:center}.stat strong{display:block;font-size:26px;color:var(--deep);font-variant-numeric:tabular-nums}.stat span{font-size:12px;color:#796d66}.list{display:flex;flex-direction:column;gap:8px}.entry{border:1px solid var(--line);border-left:5px solid #bbb;border-radius:10px;padding:10px 11px;background:white}.entry.accepted{border-left-color:var(--green)}.entry.duplicate{border-left-color:var(--error)}.entry.invalid{border-left-color:var(--warn)}.entry h3{margin:0;font-size:14px;display:flex;justify-content:space-between;gap:8px}.entry p{margin:5px 0 0;font-size:12px;color:var(--muted)}.entry code{overflow-wrap:anywhere;font-size:10px}.help-line{font-size:12px;color:#795e52;line-height:1.7}.warning{background:#fff3e0;border-left:4px solid #cc8c29;border-radius:8px;padding:9px 10px;color:#734c1a;font-size:12px;line-height:1.6}.sr-only{position:absolute;left:-10000px;width:1px;height:1px;overflow:hidden}
+footer{text-align:center;padding:10px 15px 24px;color:var(--muted);font-size:11px}
+@media(max-width:360px){header h1{font-size:21px}.page{padding:12px 11px 24px}.card{padding:12px}.result h2{font-size:27px}.button{font-size:14px}}
+</style>
+</head>
+<body>
+<div class="app">
+<header><small>和纏祭・社学／松林ゼミ</small><h1>🍿 割引抽選券・照合</h1><p>スタッフ専用／サーバー不要・端末内記録</p></header>
+<nav aria-label="画面の切り替え">
+<button type="button" data-tab="scan" aria-selected="true">📷 読み取り</button><button type="button" data-tab="history" aria-selected="false">📊 履歴</button><button type="button" data-tab="guide" aria-selected="false">⚙ 操作・管理</button>
+</nav>
+<main>
+<section id="page-scan" class="page active" aria-label="読み取り">
+<div id="result" class="result" role="status" aria-live="polite"><span class="chip">準備完了</span><h2>QRを読み取ってください</h2><p>読み取ると自動で照合・記録します。<br>同じ端末での2回目や、発行日と受付日が異なる券は受け付けません。</p></div>
+<div class="card"><h2>📷 スマホのカメラで読み取る</h2>
+<div class="video-wrap" id="videoWrap" hidden><video id="video" autoplay muted playsinline></video><div class="aim"></div></div>
+<p id="cameraState" class="camera-state">「カメラを起動」を押してください。</p>
+<div class="group"><button type="button" class="button" id="btnCam">カメラを起動</button><button type="button" class="button alt" id="btnStop" disabled>停止</button></div>
+<p class="help-line">※ iPhoneのSafari等でアプリ内読み取りができない場合は、iPhone標準カメラで抽選券QRを読み取って、この照合ページを開く方式を使用できます（券のQRに照合ページのURLを組み込んだ場合）。</p>
+</div>
+<div class="card"><h2>⌨ コードを直接入力</h2><label class="eyebrow" for="manual">QRの下に表示されたコード、またはQRに含まれるURL</label><input type="text" id="manual" autocomplete="off" autocapitalize="characters" spellcheck="false" placeholder="WF1|SB|20261027110000|260|…"><button type="button" class="button full" id="btnManual" style="margin-top:10px">コードを照合する</button></div>
+<div class="warning" id="storageWarning" hidden>端末への保存が利用できません。この状態では重複照合ができないため、券を受け付けません。別のブラウザで開いてください。</div>
+</section>
+<section id="page-history" class="page" aria-label="読み取り履歴">
+<div class="card"><h2>保存中の受付状況</h2><div class="summary"><div class="stat"><strong id="sumAccepted">0</strong><span>受付済み（累計）</span></div><div class="stat"><strong id="sumDuplicate">0</strong><span>重複</span></div><div class="stat"><strong id="sumInvalid">0</strong><span>無効</span></div></div><p class="hint" id="gameTotals">ゲーム別受付件数：—</p><button type="button" class="button full" id="btnCsv">CSVをダウンロード</button></div>
+<div class="card"><h2>照合履歴（新しい順）</h2><p class="hint">有効な券だけでなく、重複・無効コードの照合も記録します。日時は日本時間です。</p><div id="logList" class="list"></div></div>
+</section>
+<section id="page-guide" class="page" aria-label="操作・管理">
+<div class="card"><h2>使い方</h2><p class="hint">ゲームで基準点を超えた来場者は「割引抽選券」を提示します。抽選券は発行当日のみ有効・1回限り使用できます。ガラポンはハズレなし（10円引き／50円引き／100円引き／ハーフ＆ハーフ追加100円無料または50円引き）。スタッフがQRを読み取り、<b>初回受付</b>ならガラポン抽選を案内してください。<b>使用済み</b>または<b>無効</b>なら抽選を実施しません。</p><div class="divider"></div>
+<p class="hint"><b>受付基準（固定）</b><br>ショット＆バースト：260点以上<br>たまご料理の巨匠：80点以上<br>パーフェクトポップ：115点以上</p>
+<p class="hint">記録するデータ：受付状態、ゲーム、得点、クリア日時、読み取り日時、券コード。CSVを保存できます。</p></div>
+<div class="card"><h2>端末内データの保存・復元</h2><p class="hint">通信して端末間で共有する仕組みはありません。複数のスタッフが使う場合も、<b>原則1台の受付スマホ・同じブラウザ</b>で使ってください。</p>
+<div class="group"><button type="button" class="button alt" id="btnBackup">JSONバックアップ</button><label class="file-label">JSON復元 <input type="file" id="fileRestore" accept=".json,application/json"></label></div>
+<p class="warning">ブラウザのデータ消去・別の端末・別のブラウザでは使用済み記録が引き継がれません。CSVを定期保存してください。QR形式のチェックは簡易的なもので、意図的な偽造を確実に防ぐものではありません。</p></div>
+<div class="card"><h2>データ消去</h2><p class="hint">テスト後に本番用として初期化するときだけ使用してください。削除後は以前の使用済み券も未使用扱いになります。</p><button type="button" class="button danger" id="btnClear">すべての履歴を消去</button></div>
+<div class="card"><h2>システム情報</h2><p class="hint">券の仕様：<code>WF1|ゲームID|日本時間14桁|得点|ランダム10文字|検査値8文字</code><br>ゲームID：SB / EG / PP<br>検査値：FNV-1a 32bit（誤入力検出用であり暗号署名ではありません）</p><p class="hint" id="storeCount"></p></div>
+</section>
+</main>
+<footer>和纏祭 スタッフ端末用・v2.0 / 照合通信なし</footer>
+</div>
+<script>
+'use strict';
+/* QR券プロトコル WF1 / ゲーム版には別途同じ発行関数を実装する。 */
+const LIMITS={SB:{name:'ショット＆バースト',min:260},EG:{name:'たまご料理の巨匠',min:80},PP:{name:'パーフェクトポップ',min:115}};
+const STORAGE='WF26_STALL_SCANNER_LOG_V1';
+const $=id=>document.getElementById(id);
+let logs=[]; let storageOK=true; let currentTab='scan';
+let videoStream=null; let scanLoopId=0; let cameraRunning=false; let detector=null; let busy=false;
+
+// HTMLには検査値の算法を埋め込みます。安全な電子署名ではありません。
+function fnv1a32(s){let h=0x811c9dc5;for(let i=0;i<s.length;i++){h^=s.charCodeAt(i);h=Math.imul(h,0x01000193)>>>0;}return (h>>>0).toString(16).toUpperCase().padStart(8,'0');}
+function fmtJst(t){if(!Number.isFinite(t))return '不明';const parts=new Intl.DateTimeFormat('ja-JP',{timeZone:'Asia/Tokyo',year:'numeric',month:'2-digit',day:'2-digit',hour:'2-digit',minute:'2-digit',second:'2-digit',hourCycle:'h23'}).formatToParts(new Date(t));const o={};for(const p of parts)o[p.type]=p.value;return `${o.year}/${o.month}/${o.day} ${o.hour}:${o.minute}:${o.second}`;}
+function extractTicket(input){let s=(input||'').trim();if(s.startsWith('http://')||s.startsWith('https://')){try{const u=new URL(s);const h=new URLSearchParams(u.hash.replace(/^#/,''));s=h.get('ticket')||h.get('code')||u.searchParams.get('ticket')||u.searchParams.get('code')||'';}catch(_){return '';}}return s.trim().toUpperCase();}
+function parseTicket(raw){
+ const code=extractTicket(raw);const p=code.split('|');
+ if(p.length!==6||p[0]!=='WF1'||!LIMITS[p[1]]||!/^\d{14}$/.test(p[2])||!/^\d{1,5}$/.test(p[3])||!(/^[A-F0-9]{10}$/.test(p[4]))||!(/^[A-F0-9]{8}$/.test(p[5])))return {ok:false,code,reason:'券コードの形式が正しくありません'};
+ const base=p.slice(0,5).join('|');if(fnv1a32(base)!==p[5])return {ok:false,code,reason:'検査値が一致しません（誤入力・改変の可能性）'};
+ const [y,m,d,h,mi,sec]=[p[2].slice(0,4),p[2].slice(4,6),p[2].slice(6,8),p[2].slice(8,10),p[2].slice(10,12),p[2].slice(12,14)].map(Number);
+ const issuedAt=Date.UTC(y,m-1,d,h-9,mi,sec);
+ const dd=new Date(issuedAt+9*3600000);
+ if(y<2025||y>2100||dd.getUTCFullYear()!==y||dd.getUTCMonth()!==m-1||dd.getUTCDate()!==d||dd.getUTCHours()!==h||dd.getUTCMinutes()!==mi||dd.getUTCSeconds()!==sec)return {ok:false,code,reason:'クリア日時が正しくありません'};
+ if(issuedAt>Date.now()+10*60000)return {ok:false,code,reason:'クリア日時が未来になっています'};
+ if(fmtJst(issuedAt).slice(0,10)!==fmtJst(Date.now()).slice(0,10))return {ok:false,code,reason:'当日のみ有効な抽選券です（発行日と受付日が一致しません）',gameId:p[1],gameName:LIMITS[p[1]].name,issuedAt,score:Number(p[3])};
+ const score=Number(p[3]), game=LIMITS[p[1]];
+ if(score<game.min)return {ok:false,code,reason:`${game.name}のクリア条件（${game.min}点）に達していません`,gameId:p[1],gameName:game.name,issuedAt,score};
+ return {ok:true,code,gameId:p[1],gameName:game.name,issuedAt,score};
+}
+function saveLogs(next){try{localStorage.setItem(STORAGE,JSON.stringify(next));const test=localStorage.getItem(STORAGE);if(test!==JSON.stringify(next))throw Error('読み戻し不一致');logs=next;storageOK=true;return true;}catch(e){console.warn('storage unavailable',e);storageOK=false;$('storageWarning').hidden=false;return false;}}
+function initStorage(){try{const testKey=STORAGE+'_test';localStorage.setItem(testKey,'ok');localStorage.removeItem(testKey);logs=JSON.parse(localStorage.getItem(STORAGE)||'[]');if(!Array.isArray(logs))throw Error('データ形式不一致');storageOK=true;}catch(e){logs=[];storageOK=false;$('storageWarning').hidden=false;} }
+function countUsed(code){return logs.find(x=>x.status==='accepted'&&x.code===code)||null;}
+function displayResult(status,data,prior){const el=$('result');el.className='result '+(status==='accepted'?'ok':status==='duplicate'?'duplicate':'invalid');let heading,sub,chip;
+ if(status==='accepted'){heading='受付OK！';sub='初回の抽選券です。ガラポンへご案内ください。';chip='✓ 初回受付'}
+ else if(status==='duplicate'){heading='使用済み！';sub='このコードはすでに受け付けています。抽選不可。';chip='✕ 重複コード'}
+ else {heading='無効な券です';sub=data.reason||'コードの確認ができません。';chip='! 無効'}
+ const esc=t=>String(t).replace(/[&<>"']/g,c=>({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;',"'":'&#39;'}[c]));
+ let grid='';if(data.gameName)grid+=`<dt>ゲーム</dt><dd>${esc(data.gameName)}</dd>`;
+ if(Number.isFinite(data.score))grid+=`<dt>獲得点</dt><dd>${data.score}点</dd>`;
+ if(Number.isFinite(data.issuedAt))grid+=`<dt>クリア日時</dt><dd>${esc(fmtJst(data.issuedAt))}</dd>`;
+ grid+=`<dt>読み取り日時</dt><dd>${esc(fmtJst(Date.now()))}</dd>`;
+ if(prior)grid+=`<dt>最初の受付日時</dt><dd>${esc(fmtJst(prior.scannedAt))}</dd>`;
+ el.innerHTML=`<span class="chip">${chip}</span><h2>${heading}</h2><p>${esc(sub)}</p><dl class="data-grid">${grid}</dl>${data.code?`<div class="code">${esc(data.code)}</div>`:''}`;
+}
+function record(raw){
+ if(!storageOK){displayResult('invalid',{reason:'保存先を使用できません。受付不可。'});return 'storage_failed';}
+ const r=parseTicket(raw);const prior=r.ok?countUsed(r.code):null;
+ const status=!r.ok?'invalid':prior?'duplicate':'accepted';
+ const newLog={status,code:r.code||String(raw||'').slice(0,250),gameId:r.gameId||'',gameName:r.gameName||'',score:r.score??null,issuedAt:r.issuedAt??null,scannedAt:Date.now(),note:r.reason||''};
+ if(!saveLogs([...logs,newLog])){displayResult('invalid',{reason:'端末に記録できません。抽選券を受け付けないでください。'});return 'storage_failed';}
+ displayResult(status,r,prior);renderHistory();
+ if(status==='accepted'&&navigator.vibrate)navigator.vibrate(120);
+ if(status==='duplicate'&&navigator.vibrate)navigator.vibrate([150,70,150]);
+ return status;
+}
+function openTab(name){currentTab=name;document.querySelectorAll('nav button').forEach(b=>b.setAttribute('aria-selected',String(b.dataset.tab===name)));document.querySelectorAll('.page').forEach(p=>p.classList.toggle('active',p.id==='page-'+name));if(name!=='scan')stopCamera();if(name==='history')renderHistory();if(name==='guide')$('storeCount').textContent=`保存中の照合記録：${logs.length}件`;}
+function renderHistory(){const a=logs.filter(x=>x.status==='accepted');$('sumAccepted').textContent=a.length;$('sumDuplicate').textContent=logs.filter(x=>x.status==='duplicate').length;$('sumInvalid').textContent=logs.filter(x=>x.status==='invalid').length;$('gameTotals').textContent='ゲーム別受付：'+Object.entries(LIMITS).map(([k,v])=>v.name+' '+a.filter(x=>x.gameId===k).length+'件').join(' ／ ');
+ const list=$('logList');list.replaceChildren();if(!logs.length){const p=document.createElement('p');p.className='hint';p.textContent='まだ読み取り履歴がありません。';list.appendChild(p);return;}
+ logs.slice(-100).reverse().forEach((r,i)=>{const box=document.createElement('article');box.className='entry '+r.status;const h=document.createElement('h3');const lbl=document.createElement('span');lbl.textContent=({'accepted':'✓ 初回受付','duplicate':'✕ 重複','invalid':'! 無効'})[r.status]||r.status;const dt=document.createElement('span');dt.textContent=fmtJst(r.scannedAt);h.append(lbl,dt);const p=document.createElement('p');p.textContent=`${r.gameName||'不明'}${r.score===null?'':`・${r.score}点`}／クリア：${r.issuedAt?fmtJst(r.issuedAt):'—'}`;const c=document.createElement('code');c.textContent=r.code;box.append(h,p,c);list.appendChild(box);});
+}
+function saveFile(name,content,type){const blob=new Blob([content],{type});const url=URL.createObjectURL(blob);const a=document.createElement('a');a.href=url;a.download=name;document.body.append(a);a.click();a.remove();setTimeout(()=>URL.revokeObjectURL(url),60000);}
+function exportCsv(){const rows=[['結果','ゲームID','ゲーム名','得点','クリア日時（日本時間）','読み取り日時（日本時間）','券コード','備考']];for(const r of logs)rows.push([r.status,r.gameId,r.gameName,r.score===null?'':r.score,r.issuedAt?fmtJst(r.issuedAt):'',fmtJst(r.scannedAt),r.code,r.note||'']);const csv='\ufeff'+rows.map(row=>row.map(x=>'"'+String(x).replaceAll('"','""')+'"').join(',')).join('\r\n');saveFile('watamatsuri-scans-'+new Date().toISOString().slice(0,10)+'.csv',csv,'text/csv;charset=utf-8');}
+function exportJson(){saveFile('watamatsuri-scanner-backup-'+Date.now()+'.json',JSON.stringify({format:'WF26_SCANNER_BACKUP_1',createdAt:new Date().toISOString(),logs},null,2),'application/json;charset=utf-8');}
+function stopCamera(){cameraRunning=false;scanLoopId++;if(videoStream){videoStream.getTracks().forEach(t=>t.stop());videoStream=null;}const v=$('video');v.srcObject=null;$('videoWrap').hidden=true;$('btnCam').disabled=false;$('btnStop').disabled=true;if($('cameraState').dataset.error!=='yes')$('cameraState').textContent='カメラは停止しています。';}
+async function startCamera(){stopCamera();$('cameraState').dataset.error='no';if(!navigator.mediaDevices?.getUserMedia){$('cameraState').dataset.error='yes';$('cameraState').textContent='この環境ではカメラが使えません。HTTPS公開ページ・対応ブラウザで試してください。';return;}
+ if(!('BarcodeDetector'in window)){$('cameraState').dataset.error='yes';$('cameraState').textContent='このブラウザはアプリ内QR読み取りに非対応です。iPhone標準カメラまたはコード入力をご利用ください。';return;}
+ try{const formats=await BarcodeDetector.getSupportedFormats();if(!formats.includes('qr_code'))throw Error('QR検出に対応していません');detector=new BarcodeDetector({formats:['qr_code']});videoStream=await navigator.mediaDevices.getUserMedia({video:{facingMode:{ideal:'environment'},width:{ideal:1280},height:{ideal:720}},audio:false});const v=$('video');v.srcObject=videoStream;await v.play();cameraRunning=true;$('videoWrap').hidden=false;$('btnCam').disabled=true;$('btnStop').disabled=false;$('cameraState').textContent='券のQRを枠の中に合わせてください。';const id=++scanLoopId;scanFrame(id);}catch(e){stopCamera();$('cameraState').dataset.error='yes';$('cameraState').textContent='カメラを開始できません：'+(e.message||e.name)+ '。権限・HTTPS接続を確認してください。';}}
+async function scanFrame(id){if(!cameraRunning||id!==scanLoopId||busy)return;busy=true;try{const v=$('video');if(v.readyState>=2){const result=await detector.detect(v);if(id!==scanLoopId||!cameraRunning)return;if(result.length){stopCamera();record(result[0].rawValue);$('cameraState').textContent='読み取り終了。次の券は「カメラを起動」で読み取れます。';return;}}}catch(e){console.warn('scan error',e);}finally{busy=false;}if(cameraRunning&&id===scanLoopId)setTimeout(()=>scanFrame(id),140);}
+function handleDeepLink(){const u=new URL(location.href);const p=new URLSearchParams(u.hash.replace(/^#/,''));const t=p.get('ticket')||p.get('code')||u.searchParams.get('ticket')||u.searchParams.get('code');if(!t)return;history.replaceState(null,'',location.pathname+location.search.replace(/\??(?:ticket|code)=[^&]*&?/,'') );record(t);}
+
+document.querySelectorAll('nav button').forEach(b=>b.addEventListener('click',()=>openTab(b.dataset.tab)));
+$('btnCam').addEventListener('click',startCamera);$('btnStop').addEventListener('click',stopCamera);
+$('btnManual').addEventListener('click',()=>{if(!$('manual').value.trim()){alert('コードを入力してください。');return;}stopCamera();record($('manual').value);$('manual').value='';});
+$('manual').addEventListener('keydown',e=>{if(e.key==='Enter')$('btnManual').click()});
+$('btnCsv').addEventListener('click',exportCsv);$('btnBackup').addEventListener('click',exportJson);
+$('fileRestore').addEventListener('change',async e=>{const file=e.target.files[0];e.target.value='';if(!file)return;try{const obj=JSON.parse(await file.text());if(obj.format!=='WF26_SCANNER_BACKUP_1'||!Array.isArray(obj.logs)||obj.logs.length>100000||!obj.logs.every(x=>x&&typeof x.code==='string'&&['accepted','duplicate','invalid'].includes(x.status)&&Number.isFinite(x.scannedAt))){alert('バックアップ形式が不正です。');return;}if(!confirm(`${obj.logs.length}件のデータを読み込みます。現在の履歴と統合しますか？`))return;const existing=new Set(logs.map(x=>[x.status,x.code,x.scannedAt].join('~')));const merged=logs.slice();for(const x of obj.logs){const k=[x.status,x.code,x.scannedAt].join('~');if(!existing.has(k)){merged.push({...x});existing.add(k);}}merged.sort((a,b)=>a.scannedAt-b.scannedAt);if(saveLogs(merged)){renderHistory();alert('履歴を復元しました。');}else alert('保存できませんでした。');}catch(err){alert('JSONファイルを読み込めませんでした。');}});
+$('btnClear').addEventListener('click',()=>{if(!confirm('すべての受付履歴と使用済み情報が消えます。よろしいですか？'))return;const s=prompt('最終確認：DELETE と入力してください');if(s!=='DELETE')return;if(saveLogs([])){renderHistory();alert('履歴を消去しました。');}});
+window.addEventListener('storage',e=>{if(e.key===STORAGE){try{logs=JSON.parse(e.newValue||'[]');if(!Array.isArray(logs))logs=[];renderHistory();}catch(_){}}});
+window.addEventListener('pagehide',stopCamera);
+window.addEventListener('hashchange',handleDeepLink);
+initStorage();renderHistory();handleDeepLink();
+</script>
+</body>
+</html>
