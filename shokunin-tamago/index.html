@@ -4,6 +4,7 @@
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no">
 <meta name="theme-color" content="#140d08">
+<!-- shokunin-tamago v9 -->
 <meta name="format-detection" content="telephone=no">
 <title>職人 ― たまご料理の巨匠</title>
 <style>
@@ -145,9 +146,7 @@ button{font:inherit;color:inherit;border:0;background:none;cursor:pointer;touch-
 #rPop{top:404px;height:62px;display:flex;flex-direction:column;align-items:center;justify-content:center;gap:3px}
 #rPop .big{font-size:19px;color:var(--gold2)}
 #rPop .sm{font-size:11px;color:var(--dim)}
-#rBest{position:absolute;left:0;right:0;top:472px;text-align:center;font-size:11px;color:var(--dim);line-height:1.6}
-.share{top:506px;height:72px;display:flex;align-items:center;gap:8px;padding:0 8px 0 14px}
-#rShare{flex:1;font-size:13px;line-height:1.4;color:var(--ink);-webkit-user-select:text;user-select:text}
+#rBest{position:absolute;left:0;right:0;top:486px;text-align:center;font-size:11px;color:var(--dim);line-height:1.6}
 .btn.mini{min-height:62px;padding:0 12px;font-size:14px;letter-spacing:.05em;border-radius:10px}
 .btn.mini svg{width:18px;height:18px}
 #bAgain{position:absolute;left:30px;top:588px;width:390px}
@@ -249,7 +248,6 @@ button{font:inherit;color:inherit;border:0;background:none;cursor:pointer;touch-
     <div class="rows sans" id="rRows"></div>
     <div class="box sans" id="rPop"></div>
     <div id="rBest" class="sans"></div>
-    <div class="box share sans"><span id="rShare"></span><button class="btn mini" id="bCopy" aria-label="結果の文章をコピー"></button></div>
     <button class="btn gold" id="bAgain" data-primary aria-label="もう一度同じ料理に挑戦"></button>
     <div class="row2"><button class="btn" id="bRSel" aria-label="料理選択へ">料理を選ぶ</button><button class="btn stall" id="bStall" hidden aria-label="割引抽選券を表示"></button></div>
     <div class="stallNote sans" id="stallNote" hidden>🎟 抽選券をスタッフに見せて、ガラポンを回そう</div>
@@ -2628,7 +2626,6 @@ const ENTER={
     $('rPop').innerHTML=tk?'<div class="big">🎟 割引抽選券 GET！</div><div class="sm">ガラポン1回（ハズレなし）　｜　大学祭当日のみ有効・1回限り</div>'
       :`<div class="big">🍿 あと${CONFIG.highScore-R.total}点</div><div class="sm">${CONFIG.highScore}点以上で 割引抽選券（ガラポン1回・ハズレなし）</div>`;
     $('rBest').innerHTML=`最高記録　オムレツ ${S.best.omelette}点 ／ 卵焼き ${S.best.tamago}点 ／ 総合最高（全料理）${S.best.total}点`;
-    $('rShare').textContent=shareText();
     $('bStall').hidden=!tk; $('stallNote').hidden=!tk;
     drawMinis();
   },
@@ -2640,7 +2637,6 @@ const ENTER={
     try{ wfDrawQR(wfQRData(t)); }catch(e){ $('tkCode').textContent=t.code+'（QRを表示できません。スタッフにこのコードを入力してもらってください）'; }
   }
 };
-function shareText(){ const R=G.R; return `たまご職人で${R.total}点！${R.rank}でした。`; }
 function comments(R){
   const om=R.dish==='omelette', lo=om?70:62, hi=om?90:86;
   const c0=R.ratio>=.9?'◎ 安定':R.ratio>=.6?'○ まずまず':'△ 不安定';
@@ -2768,20 +2764,15 @@ const infoBack=()=>setState(G.infoFrom==='coupon'?'coupon':G.R?'result':'title')
 on('bAgain',()=>setState('countdown'));
 on('bRSel',()=>setState('select'));
 on('bStall',()=>{ G.ticket=G.R.ticket; setState('coupon'); });
-on('bCopy',async()=>{ const ok=await copyText(shareText()); toast(ok?'コピーしました':'コピーできませんでした'); });
 const cpBack=()=>setState((G.cpFrom==='result'||G.cpFrom==='grow'||G.cpFrom==='info')&&G.R?'result':'title');
 on('bCpBack',cpBack); on('bCpDone',cpBack);
 function sndUI(){ $('bSe').innerHTML=svg(S.se?'spk':'spkOff'); $('bSe').setAttribute('aria-pressed',String(S.se)); $('bBgm').innerHTML=svg(S.bgm?'note':'noteOff'); $('bBgm').setAttribute('aria-pressed',String(S.bgm)); }
 $('bSe').addEventListener('click',()=>{ audioInit(); S.se=!S.se; applySound(); sndUI(); saveS(); if(S.se) sfx.ui(); });
 $('bBgm').addEventListener('click',()=>{ audioInit(); S.bgm=!S.bgm; applySound(); sndUI(); saveS(); });
-async function copyText(t){
-  try{ if(navigator.clipboard&&window.isSecureContext){ await navigator.clipboard.writeText(t); return true; } }catch(e){}
-  try{ const ta=document.createElement('textarea'); ta.value=t; ta.setAttribute('readonly',''); ta.style.cssText='position:fixed;left:0;top:0;opacity:0;-webkit-user-select:text;user-select:text'; document.body.appendChild(ta); ta.select(); ta.setSelectionRange(0,t.length); const ok=document.execCommand('copy'); ta.remove(); return ok; }catch(e){ return false; }
-}
 
 /* ---------- boot ---------- */
 [['bSelBack','back'],['bExBack','back'],['bCpBack','back'],['bInfoBack','back'],['bRInfo','pin']].forEach(([id,i])=>$(id).innerHTML=svg(i));
-$('bCopy').innerHTML=svg('copy')+'コピー'; $('bAgain').innerHTML=svg('retry')+'<span>もう一度</span>'; $('bStall').innerHTML=svg('ticket')+'<span>抽選券</span>';
+$('bAgain').innerHTML=svg('retry')+'<span>もう一度</span>'; $('bStall').innerHTML=svg('ticket')+'<span>抽選券</span>';
 loadS(); saveS(); sndUI(); newPlay('omelette'); fit(); setState('title');
 let last=performance.now();
 const rotMQ=window.matchMedia?window.matchMedia('(orientation: landscape) and (max-height: 520px) and (pointer: coarse)'):null;
