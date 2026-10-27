@@ -116,9 +116,9 @@ h1{font-size:27px;line-height:1.12;margin:6px 0;color:var(--red);letter-spacing:
         <div>🌽 <b>通常</b><br>連鎖の基本</div>
         <div>🍯 <b>キャラメル</b><br>周囲を巻き込む</div>
         <div>⭐ <b>スター</b><br>高速で自動追撃</div>
-        <div>🫘 <b>黒豆</b><br>当てると減点・連鎖ストップ</div><div>🐦 <b>スズメ</b><br>当てると減点・連鎖ストップ</div>
+        <div>🫘 <b>黒豆</b><br>当てると減点・連鎖ストップ</div><div>🐦 <b>スズメ</b><br>当てると火の鳥に！的を食べまくる</div>
       </div>
-      <div class="small" style="margin-top:8px;text-align:center">30秒・最大12ショット。終了時に260点以上でクリア！ 最高得点をめざそう。壁反射も使えます。<br>ぼやぼやするとスズメがコーンを食べに来ます。黒豆やスズメに当たると減点、連鎖もそこでストップ！<br>スマホ：指でドラッグ ／ PC：マウスでドラッグ</div>
+      <div class="small" style="margin-top:8px;text-align:center">30秒・最大12ショット。終了時に260点以上でクリア！ 最高得点をめざそう。壁反射も使えます。<br>ぼやぼやするとスズメがコーンを食べに来ます。黒豆やスズメに当たると減点、連鎖もそこでストップ！ スズメは火の鳥に変身して的を食べ、的が減ったまま戻りません。<br>スマホ：指でドラッグ ／ PC：マウスでドラッグ</div>
     </div>
     <div class="start-notice">🎯 260点以上で「割引抽選券」GET！<br>🎊 ガラポンはハズレなし・最低10円引き<br>※抽選券は当日のみ有効・1回限り使用可</div>
     <button id="startBtn" class="btn primary">ゲームスタート！</button>
@@ -1462,7 +1462,7 @@ global.WFQRCode=require("./index"); global.WFQRLevel=require("./QRErrorCorrectLe
 
 /* ================== 和纏祭 抽選券 WF1 共通仕様 ================== */
 const WF_GAME_ID='SB', WF_CLEAR_SCORE=260;
-let chainEpoch=0, clearAnnounced=false, caramelPending=0;
+let chainEpoch=0, clearAnnounced=false, caramelPending=0, eatenDebt=0;
 // スタッフ用照合HTMLを同じHTTPSフォルダに置く（ファイル名は一致させること）。
 // 別のフォルダを使う場合のみ、HTTPSの絶対URLを設定する。
 const WF_SCANNER_URL_OVERRIDE='https://lecture-app.online/popcorn-games/staff/'; // どちらのサイトで遊んでも、券のQRは本部の照合ページを開く
@@ -1644,14 +1644,16 @@ function fillBoard(){
   for(let i=0;i<3;i++)addTarget('BAD');
 }
 // 補充は連鎖が完全に止まってから（連鎖中に新しいコーンを置くと、飛んでいる破片が当たって勝手に連鎖が続くため）
-function chainActive(){ return !!projectile||frags.length>0||starRunners.length>0||caramelPending>0; }
+function chainActive(){ return !!projectile||frags.length>0||starRunners.length>0||caramelPending>0||!!(sparrow&&sparrow.phase==='PHOENIX'); }
 function refillBoard(now){
   if(chainActive())return;
   if(now-lastRefillAt<350)return;
   lastRefillAt=now;
   const alive=targets.filter(t=>t.alive).length;
-  if(alive>=14)return;
-  while(targets.filter(t=>t.alive).length<17){
+  // 火の鳥に食べられた的は、その回のゲーム中は補充されない（的が減るペナルティー）
+  const cap=Math.max(8,17-eatenDebt);
+  if(alive>=cap-3)return;
+  while(targets.filter(t=>t.alive).length<cap){
     const r=Math.random();
     if(r<.72)addTarget('NORMAL');
     else if(r<.84)addTarget('BAD');
@@ -1768,20 +1770,18 @@ function scareSparrow(){
   score=Math.max(0,score-20);
   sparrowsScared++;
   shotChain=0;
-  floatText(sparrow.x,sparrow.y-16,'スズメに命中 −20 / 連鎖ストップ','#b31e28',16);
-  burstParticles(sparrow.x,sparrow.y,'#fff3cb',12,.8);
-  tone('bad');screenShake=6;
-  if(navigator.vibrate)navigator.vibrate(35);
-  sparrow.phase='ESCAPE';
+  floatText(sparrow.x,sparrow.y-16,'−20 🔥火の鳥に変身！','#c2280c',17);
+  burstParticles(sparrow.x,sparrow.y,'#ff7a1a',22,1.2);burstParticles(sparrow.x,sparrow.y,'#ffd23f',14,1);
+  tone('bad');screenShake=8;
+  if(navigator.vibrate)navigator.vibrate([40,40,60]);
+  sparrow.phase='PHOENIX';sparrow.fire=true;
   sparrow.carry=false;
-  sparrow.escapeTimer=0;
-  const dir=sparrow.x<W/2?-1:1;
-  sparrow.vx=dir*8.5;
-  sparrow.vy=-5.2;
+  sparrow.phoenixT=0;sparrow.eaten=0;
+  sparrow.vx=sparrow.vx||3;sparrow.vy=-2;
 }
 
 function sparrowHitTest(o){
-  if(!sparrow||sparrow.phase==='GONE')return false;
+  if(!sparrow||sparrow.phase==='GONE'||sparrow.hit)return false;
   if(Math.hypot(o.x-sparrow.x,o.y-sparrow.y)<o.r+sparrow.r+5){
     scareSparrow();
     stopChain();
@@ -1896,8 +1896,32 @@ function updateSparrow(dt,now){
       sparrow.vx=dir*6.7;
       sparrow.vy=-3.3;
     }
+  }else if(sparrow.phase==='PHOENIX'){
+    // 火の鳥：近くの星・キャラメル・コーンを次々に食べる（黒豆は食べない）
+    sparrow.phoenixT+=dt;sparrow.wing+=dt*10;
+    let best=null,bd=1e9;
+    for(const t of targets){ if(!t.alive||t.type==='BAD')continue; const d=Math.hypot(t.x-sparrow.x,t.y-sparrow.y); if(d<bd){bd=d;best=t;} }
+    if(best){
+      const dx=best.x-sparrow.x,dy=best.y-sparrow.y,d=Math.hypot(dx,dy)||1,sp=5.4;
+      sparrow.vx=sparrow.vx*.8+(dx/d*sp)*.2; sparrow.vy=sparrow.vy*.8+(dy/d*sp)*.2;
+      if(d<best.r+sparrow.r+2){
+        best.alive=false;eatenDebt++;sparrow.eaten++;
+        burstParticles(best.x,best.y,'#ff6a13',14,1.1);
+        floatText(best.x,best.y,'ジュッ！','#c2280c',15);
+        tone('bad');
+      }
+    }
+    sparrow.x+=sparrow.vx*dt*60;sparrow.y+=sparrow.vy*dt*60;
+    sparrow.x=clamp(sparrow.x,10,W-10);sparrow.y=clamp(sparrow.y,bounds.top+10,H-20);
+    if(Math.random()<dt*40)particles.push({x:sparrow.x-sparrow.vx*2,y:sparrow.y-sparrow.vy*2,vx:rand(-.6,.6),vy:rand(-1.2,-.2),g:-.02,r:rand(3,6),life:rand(.3,.55),max:1,color:Math.random()<.5?'#ff7a1a':'#ffd23f',shape:'dot'});
+    if(!best||sparrow.eaten>=6||sparrow.phoenixT>4.2){
+      if(sparrow.eaten>0)floatText(sparrow.x,sparrow.y-20,`的が${sparrow.eaten}個 食べられた…`,'#c2280c',15);
+      sparrow.phase='ESCAPE';sparrow.escapeTimer=0;
+      const dir=sparrow.x<W/2?-1:1;sparrow.vx=dir*9;sparrow.vy=-5;
+    }
   }else if(sparrow.phase==='ESCAPE'){
     sparrow.escapeTimer+=dt;
+    if(sparrow.fire&&Math.random()<dt*30)particles.push({x:sparrow.x,y:sparrow.y,vx:rand(-.6,.6),vy:rand(-1,0),g:-.02,r:rand(3,5),life:.4,max:1,color:'#ff7a1a',shape:'dot'});
     sparrow.x+=sparrow.vx*dt*60;
     sparrow.y+=sparrow.vy*dt*60;
     sparrow.vy*=.995;
@@ -2075,6 +2099,8 @@ function drawBoard(){
     const dir=sparrow.vx>=0?1:-1;
     ctx.scale(dir,1);
     const flap=Math.sin(sparrow.wing)*5;
+    const FIRE=!!sparrow.fire;
+    if(FIRE){ ctx.shadowColor='rgba(255,110,20,.9)'; ctx.shadowBlur=18; }
 
     // shadow / motion
     ctx.globalAlpha=.13;
@@ -2085,17 +2111,18 @@ function drawBoard(){
     // body
     const birdBob=(sparrow.phase==='HOVER'||sparrow.phase==='PECK')?Math.sin(sparrow.wing*1.2)*1.5:0;
     ctx.translate(0,birdBob);
-    ctx.fillStyle='#8a633f';
-    ctx.strokeStyle='#4a3426';
+    ctx.fillStyle=FIRE?'#e8481c':'#8a633f';
+    ctx.strokeStyle=FIRE?'#8f1d06':'#4a3426';
     ctx.lineWidth=1.4;
     ctx.beginPath();ctx.ellipse(0,0,15,10,-.08,0,Math.PI*2);ctx.fill();ctx.stroke();
 
     // head
-    ctx.fillStyle='#725039';
+    ctx.fillStyle=FIRE?'#ff8a1f':'#725039';
     ctx.beginPath();ctx.arc(12,-5,7.5,0,Math.PI*2);ctx.fill();
+    if(FIRE){ ctx.fillStyle='#ffd23f'; ctx.beginPath(); ctx.moveTo(8,-11); ctx.lineTo(10,-20-flap*.4); ctx.lineTo(13,-12); ctx.lineTo(16,-19-flap*.3); ctx.lineTo(17,-10); ctx.closePath(); ctx.fill(); }
 
     // wing
-    ctx.fillStyle='#aa8056';
+    ctx.fillStyle=FIRE?'#ffb02e':'#aa8056';
     ctx.beginPath();
     ctx.moveTo(-4,-2);ctx.quadraticCurveTo(-18,-10-flap,-12,8);ctx.quadraticCurveTo(-3,5,5,1);ctx.closePath();ctx.fill();
 
@@ -2107,8 +2134,9 @@ function drawBoard(){
     ctx.fillStyle='#120e0b';ctx.beginPath();ctx.arc(14,-7,1.3,0,Math.PI*2);ctx.fill();
 
     // tail
-    ctx.fillStyle='#5f412f';
-    ctx.beginPath();ctx.moveTo(-13,0);ctx.lineTo(-25,-5);ctx.lineTo(-22,5);ctx.closePath();ctx.fill();
+    ctx.fillStyle=FIRE?'#ffd23f':'#5f412f';
+    if(FIRE){ ctx.beginPath();ctx.moveTo(-12,0);ctx.lineTo(-34,-10+flap);ctx.lineTo(-27,0);ctx.lineTo(-36,8-flap);ctx.closePath();ctx.fill(); }
+    else { ctx.beginPath();ctx.moveTo(-13,0);ctx.lineTo(-25,-5);ctx.lineTo(-22,5);ctx.closePath();ctx.fill(); }
 
     if(sparrow.phase==='HOVER'||sparrow.phase==='PECK'){
       ctx.strokeStyle='#9b6a2c';ctx.lineWidth=1.4;
@@ -2312,7 +2340,7 @@ if(!window.PointerEvent){
 
 
 function startGame(){
-  wfSession++;chainEpoch++;clearAnnounced=false;caramelPending=0;resize();score=0;timeLeft=30;shotsLeft=12;maxChain=0;shotChain=0;sparrowsScared=0;sparrowsFed=0;
+  wfSession++;chainEpoch++;clearAnnounced=false;caramelPending=0;eatenDebt=0;resize();score=0;timeLeft=30;shotsLeft=12;maxChain=0;shotChain=0;sparrowsScared=0;sparrowsFed=0;
   projectile=null;sparrow=null;particles=[];texts=[];frags=[];starRunners=[];nextId=1;screenShake=0;
   fillBoard();seedAmbient();state='PLAYING';startAt=performance.now();lastFrame=startAt;lastSecond=30;lastRefillAt=0;lastShotAt=startAt;lastSparrowAt=startAt-1800;
   startScreen.classList.add('hidden');resultScreen.classList.add('hidden');
@@ -2323,7 +2351,7 @@ function endGame(){
   state='RESULT';dragging=false;projectile=null;
   const final=Math.max(0,Math.round(score));
   document.getElementById('finalScore').textContent=`${final} PTS`;
-  document.getElementById('chainResult').textContent=`MAX CHAIN ${maxChain} ／ ${12-shotsLeft} SHOTS ／ 🐦命中 ${sparrowsScared}`;
+  document.getElementById('chainResult').textContent=`MAX CHAIN ${maxChain} ／ ${12-shotsLeft} SHOTS ／ 🔥火の鳥 ${sparrowsScared}`;
   let best=0;try{best=Number(localStorage.getItem('catchBurstShotBest')||0)}catch(_){ }
   if(final>best){best=final;try{localStorage.setItem('catchBurstShotBest',String(best))}catch(_){ }}
   document.getElementById('bestText').textContent=final>=best?'BEST SCORE!':'BEST '+best+' PTS';
