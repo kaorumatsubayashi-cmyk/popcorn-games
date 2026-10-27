@@ -1699,6 +1699,7 @@ const CONFIG = {
   popPoints: 2,          // ポップ1回の得点
   popInterval: 0.30,     // 適温中に1粒弾けるまでの秒数（小さいほど高得点）
   removeBonus: 5,        // 異物をタップ除去したときのボーナス
+  wrongTapPenalty: 10,   // 本物のポップコーンを間違ってタップしたときの減点
   burnPenalty: 10,       // 焦がし1回あたりの減点
   foreignPenalty: 20,    // 取り残した異物1個あたりの減点
   // --- 温度まわり ---
@@ -1708,6 +1709,14 @@ const CONFIG = {
   zoneHalf: 7,           // 適温ゾーンの半幅（大きいほど簡単）
   zoneMoveMin: 4.0,      // 適温が変わる間隔（最短・秒）
   zoneMoveMax: 6.0,      // 適温が変わる間隔（最長・秒）
+  // --- 後半の難化（rampStart〜rampEnd 秒で徐々に最大へ） ---
+  rampStart: 8,          // 難化が始まる経過秒
+  rampEnd: 18,           // 難化が最大になる経過秒
+  zoneMoveMinLate: 1.5,  // 最大難化時の適温が変わる間隔（最短・秒）
+  zoneMoveMaxLate: 2.3,  // 最大難化時の適温が変わる間隔（最長・秒）
+  zoneHalfLate: 5,       // 最大難化時の適温ゾーンの半幅
+  driftAmp: 9,           // 最大難化時、適温が常に揺れる幅（±）
+  driftSpeed: 2.1,       // その揺れの速さ
   burnMargin: 8,         // 適温上限からこれ以上高いと焦げ始める
   burnInterval: 1.1,     // 焦げ判定の間隔（秒）
   // --- フィーバー ---
@@ -1752,7 +1761,7 @@ const G = {
   zoneC:50, zoneTarget:50, zoneTimer:0, zoneNext:5, zoneMoveT:0,
   popT:0, burnT:0, keepT:0,
   fever:0, feverFlash:0,
-  score:0, pops:0, burns:0,
+  score:0, pops:0, burns:0, wrong:0,
   corns:[], foreigns:[], fx:[], flame:0,
   spawnT:0, foreignTaught:false, shake:0
 };
@@ -1762,8 +1771,8 @@ function resetGame(){
   G.temp = 25; G.up = G.down = false;
   G.zoneC = 42; G.zoneTarget = 42; G.zoneTimer = 0; G.zoneNext = rand(CONFIG.zoneMoveMin,CONFIG.zoneMoveMax); G.zoneMoveT = 0;
   G.popT = 0; G.burnT = 0; G.keepT = 0; G.fever = 0; G.feverFlash = 0;
-  G.score = 0; G.pops = 0; G.burns = 0;
-  G.corns = []; G.foreigns = []; G.fx = []; G.spawnT = 1.2; G.foreignTaught = false; G.shake = 0;
+  G.score = 0; G.pops = 0; G.burns = 0; G.wrong = 0;
+  G.corns = []; G.foreigns = []; G.fx = []; G.spawnT = 1.2; G.foreignTaught = false; G.shake = 0; G.rampTold = false;
   // 未加熱のコーン粒を敷き詰める
   for(let i=0;i<26;i++) G.corns.push(makeItem("kernel"));
   $("btnUp").classList.remove("hold"); $("btnDown").classList.remove("hold");
@@ -1784,8 +1793,11 @@ function spawnForeign(){
 function fx(x,y,kind,text){ G.fx.push({x,y,kind,text,t:0}); }
 
 /* ---------- 適温ゾーン ---------- */
-function zoneLo(){ return G.zoneC - CONFIG.zoneHalf; }
-function zoneHi(){ return G.zoneC + CONFIG.zoneHalf; }
+function ramp(){ return clamp((G.t - CONFIG.rampStart)/(CONFIG.rampEnd - CONFIG.rampStart), 0, 1); }
+function zoneMid(){ const p = ramp(); return clamp(G.zoneC + Math.sin(G.t*CONFIG.driftSpeed)*CONFIG.driftAmp*p, 10, 92); }
+function zoneHalfNow(){ const p = ramp(); return CONFIG.zoneHalf + (CONFIG.zoneHalfLate - CONFIG.zoneHalf)*p; }
+function zoneLo(){ return zoneMid() - zoneHalfNow(); }
+function zoneHi(){ return zoneMid() + zoneHalfNow(); }
 function inZone(){ return G.temp >= zoneLo() && G.temp <= zoneHi(); }
 
 /* =====================================================================
@@ -1804,10 +1816,13 @@ function update(dt){
   G.flame += ((G.up ? 1 : 0.18) + G.temp/160 - G.flame) * Math.min(1, dt*7);
 
   /* --- 適温ゾーンの移動 --- */
+  if(!G.rampTold && G.t >= CONFIG.rampStart){ G.rampTold = true; fx(TH.x, tempY(G.zoneC), "zone", "適温が暴れ出した！"); }
   G.zoneTimer += dt;
   if(G.zoneTimer >= G.zoneNext){
     G.zoneTimer = 0;
-    G.zoneNext = rand(CONFIG.zoneMoveMin, CONFIG.zoneMoveMax);
+    const p = ramp();
+    G.zoneNext = rand(CONFIG.zoneMoveMin + (CONFIG.zoneMoveMinLate - CONFIG.zoneMoveMin)*p,
+                      CONFIG.zoneMoveMax + (CONFIG.zoneMoveMaxLate - CONFIG.zoneMoveMax)*p);
     let nc;
     do { nc = rand(20, 84); } while(Math.abs(nc - G.zoneTarget) < 20);
     G.zoneTarget = nc; G.zoneMoveT = 0.45;
@@ -2012,7 +2027,17 @@ function drawForeigns(){
     const alpha = f.dead>0 ? Math.max(0, 1 - f.dead*2.6) : 1;
     ctx.save(); ctx.globalAlpha = alpha;
     ctx.translate(f.x, f.y+wob); ctx.scale(pop,pop);
-    if(f.type === "sheep"){
+    foreignShape(f.type);
+    ctx.restore();
+    if(f.dead>0){
+      ctx.save(); ctx.globalAlpha = Math.max(0,1-f.dead*2.6);
+      ctx.beginPath(); ctx.arc(f.x,f.y,28+f.dead*40,0,Math.PI*2);
+      ctx.strokeStyle="#e2453c"; ctx.lineWidth=5; ctx.stroke(); ctx.restore();
+    }
+  }
+}
+function foreignShape(type){
+    if(type === "sheep"){
       fluff(0,0,0.95,"#ffffff","#4a3520");
       // 顔と脚
       ctx.save(); ctx.translate(13,-8);
@@ -2030,13 +2055,23 @@ function drawForeigns(){
       ctx.beginPath(); ctx.arc(0,3,7,0.1,Math.PI-0.1);
       ctx.strokeStyle="#c9d7e2"; ctx.lineWidth=3; ctx.stroke();
     }
+}
+/* 見本：ポップコーンと異物（羊・雲）の見分け方 */
+function drawLegend(){
+  const x0=96, y0=6, w=378, h=60;
+  ctx.save();
+  roundRect(x0,y0,w,h,14); ctx.fillStyle="rgba(255,250,240,.94)"; ctx.fill(); ink(3);
+  const items=[["pop","ポップコーン","得点！","#2f8c3c"],["sheep","羊","異物！タップ","#e2453c"],["cloud","雲","異物！タップ","#e2453c"]];
+  items.forEach(([k,name,sub,col],i)=>{
+    const cx=x0+12+i*(w-12)/3, iy=y0+h/2+1;
+    ctx.save(); ctx.translate(cx+19,iy); ctx.scale(.66,.66);
+    if(k==="pop") fluff(0,0,0.95,"#ffffff","#4a3520"); else foreignShape(k);
     ctx.restore();
-    if(f.dead>0){
-      ctx.save(); ctx.globalAlpha = Math.max(0,1-f.dead*2.6);
-      ctx.beginPath(); ctx.arc(f.x,f.y,28+f.dead*40,0,Math.PI*2);
-      ctx.strokeStyle="#e2453c"; ctx.lineWidth=5; ctx.stroke(); ctx.restore();
-    }
-  }
+    ctx.textAlign="left"; ctx.textBaseline="middle";
+    ctx.font="800 13px sans-serif"; ctx.fillStyle="#4a3520"; ctx.fillText(name,cx+38,iy-9);
+    ctx.font="800 11px sans-serif"; ctx.fillStyle=col; ctx.fillText(sub,cx+38,iy+10);
+  });
+  ctx.restore();
 }
 
 function drawFx(){
@@ -2094,6 +2129,7 @@ function render(){
   drawCorns();
   drawForeigns();
   drawThermo();
+  drawLegend();
   drawFx();
   // 状態ラベル
   ctx.save();
@@ -2170,6 +2206,17 @@ cv.addEventListener("pointerdown", e => {
       return;
     }
   }
+  // 本物のポップコーンを取り除いてしまったら減点
+  for(let i=G.corns.length-1;i>=0;i--){
+    const c = G.corns[i];
+    if(c.kind !== "pop") continue;
+    if(Math.hypot(x - c.x, y - c.y) <= 22){
+      G.corns.splice(i,1);
+      G.score -= CONFIG.wrongTapPenalty; G.wrong++; G.shake = 0.25;
+      fx(c.x, c.y, "bad", "-" + CONFIG.wrongTapPenalty + " 本物を捨てた！");
+      return;
+    }
+  }
 }, { passive:true });
 cv.addEventListener("touchstart", e => e.preventDefault(), { passive:false });
 document.addEventListener("gesturestart", e => e.preventDefault());
@@ -2181,7 +2228,7 @@ document.addEventListener("gesturestart", e => e.preventDefault());
    ===================================================================== */
 const WF_GAME_ID='PP', WF_CLEAR_SCORE=115;
 const WF_SCANNER_FILE='watamatsuri-qr-scanner-v2.html';
-const WF_SCANNER_URL_OVERRIDE=''; // 公開フォルダが違う場合のみ HTTPS URL を指定
+const WF_SCANNER_URL_OVERRIDE='https://lecture-app.online/popcorn-games/staff/'; // どちらのサイトで遊んでも、券のQRは本部の照合ページを開く // 公開フォルダが違う場合のみ HTTPS URL を指定
 const WF_LAST_KEY='WATAMATSURI_PP_LAST_TICKET_V1';
 let wfLastTicket=null;
 let lastResult=null;
@@ -2206,7 +2253,7 @@ function showOutcome(r){
   $('verdict').classList.toggle('lost',!ok);
   $('rVerdict').textContent=ok?'🎉 115点達成！抽選券を獲得！':'残念！再チャレンジをお待ちしております';
   $('rSub').textContent=ok?'テント２番のガラポンを1回まわせます。ハズレなし、最低10円引き！':`クリアラインは115点。あと${Math.max(0,115-r.final)}点！ もう一度挑戦しよう！`;
-  $('rBreakdown').textContent=r.saved?'本日獲得した抽選券を再表示中':`ポップ ${r.pops}粒 ／ 焦がし ${r.burns}回 ／ 未除去の異物 ${r.foreign}個`;
+  $('rBreakdown').textContent=r.saved?'本日獲得した抽選券を再表示中':`ポップ ${r.pops}粒 ／ 焦がし ${r.burns}回 ／ 未除去の異物 ${r.foreign}個 ／ 誤タップ ${r.wrong||0}回`;
   $('winSection').hidden=!ok;
   if(ok){
     $('ticketCode').textContent=r.ticket.code;
@@ -2224,7 +2271,7 @@ function finish(){
   const final=wfCurrentScore();
   const ticket=final>=WF_CLEAR_SCORE?wfNewTicket(final):null;
   if(ticket)wfStoreTicket(ticket);
-  lastResult={final,ticket,pops:G.pops,burns:G.burns,foreign:G.foreigns.filter(f=>f.dead===0).length};
+  lastResult={final,ticket,pops:G.pops,burns:G.burns,wrong:G.wrong,foreign:G.foreigns.filter(f=>f.dead===0).length};
   showOutcome(lastResult);
 }
 function start(){resetGame();G.deadline=performance.now()+CONFIG.duration*1000;show('game');$('hudScore').textContent=0;$('hudTime').textContent=CONFIG.duration;}
