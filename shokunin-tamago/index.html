@@ -10,24 +10,25 @@
 :root{--gold:#d8b46a;--gold2:#f3dca0;--ink:#f5ecd9;--dim:#bba98a;}
 *{box-sizing:border-box;margin:0;padding:0;-webkit-tap-highlight-color:transparent}
 [hidden]{display:none!important}
-html,body{height:100%;overflow:hidden;overscroll-behavior:none;background:#0d0805}
+html,body{height:100%;overflow:hidden;overscroll-behavior:none;background:#0d0805;touch-action:none}
 body{position:fixed;inset:0;color:var(--ink);font-family:"Hiragino Mincho ProN","Yu Mincho","YuMincho","Noto Serif JP","Noto Serif CJK JP","MS PMincho",serif;-webkit-user-select:none;user-select:none;-webkit-touch-callout:none;-webkit-text-size-adjust:100%;background:radial-gradient(ellipse at 50% 35%,#2a1b11 0%,#0d0805 75%)}
 .sans{font-family:"Hiragino Sans","Hiragino Kaku Gothic ProN","Yu Gothic","YuGothic","Noto Sans JP","Meiryo",sans-serif}
 #stage{position:absolute;left:0;top:0;width:450px;height:800px;transform-origin:0 0;overflow:hidden;touch-action:none;background:#1b120b;box-shadow:0 0 60px rgba(0,0,0,.8)}
 #cv{position:absolute;left:0;top:0;width:450px;height:800px;display:block;touch-action:none}
-#layer{position:absolute;left:0;top:0;width:450px;height:800px}
+#layer{position:absolute;left:0;top:0;width:450px;height:800px;pointer-events:none}
+.screen.on{pointer-events:auto}
 button{font:inherit;color:inherit;border:0;background:none;cursor:pointer;touch-action:manipulation}
-.btn{min-height:58px;padding:0 22px;border-radius:12px;border:1px solid rgba(216,180,106,.65);background:linear-gradient(#3b2817,#22160c);color:var(--gold2);font-size:20px;letter-spacing:.14em;box-shadow:0 3px 0 #080502,0 8px 18px rgba(0,0,0,.5),inset 0 1px 0 rgba(255,230,170,.18);display:inline-flex;align-items:center;justify-content:center;gap:10px;white-space:nowrap}
+.btn{min-height:64px;padding:0 22px;border-radius:12px;border:1px solid rgba(216,180,106,.65);background:linear-gradient(#3b2817,#22160c);color:var(--gold2);font-size:20px;letter-spacing:.14em;box-shadow:0 3px 0 #080502,0 8px 18px rgba(0,0,0,.5),inset 0 1px 0 rgba(255,230,170,.18);display:inline-flex;align-items:center;justify-content:center;gap:10px;white-space:nowrap}
 .btn:active,.btn.down{transform:translateY(2px);box-shadow:0 1px 0 #080502,0 4px 10px rgba(0,0,0,.5)}
 .btn.gold{background:linear-gradient(#ecd08e,#b8893f);color:#26170a;border-color:#f7e5b2;font-weight:bold;text-shadow:0 1px 0 rgba(255,245,215,.5)}
 .btn.off{opacity:.38;cursor:default}
 .btn svg{width:26px;height:26px;flex:none}
 .wide{width:320px}
-.icon-btn{width:46px;height:46px;border-radius:50%;border:1px solid rgba(216,180,106,.5);background:rgba(25,16,9,.78);color:var(--gold2);display:flex;align-items:center;justify-content:center}
-.icon-btn svg{width:24px;height:24px}
+.icon-btn{width:62px;height:62px;border-radius:50%;border:1px solid rgba(216,180,106,.5);background:rgba(25,16,9,.78);color:var(--gold2);display:flex;align-items:center;justify-content:center}
+.icon-btn svg{width:28px;height:28px}
 .icon-btn[aria-pressed="false"]{color:#8a7a60;border-color:rgba(140,120,90,.4)}
 #snd{position:absolute;right:8px;top:8px;display:flex;gap:8px;z-index:30}
-.back{position:absolute;left:10px;top:8px;z-index:5}
+.back{position:absolute;left:8px;top:8px;z-index:5}
 .screen{position:absolute;inset:0;display:none;z-index:10}
 .screen.on{display:block}
 .center{position:absolute;left:0;right:0;display:flex;flex-direction:column;align-items:center}
@@ -42,7 +43,7 @@ button{font:inherit;color:inherit;border:0;background:none;cursor:pointer;touch-
 .pill{font-size:14px;padding:7px 16px;border-radius:99px;background:rgba(20,12,6,.8);border:1px solid rgba(216,180,106,.4);color:var(--gold2)}
 .best{font-size:12px;color:var(--dim);text-align:center;line-height:1.6;text-shadow:0 1px 4px #000}
 /* select */
-.cards{position:absolute;top:128px;left:14px;right:14px;display:flex;gap:14px}
+.cards{position:absolute;top:136px;left:14px;right:14px;display:flex;gap:14px}
 .card{flex:1;height:440px;border-radius:14px;border:1px solid rgba(216,180,106,.55);background:linear-gradient(rgba(34,22,12,.92),rgba(14,9,5,.95));box-shadow:0 10px 26px rgba(0,0,0,.6),inset 0 1px 0 rgba(255,230,170,.12);display:flex;flex-direction:column;align-items:center;padding-top:14px}
 .card:active{transform:scale(.98)}
 .card canvas{width:190px;height:210px}
@@ -66,24 +67,24 @@ button{font:inherit;color:inherit;border:0;background:none;cursor:pointer;touch-
 #bGo{position:absolute;left:65px;top:640px}
 .limit{position:absolute;left:0;right:0;top:716px;text-align:center;font-size:12px;color:var(--dim)}
 /* hud */
-#hud{position:absolute;left:10px;top:8px;width:328px;z-index:20}
-.hbar{height:46px;border-radius:10px;background:rgba(18,11,6,.82);border:1px solid rgba(216,180,106,.45);display:flex;align-items:center;justify-content:space-around;padding:0 6px}
+#hud{position:absolute;left:8px;top:8px;width:290px;z-index:20}
+.hbar{height:62px;border-radius:10px;background:rgba(18,11,6,.82);border:1px solid rgba(216,180,106,.45);display:flex;align-items:center;justify-content:space-around;padding:0 6px}
 .hbar i{width:1px;height:24px;background:rgba(216,180,106,.4)}
-#hDish{font-size:17px;letter-spacing:.08em;color:var(--gold2)}
-#hTime,#hScore{font-size:21px;font-variant-numeric:tabular-nums;font-weight:600}
+#hDish{font-size:16px;letter-spacing:.08em;color:var(--gold2)}
+#hTime,#hScore{font-size:22px;font-variant-numeric:tabular-nums;font-weight:600}
 #hTime.warn{color:#ffb38a}
 #hPop{font-size:11px;color:var(--dim);margin:3px 0 0 6px}
 /* controls */
 #controls{position:absolute;left:0;right:0;bottom:0;height:202px;z-index:20;background:linear-gradient(rgba(10,6,3,0),rgba(10,6,3,.78) 30%,rgba(8,5,2,.94))}
-#heatRow,#hintRow{position:absolute;left:14px;right:14px;top:12px;height:70px;display:flex;align-items:center;gap:10px;border-radius:12px;background:rgba(22,14,8,.85);border:1px solid rgba(216,180,106,.35);padding:0 12px}
+#heatRow,#hintRow{position:absolute;left:14px;right:14px;top:8px;height:80px;display:flex;align-items:center;gap:10px;border-radius:12px;background:rgba(22,14,8,.85);border:1px solid rgba(216,180,106,.35);padding:0 12px}
 #hintRow{justify-content:center;font-size:17px;color:var(--gold2);letter-spacing:.08em}
 .hl{font-size:16px;color:var(--gold2);white-space:nowrap}
-.rw{flex:1;position:relative;height:56px}
-#heat{position:absolute;left:0;right:0;top:4px;width:100%;height:36px;-webkit-appearance:none;appearance:none;background:transparent;touch-action:none}
+.rw{flex:1;position:relative;height:72px}
+#heat{position:absolute;left:0;right:0;top:0;width:100%;height:62px;-webkit-appearance:none;appearance:none;background:transparent;touch-action:none}
 #heat::-webkit-slider-runnable-track{height:10px;border-radius:5px;background:linear-gradient(90deg,#2d4468,#a4722e 55%,#c24f22);border:1px solid rgba(0,0,0,.6)}
 #heat::-moz-range-track{height:10px;border-radius:5px;background:linear-gradient(90deg,#2d4468,#a4722e 55%,#c24f22)}
-#heat::-webkit-slider-thumb{-webkit-appearance:none;width:40px;height:40px;margin-top:-16px;border-radius:50%;background:radial-gradient(circle at 35% 30%,#fff3cf,#d6ab58 55%,#8a6424);border:2px solid #2a1a0c;box-shadow:0 3px 8px rgba(0,0,0,.7)}
-#heat::-moz-range-thumb{width:38px;height:38px;border-radius:50%;background:radial-gradient(circle at 35% 30%,#fff3cf,#d6ab58 55%,#8a6424);border:2px solid #2a1a0c}
+#heat::-webkit-slider-thumb{-webkit-appearance:none;width:58px;height:58px;margin-top:-25px;border-radius:50%;background:radial-gradient(circle at 35% 30%,#fff3cf,#d6ab58 55%,#8a6424);border:2px solid #2a1a0c;box-shadow:0 3px 8px rgba(0,0,0,.7)}
+#heat::-moz-range-thumb{width:56px;height:56px;border-radius:50%;background:radial-gradient(circle at 35% 30%,#fff3cf,#d6ab58 55%,#8a6424);border:2px solid #2a1a0c}
 .ticks{position:absolute;left:10px;right:10px;bottom:0;display:flex;justify-content:space-between;font-size:11px;color:var(--dim)}
 #heatVal{width:44px;text-align:center;font-size:17px;font-weight:bold;color:#ffd79a}
 #heatRow.pulse{animation:pl 1.2s ease-in-out infinite}
@@ -111,36 +112,36 @@ button{font:inherit;color:inherit;border:0;background:none;cursor:pointer;touch-
 .row .v{width:56px;text-align:right;font-variant-numeric:tabular-nums;color:#fff3d2}
 .row .c{width:74px;font-size:11px;color:var(--gold2);white-space:nowrap}
 #sNote{position:absolute;left:0;right:0;top:672px;text-align:center;font-size:13px;color:#ffb38a}
-#bNext{position:absolute;left:65px;top:704px}
+#bNext{position:absolute;left:65px;top:700px}
 /* grow */
 #gStat{position:absolute;left:0;right:0;top:108px;text-align:center;font-size:20px;color:var(--gold2)}
 #gSteps{position:absolute;left:0;right:0;top:140px;text-align:center;font-size:13px;color:var(--dim);letter-spacing:.08em}
 #gMsg{position:absolute;left:20px;right:20px;top:548px;text-align:center;font-size:19px;line-height:1.5;color:#fff3d2;text-shadow:0 2px 8px #000;letter-spacing:.06em}
-#bGrowAct{position:absolute;left:65px;top:626px}
-#bGrowNext{position:absolute;left:65px;top:704px}
+#bGrowAct{position:absolute;left:65px;top:620px}
+#bGrowNext{position:absolute;left:65px;top:700px}
 /* result */
-#rDish{position:absolute;left:0;right:0;top:20px;text-align:center;font-size:15px;letter-spacing:.3em;color:var(--dim)}
-#mRes{position:absolute;left:75px;top:44px;width:300px;height:124px}
-.rScore{position:absolute;left:0;right:0;top:168px;text-align:center;color:#fff3d2}
+#rDish{position:absolute;left:0;right:0;top:50px;text-align:center;font-size:15px;letter-spacing:.3em;color:var(--dim)}
+#mRes{position:absolute;left:75px;top:74px;width:300px;height:124px}
+.rScore{position:absolute;left:0;right:0;top:190px;text-align:center;color:#fff3d2}
 #rNum{font-size:66px;font-weight:600;line-height:1;font-variant-numeric:tabular-nums}
 .new{display:inline-block;font-size:11px;letter-spacing:.1em;color:#26170a;background:linear-gradient(#ecd08e,#b8893f);border-radius:4px;padding:2px 6px;margin-left:8px;vertical-align:super}
-#rRank{position:absolute;left:0;right:0;top:240px;text-align:center;font-size:26px;letter-spacing:.35em;padding-left:.35em;color:var(--gold2)}
-#rRows{top:284px}
-#rRows .row{opacity:1;height:22px;font-size:13px}
+#rRank{position:absolute;left:0;right:0;top:258px;text-align:center;font-size:26px;letter-spacing:.35em;padding-left:.35em;color:var(--gold2)}
+#rRows{top:298px}
+#rRows .row{opacity:1;height:20px;font-size:13px}
 .box{position:absolute;left:30px;right:30px;border-radius:12px;background:rgba(20,12,6,.78);border:1px solid rgba(216,180,106,.35)}
-#rPop{top:406px;height:60px;display:flex;flex-direction:column;align-items:center;justify-content:center;gap:3px}
+#rPop{top:404px;height:62px;display:flex;flex-direction:column;align-items:center;justify-content:center;gap:3px}
 #rPop .big{font-size:19px;color:var(--gold2)}
 #rPop .sm{font-size:11px;color:var(--dim)}
-#rBest{position:absolute;left:0;right:0;top:474px;text-align:center;font-size:11px;color:var(--dim);line-height:1.6}
-.share{top:512px;height:58px;display:flex;align-items:center;gap:8px;padding:0 8px 0 14px}
+#rBest{position:absolute;left:0;right:0;top:472px;text-align:center;font-size:11px;color:var(--dim);line-height:1.6}
+.share{top:506px;height:72px;display:flex;align-items:center;gap:8px;padding:0 8px 0 14px}
 #rShare{flex:1;font-size:13px;line-height:1.4;color:var(--ink);-webkit-user-select:text;user-select:text}
-.btn.mini{min-height:44px;padding:0 12px;font-size:14px;letter-spacing:.05em;border-radius:10px}
+.btn.mini{min-height:62px;padding:0 12px;font-size:14px;letter-spacing:.05em;border-radius:10px}
 .btn.mini svg{width:18px;height:18px}
-#bAgain{position:absolute;left:30px;top:584px;width:390px}
-.row2{position:absolute;left:30px;right:30px;top:660px;display:flex;gap:12px}
+#bAgain{position:absolute;left:30px;top:588px;width:390px}
+.row2{position:absolute;left:30px;right:30px;top:664px;display:flex;gap:12px}
 .row2 .btn{flex:1;font-size:17px;letter-spacing:.08em;padding:0 10px}
 .btn.stall{background:linear-gradient(#7a2320,#4a1210);border-color:#e6b36a;color:#ffe9bd}
-.stallNote{position:absolute;left:0;right:0;top:730px;text-align:center;font-size:12px;color:var(--gold2)}
+.stallNote{position:absolute;left:0;right:0;top:738px;text-align:center;font-size:12px;color:var(--gold2)}
 /* coupon */
 .ticket{position:absolute;left:40px;right:40px;top:92px;height:440px;border-radius:16px;background:linear-gradient(160deg,#2c1c0f,#150c06);border:2px solid #d8b46a;box-shadow:0 12px 30px rgba(0,0,0,.7),inset 0 0 0 6px rgba(20,12,6,1),inset 0 0 0 7px rgba(216,180,106,.5);display:flex;flex-direction:column;align-items:center;padding-top:34px;overflow:hidden}
 #tkStall{font-size:15px;letter-spacing:.2em;color:var(--dim)}
@@ -151,9 +152,25 @@ button{font:inherit;color:inherit;border:0;background:none;cursor:pointer;touch-
 #tkNote{font-size:13px;color:var(--ink);margin-top:22px;padding:0 20px;text-align:center;line-height:1.6}
 .stamp{white-space:nowrap;position:absolute;top:170px;left:50%;transform:translateX(-50%) rotate(-14deg);font-size:54px;letter-spacing:.2em;color:#e0574a;border:5px solid #e0574a;border-radius:10px;padding:0 18px;background:rgba(20,10,6,.6)}
 #bCpDone{position:absolute;left:65px;top:560px}
-#bStaff{position:absolute;left:65px;top:650px;width:320px;height:52px;border-radius:12px;border:1px dashed rgba(216,180,106,.5);background:rgba(20,12,6,.7);color:var(--dim);font-size:13px;overflow:hidden}
-#bStaff .fill{position:absolute;left:0;top:0;bottom:0;width:0;background:rgba(216,180,106,.35)}
-#bStaff .lbl{position:relative}
+#bStaff{position:absolute;left:65px;top:640px;width:320px;height:64px;border-radius:12px;border:1px dashed rgba(216,180,106,.5);background:rgba(20,12,6,.7);color:var(--dim);font-size:13px;overflow:hidden}
+.live{position:absolute;left:0;right:0;top:540px;text-align:center;font-size:13px;color:var(--gold2);font-variant-numeric:tabular-nums}
+.live b{display:inline-block;width:8px;height:8px;border-radius:50%;background:#e0574a;margin-right:6px;animation:bl 1s steps(2) infinite}
+@keyframes bl{50%{opacity:.15}}
+.tkShine{position:absolute;top:0;bottom:0;width:60px;left:-80px;background:linear-gradient(90deg,transparent,rgba(255,235,180,.16),transparent);transform:skewX(-18deg);animation:sh 2.6s linear infinite;pointer-events:none}
+@keyframes sh{to{left:420px}}
+#pinPad{position:absolute;left:40px;right:40px;top:100px;padding:18px 18px 20px;border-radius:16px;background:rgba(14,9,5,.97);border:1px solid var(--gold);box-shadow:0 14px 34px rgba(0,0,0,.8);z-index:6;text-align:center}
+.pinT{font-size:16px;color:var(--gold2);letter-spacing:.1em}
+#pinDots{margin:12px 0 4px;font-size:26px;letter-spacing:.35em;color:#fff3d2;min-height:34px}
+#pinMsg{font-size:12px;color:#ffb38a;min-height:18px}
+.pinKeys{display:grid;grid-template-columns:repeat(3,1fr);gap:10px;margin-top:8px}
+.pinKeys button{height:64px;border-radius:10px;border:1px solid rgba(216,180,106,.5);background:linear-gradient(#3b2817,#22160c);color:var(--gold2);font-size:22px}
+.pinKeys button:active{transform:translateY(2px)}
+.shake{animation:sk .35s}
+@keyframes sk{25%{transform:translateX(-8px)}75%{transform:translateX(8px)}}
+#rotate{display:none;position:fixed;inset:0;z-index:100;background:radial-gradient(ellipse at 50% 40%,#2a1b11,#0d0805 75%);color:var(--gold2);flex-direction:column;align-items:center;justify-content:center;gap:22px;text-align:center;font-size:22px;letter-spacing:.12em;line-height:1.6}
+.rphone{width:46px;height:78px;border:3px solid var(--gold);border-radius:10px;animation:rot 2s ease-in-out infinite}
+@keyframes rot{0%,20%{transform:rotate(-90deg)}60%,100%{transform:rotate(0)}}
+@media (orientation: landscape) and (max-height: 520px) and (pointer: coarse){#rotate{display:flex}#stage{visibility:hidden}}
 #toast{position:absolute;left:0;right:0;top:272px;text-align:center;z-index:40;pointer-events:none;opacity:0;transition:opacity .3s}
 #toast.on{opacity:1}
 #toast span{display:inline-block;font-size:30px;letter-spacing:.25em;padding:10px 26px 10px 32px;border-radius:12px;background:rgba(15,9,5,.88);border:1px solid var(--gold);color:var(--gold2)}
@@ -161,6 +178,7 @@ button{font:inherit;color:inherit;border:0;background:none;cursor:pointer;touch-
 </style>
 </head>
 <body>
+<div id="rotate" role="alert"><div class="rphone" aria-hidden="true"></div><p>スマートフォンを<br>縦向きにしてください</p></div>
 <div id="stage">
   <canvas id="cv" aria-label="調理画面"></canvas>
 
@@ -252,9 +270,15 @@ button{font:inherit;color:inherit;border:0;background:none;cursor:pointer;touch-
       <div id="tkDate" class="sans"></div>
       <div id="tkNote" class="sans"></div>
       <div class="stamp" id="tkStamp" hidden>使用済</div>
+      <div class="tkShine" aria-hidden="true"></div>
     </div>
+    <div class="live sans" id="tkLive"><b></b><span id="tkClock"></span></div>
     <button class="btn wide" id="bCpDone" aria-label="戻る">戻る</button>
-    <button id="bStaff" class="sans" aria-label="スタッフ用：長押しで使用済にする"><span class="fill" id="staffFill"></span><span class="lbl">スタッフ用：長押しで使用済にする</span></button>
+    <button id="bStaff" class="sans" aria-label="スタッフ用：使用済にする">スタッフ用：使用済にする</button>
+    <div id="pinPad" class="sans" hidden role="dialog" aria-label="スタッフ番号の入力">
+      <div class="pinT">スタッフ番号を入力</div><div id="pinDots"></div><div id="pinMsg"></div>
+      <div class="pinKeys"><button data-k="1">1</button><button data-k="2">2</button><button data-k="3">3</button><button data-k="4">4</button><button data-k="5">5</button><button data-k="6">6</button><button data-k="7">7</button><button data-k="8">8</button><button data-k="9">9</button><button data-k="x" aria-label="閉じる">×</button><button data-k="0">0</button><button data-k="b" aria-label="1文字消す">⌫</button></div>
+    </div>
   </section>
 
   <div id="toast" aria-live="polite"><span id="toastT"></span></div>
@@ -270,6 +294,7 @@ const CONFIG={
   stallName:'学園祭 ポップコーン屋台',
   couponTitle:'ポップコーン<br>割引券',
   couponNote:'この画面を屋台のスタッフにお見せください',
+  staffPinHash:'a1737025', // 割引券を「使用済」にするスタッフ番号（4桁）のハッシュ値。番号そのものは書かない
   timeLimit:120,      // 調理の制限時間（秒）…卵を溶き始めてから
   highScore:80        // 高得点（ポップコーンが育つ）ライン
 };
@@ -333,7 +358,12 @@ function loadS(){
     if(typeof d.bgm==='boolean') S.bgm=d.bgm;
   }catch(e){}
 }
-function saveS(){try{localStorage.setItem(KEY,JSON.stringify(S));}catch(e){}}
+let saveWarned=false;
+function saveS(){
+  let ok=false; try{ const v=JSON.stringify(S); localStorage.setItem(KEY,v); ok=localStorage.getItem(KEY)===v; }catch(e){ ok=false; }
+  if(!ok&&!saveWarned){ saveWarned=true; setTimeout(()=>toast('記録を保存できません',3200),50); }
+  G.saveOk=ok; return ok;
+}
 
 /* ---------- audio ---------- */
 const A={ctx:null,out:null,se:null,bg:null,noise:null,sz:null,timer:0,next:0,step:0,on:false};
@@ -745,7 +775,7 @@ function popWord(q,x,y){
 }
 
 /* ---------- game state ---------- */
-const G={state:'title',time:0,st:0,dish:'omelette',R:null,sc:null,gw:null,cpFrom:'title',staff:-1,cpUsed:false,cd:0};
+const G={state:'title',time:0,st:0,dish:'omelette',R:null,sc:null,gw:null,cpFrom:'title',cpUsed:false,cd:0,realDt:0,saveOk:true};
 const P={};
 const DISH={omelette:{name:'オムレツ',en:'OMELETTE'},tamago:{name:'卵焼き',en:'TAMAGOYAKI'}};
 const IDEAL={omelette:{dish:'omelette',C:80,B:3,Bv:3,shape:1,torn:false,flat:false,layers:0,off:0,seed:11,poured:true},
@@ -880,7 +910,6 @@ function updPlay(dt){
       } else if(P.cracked>=3){ P.wait+=dt; if(P.wait>.45) goPhase('whisk'); }
       break;
     case 'whisk':
-      if(!P.timerOn&&P.pt>3) startTimer();
       if(P.kbWhisk>0){ P.wx=225+Math.cos(P.whA)*48; P.wy=404+Math.sin(P.whA)*28; }
       if(P.mix>=100){ P.wait+=dt; if(P.wait>.35) finishWhisk(); }
       break;
@@ -930,7 +959,7 @@ function update(dt){
   else if(G.state==='play') updPlay(dt);
   else if(G.state==='score') updScore(dt);
   else if(G.state==='grow') updGrow(dt);
-  else if(G.state==='coupon'&&G.staff>=0){ G.staff+=dt; $('staffFill').style.width=clamp(G.staff/1.5*100,0,100)+'%'; if(G.staff>=1.5){ G.staff=-1; useCoupon(); } }
+  else if(G.state==='coupon'){ const d=new Date(), z=n=>String(n).padStart(2,'0'), tx=`現在時刻 ${z(d.getHours())}:${z(d.getMinutes())}:${z(d.getSeconds())}`; if($('tkClock').textContent!==tx) $('tkClock').textContent=tx; }
   if(G.state==='title'&&Math.random()<dt*2) addFx({t:'steam',x:225+(Math.random()-.5)*120,y:440,vx:(Math.random()-.5)*6,vy:-30,max:2.4,s:14});
   updFx(dt);
   if(G.state==='play'||G.state==='countdown') updHUD();
@@ -1124,7 +1153,7 @@ function drawGrowScene(c){
 /* ---------- UI ---------- */
 const MAXP=[20,30,20,20,10], PNAMES=['火加減','焼き加減','操作タイミング','形・完成度','盛り付け'];
 let toastTimer=0;
-function toast(t){ $('toastT').textContent=t; $('toast').classList.add('on'); clearTimeout(toastTimer); toastTimer=setTimeout(()=>$('toast').classList.remove('on'),1600); }
+function toast(t,ms){ $('toastT').textContent=t; $('toast').classList.add('on'); clearTimeout(toastTimer); toastTimer=setTimeout(()=>$('toast').classList.remove('on'),ms||1600); }
 function heatLabel(){ const v=+$('heat').value; if(P.phase) P.heat=v; $('heatVal').textContent=v<3?'消':v<25?'弱':v<45?'中弱':v<62?'中':v<80?'中強':'強'; }
 let hudCache='';
 function updHUD(){
@@ -1183,7 +1212,7 @@ const ENTER={
   title(){
     $('tPop').textContent=S.pop>=3?'🍿 COMPLETE ― 割引券を受け取れます':`🍿 ポップコーン ${S.pop} / 3　（${CONFIG.highScore}点以上で成長）`;
     $('bTCoupon').hidden=!(S.pop>=3);
-    $('tBest').innerHTML=`最高記録　オムレツ ${S.best.omelette}点 ／ 卵焼き ${S.best.tamago}点<br>総合 ${S.best.total}点`;
+    $('tBest').innerHTML=`最高記録　オムレツ ${S.best.omelette}点 ／ 卵焼き ${S.best.tamago}点<br>総合最高（全料理）${S.best.total}点`;
   },
   select(){ $('bestOm').textContent=`最高 ${S.best.omelette}点`; $('bestTa').textContent=`最高 ${S.best.tamago}点`; drawMinis(); },
   explain(){
@@ -1220,14 +1249,14 @@ const ENTER={
     const done=S.pop>=3;
     $('rPop').innerHTML=done?'<div class="big">🍿 COMPLETE</div><div class="sm">✓ 種　✓ 芽　✓ 収穫 ― 屋台で割引券を受け取ろう</div>'
       :`<div class="big">🍿 ${S.pop} / 3</div><div class="sm">${stepText()}　｜　${CONFIG.highScore}点以上で成長</div>`;
-    $('rBest').innerHTML=`最高記録　オムレツ ${S.best.omelette}点 ／ 卵焼き ${S.best.tamago}点 ／ 総合 ${S.best.total}点`;
+    $('rBest').innerHTML=`最高記録　オムレツ ${S.best.omelette}点 ／ 卵焼き ${S.best.tamago}点 ／ 総合最高（全料理）${S.best.total}点`;
     $('rShare').textContent=shareText();
     $('bStall').hidden=!done; $('stallNote').hidden=!done;
     drawMinis();
   },
   coupon(prev){
     if(prev&&prev!=='coupon') G.cpFrom=prev;
-    ensureCoupon(); G.cpUsed=false; G.staff=-1; $('staffFill').style.width='0';
+    ensureCoupon(); G.cpUsed=false; closePin();
     $('tkStall').textContent=CONFIG.stallName; $('tkTitle').innerHTML=CONFIG.couponTitle;
     const cp=S.coupon;
     $('tkNo').textContent=cp?'No. '+cp.no:''; $('tkDate').textContent=cp?'発行 '+fmtDate(cp.at):'';
@@ -1244,8 +1273,9 @@ function comments(R){
   return [c0,c1,p[2]>=18?'◎ 完璧':p[2]>=12?'○ 良い':'△ 惜しい',p[3]>=18?'◎ 美しい':p[3]>=12?'○ 整う':'△ 崩れ気味',p[4]>=9?'◎ 中央':p[4]>=5?'○ 少しずれ':'△ ずれ'];
 }
 function fmtDate(t){ const d=new Date(t); const z=n=>String(n).padStart(2,'0'); return `${d.getFullYear()}/${z(d.getMonth()+1)}/${z(d.getDate())} ${z(d.getHours())}:${z(d.getMinutes())}`; }
-function ensureCoupon(){ if(S.pop>=3&&!S.coupon){ const d=new Date(); const z=n=>String(n).padStart(2,'0'); S.coupon={no:`${z(d.getMonth()+1)}${z(d.getDate())}-${String(1000+Math.floor(Math.random()*9000))}`,at:Date.now()}; saveS(); } }
-function useCoupon(){ S.coupon=null; S.pop=0; S.used++; saveS(); G.cpUsed=true; $('tkStamp').hidden=false; $('bStaff').hidden=true; $('tkNote').textContent='ご利用ありがとうございました。また種から育てられます。'; sfx.rank(); }
+function rand8(){ let n; try{ const a=new Uint32Array(1); crypto.getRandomValues(a); n=a[0]%100000000; }catch(e){ n=Math.floor(Math.random()*100000000); } return String(n).padStart(8,'0'); }
+function ensureCoupon(){ if(S.pop>=3&&!S.coupon){ const d=new Date(); const z=n=>String(n).padStart(2,'0'); const r=rand8(); S.coupon={no:`${z(d.getMonth()+1)}${z(d.getDate())}-${r.slice(0,4)}-${r.slice(4)}`,at:Date.now()}; saveS(); } }
+function useCoupon(){ S.coupon=null; S.pop=0; S.used++; saveS(); G.cpUsed=true; $('tkStamp').hidden=false; $('bStaff').hidden=true; closePin(); $('tkNote').textContent='ご利用ありがとうございました。また種から育てられます。'; sfx.rank(); }
 function growUI(){
   const g=G.gw, R=G.R, st=S.pop;
   $('gStat').textContent=st>=3&&S.coupon?'🍿 COMPLETE':`🍿 ${st} / 3`; $('gSteps').textContent=stepText();
@@ -1328,16 +1358,16 @@ document.addEventListener('keydown',e=>{
   if(G.state==='score'&&(k===' '||k==='Enter')&&!G.sc.ranked){ e.preventDefault(); G.sc.skip=true; return; }
   if(k==='Enter'||k===' '){ const ae=document.activeElement; if(ae&&ae.tagName==='BUTTON') return;
     const scr=document.querySelector('.screen.on'); if(!scr) return; const b=[...scr.querySelectorAll('[data-primary]')].find(x=>!x.hidden); if(b){ e.preventDefault(); b.click(); } }
-  if(k==='Escape'&&G.state==='coupon') $('bCpDone').click();
+  if(k==='Escape'&&G.state==='coupon'){ if(!$('pinPad').hidden) closePin(); else $('bCpDone').click(); }
 });
 document.addEventListener('keyup',e=>{ if(G.state==='play'&&(e.key===' '||e.key==='Enter')){ e.preventDefault(); actRelease(); } });
 window.addEventListener('blur',()=>{ actRelease(); ptr.id=null; });
-document.addEventListener('visibilitychange',()=>{ if(!A.ctx) return; try{ if(document.hidden) A.ctx.suspend(); else A.ctx.resume(); }catch(e){} });
-document.addEventListener('pointerdown',()=>audioInit(),{capture:true});
+document.addEventListener('visibilitychange',()=>{ last=performance.now(); if(!A.ctx) return; try{ if(document.hidden) A.ctx.suspend(); else A.ctx.resume(); }catch(e){} });
+['pointerdown','touchend','click'].forEach(ev=>document.addEventListener(ev,()=>audioInit(),{capture:true,passive:true}));
 stage.addEventListener('contextmenu',e=>e.preventDefault());
 document.addEventListener('gesturestart',e=>e.preventDefault());
 document.addEventListener('dblclick',e=>e.preventDefault());
-window.addEventListener('resize',fit); window.addEventListener('orientationchange',()=>setTimeout(fit,200));
+window.addEventListener('resize',fit); if(window.visualViewport) window.visualViewport.addEventListener('resize',fit); window.addEventListener('orientationchange',()=>setTimeout(fit,200));
 
 const on=(id,f)=>$(id).addEventListener('click',()=>{ audioInit(); sfx.ui(); f(); });
 on('bStart',()=>setState('select'));
@@ -1357,9 +1387,19 @@ on('bStall',()=>setState('coupon'));
 on('bCopy',async()=>{ const ok=await copyText(shareText()); toast(ok?'コピーしました':'コピーできませんでした'); });
 const cpBack=()=>setState(G.cpUsed?'title':(G.cpFrom==='result'&&G.R?'result':'title'));
 on('bCpBack',cpBack); on('bCpDone',cpBack);
-const staff=$('bStaff');
-staff.addEventListener('pointerdown',e=>{ e.preventDefault(); if(G.state==='coupon'&&S.coupon) G.staff=0; });
-['pointerup','pointercancel','pointerleave'].forEach(ev=>staff.addEventListener(ev,()=>{ if(G.staff>=0){ G.staff=-1; $('staffFill').style.width='0'; } }));
+let pinBuf='', pinFails=0, pinLock=0;
+const LKEY='shokunin_tamago_pinlock_v1';
+try{ const d=JSON.parse(localStorage.getItem(LKEY)||'null'); if(d&&typeof d==='object'){ if(typeof d.f==='number'&&isFinite(d.f)) pinFails=clamp(d.f|0,0,4); if(typeof d.u==='number'&&isFinite(d.u)) pinLock=Math.min(d.u,Date.now()+30000); } }catch(e){}
+function savePinLock(){ try{ localStorage.setItem(LKEY,JSON.stringify({f:pinFails,u:pinLock})); }catch(e){} }
+function pinHash(pin){ let h=0x811c9dc5>>>0; const s='shokunin-tamago:'+pin; for(let r=0;r<20000;r++){ for(let i=0;i<s.length;i++){ h^=s.charCodeAt(i); h=Math.imul(h,0x01000193)>>>0; } h=(h^r)>>>0; } return h.toString(16).padStart(8,'0'); }
+function pinShow(){ $('pinDots').textContent='●'.repeat(pinBuf.length)+'○'.repeat(Math.max(0,4-pinBuf.length)); }
+function openPin(){ if(G.state!=='coupon'||!S.coupon) return; pinBuf=''; $('pinMsg').textContent=''; pinShow(); $('pinPad').hidden=false; }
+function closePin(){ pinBuf=''; $('pinPad').hidden=true; }
+on('bStaff',openPin);
+$('pinPad').addEventListener('click',e=>{ const b=e.target.closest('button'); if(!b) return; const k=b.dataset.k; sfx.ui();
+  if(k==='x'){ closePin(); return; } if(k==='b'){ pinBuf=pinBuf.slice(0,-1); pinShow(); return; }
+  if(pinBuf.length<4){ pinBuf+=k; pinShow(); }
+  if(pinBuf.length===4){ if(Date.now()<pinLock){ $('pinMsg').textContent='しばらく待ってから入力してください'; pinBuf=''; setTimeout(pinShow,250); return; } if(pinHash(pinBuf)===CONFIG.staffPinHash){ pinFails=0; pinLock=0; savePinLock(); useCoupon(); } else { if(++pinFails>=5){ pinFails=0; pinLock=Date.now()+30000; } savePinLock(); $('pinMsg').textContent=Date.now()<pinLock?'しばらく待ってから入力してください':'番号が違います'; const p=$('pinPad'); p.classList.remove('shake'); void p.offsetWidth; p.classList.add('shake'); pinBuf=''; setTimeout(pinShow,250); } } });
 function sndUI(){ $('bSe').innerHTML=svg(S.se?'spk':'spkOff'); $('bSe').setAttribute('aria-pressed',String(S.se)); $('bBgm').innerHTML=svg(S.bgm?'note':'noteOff'); $('bBgm').setAttribute('aria-pressed',String(S.bgm)); }
 $('bSe').addEventListener('click',()=>{ audioInit(); S.se=!S.se; applySound(); sndUI(); saveS(); if(S.se) sfx.ui(); });
 $('bBgm').addEventListener('click',()=>{ audioInit(); S.bgm=!S.bgm; applySound(); sndUI(); saveS(); });
@@ -1371,11 +1411,24 @@ async function copyText(t){
 /* ---------- boot ---------- */
 [['bSelBack','back'],['bExBack','back'],['bCpBack','back']].forEach(([id,i])=>$(id).innerHTML=svg(i));
 $('bCopy').innerHTML=svg('copy')+'コピー'; $('bAgain').innerHTML=svg('retry')+'<span>もう一度</span>'; $('bStall').innerHTML=svg('ticket')+'<span>屋台へ</span>';
-loadS(); sndUI(); newPlay('omelette'); fit(); setState('title');
+loadS(); saveS(); sndUI(); newPlay('omelette'); fit(); setState('title');
 let last=performance.now();
-function loop(now){ const dt=Math.min(.1,Math.max(0,(now-last)/1000)); last=now; try{ update(dt); render(); }catch(err){ console.error(err); } requestAnimationFrame(loop); }
+const rotMQ=window.matchMedia?window.matchMedia('(orientation: landscape) and (max-height: 520px) and (pointer: coarse)'):null;
+function loop(now){
+  let raw=Math.max(0,(now-last)/1000); last=now;
+  // バックグラウンド中の時間は visibilitychange で除外済み。表示中の処理停止は長くても実時間どおり数える
+  const paused=rotMQ&&rotMQ.matches;
+  try{
+    if(!paused){
+      const extra=Math.max(0,raw-10); raw=Math.min(raw,10);
+      if(extra>0&&G.state==='play'&&P.timerOn&&!P.done) P.t+=extra; // 10秒を超える停止分は時計にだけ加算
+      while(raw>1e-6){ const d=Math.min(.05,raw); update(d); raw-=d; }
+    }
+    render();
+  }catch(err){ console.error(err); }
+  requestAnimationFrame(loop);
+}
 requestAnimationFrame(loop);
-window.__game={G,P,S,setState,actPress,actRelease,swipe,parts}; // テスト用
 })();
 </script>
 </body>
