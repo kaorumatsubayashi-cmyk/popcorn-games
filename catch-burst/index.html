@@ -94,6 +94,7 @@ h1{font-size:27px;line-height:1.12;margin:6px 0;color:var(--red);letter-spacing:
 #shareBtn{width:min(100%,330px);font-size:14px}
 #start .start-notice{font-size:13px;font-weight:900;color:#8b2431;background:#fff;border-radius:11px;border:2px dashed #e7a143;padding:8px;margin-top:10px;line-height:1.65}
 #start #resumeTicketBtn{margin:8px 0 0;font-size:13px;padding:9px 12px;background:#782c34}
+@media(max-height:760px){#start{justify-content:flex-start;padding-top:12px}#start .logo{font-size:32px}#start h1{font-size:22px;margin:4px 0}#start .tag{margin:2px 0 6px}#start .start-notice{order:1;margin-top:4px;padding:6px;font-size:12px;line-height:1.5}#startBtn{order:2;margin-top:8px}#resumeTicketBtn{order:3}#start .how{order:4;margin-top:10px}}
 @media(max-width:360px){#result .result-layout{padding:10px 9px 18px;gap:9px}.prize-table>div{font-size:12px}.prize-table strong{font-size:17px}}
 
 </style>
@@ -1461,7 +1462,7 @@ global.WFQRCode=require("./index"); global.WFQRLevel=require("./QRErrorCorrectLe
 
 /* ================== 和纏祭 抽選券 WF1 共通仕様 ================== */
 const WF_GAME_ID='SB', WF_CLEAR_SCORE=260;
-let chainEpoch=0, clearAnnounced=false;
+let chainEpoch=0, clearAnnounced=false, caramelPending=0;
 // スタッフ用照合HTMLを同じHTTPSフォルダに置く（ファイル名は一致させること）。
 // 別のフォルダを使う場合のみ、HTTPSの絶対URLを設定する。
 const WF_SCANNER_URL_OVERRIDE='https://lecture-app.online/popcorn-games/staff/'; // どちらのサイトで遊んでも、券のQRは本部の照合ページを開く
@@ -1642,7 +1643,10 @@ function fillBoard(){
   addTarget('STAR');
   for(let i=0;i<3;i++)addTarget('BAD');
 }
+// 補充は連鎖が完全に止まってから（連鎖中に新しいコーンを置くと、飛んでいる破片が当たって勝手に連鎖が続くため）
+function chainActive(){ return !!projectile||frags.length>0||starRunners.length>0||caramelPending>0; }
 function refillBoard(now){
+  if(chainActive())return;
   if(now-lastRefillAt<350)return;
   lastRefillAt=now;
   const alive=targets.filter(t=>t.alive).length;
@@ -1710,7 +1714,7 @@ function hitTarget(t,depth=0,source='shot'){
     burstParticles(t.x,t.y,'#d88a32',18,1.25);
     floatText(t.x,t.y-18,'CARAMEL BURST!','#a85716',15);
     const near=targets.filter(o=>o.alive&&o.type!=='BAD'&&Math.hypot(o.x-t.x,o.y-t.y)<82).slice(0,3);
-    for(const o of near){const ss=wfSession,ce=chainEpoch;setTimeout(()=>{if(ss===wfSession&&ce===chainEpoch&&state==='PLAYING')hitTarget(o,depth+1,'caramel');},45+Math.random()*90);}
+    for(const o of near){const ss=wfSession,ce=chainEpoch;caramelPending++;setTimeout(()=>{caramelPending=Math.max(0,caramelPending-1);if(ss===wfSession&&ce===chainEpoch&&state==='PLAYING')hitTarget(o,depth+1,'caramel');},45+Math.random()*90);}
   }else if(t.type==='STAR'){
     tone('star',shotChain);
     burstParticles(t.x,t.y,'#c8f2ff',22,1.35);
@@ -2308,7 +2312,7 @@ if(!window.PointerEvent){
 
 
 function startGame(){
-  wfSession++;chainEpoch++;clearAnnounced=false;resize();score=0;timeLeft=30;shotsLeft=12;maxChain=0;shotChain=0;sparrowsScared=0;sparrowsFed=0;
+  wfSession++;chainEpoch++;clearAnnounced=false;caramelPending=0;resize();score=0;timeLeft=30;shotsLeft=12;maxChain=0;shotChain=0;sparrowsScared=0;sparrowsFed=0;
   projectile=null;sparrow=null;particles=[];texts=[];frags=[];starRunners=[];nextId=1;screenShake=0;
   fillBoard();seedAmbient();state='PLAYING';startAt=performance.now();lastFrame=startAt;lastSecond=30;lastRefillAt=0;lastShotAt=startAt;lastSparrowAt=startAt-1800;
   startScreen.classList.add('hidden');resultScreen.classList.add('hidden');
@@ -2342,7 +2346,7 @@ function loop(now){
   if(screenShake)ctx.translate(rand(-screenShake,screenShake),rand(-screenShake,screenShake));
   drawBoard();ctx.restore();
   const actionDone=!projectile&&frags.length===0&&starRunners.length===0;
-  if(!clearAnnounced&&Math.round(score)>=WF_CLEAR_SCORE){clearAnnounced=true;floatText(W/2,bounds.top+70,'🎟 '+WF_CLEAR_SCORE+'点突破！ 抽選券確定','#1f7a3a',20);}
+  if(!clearAnnounced&&Math.round(score)>=WF_CLEAR_SCORE){clearAnnounced=true;floatText(W/2,bounds.top+70,'🎟 '+WF_CLEAR_SCORE+'点突破！ 終了時もこのままなら抽選券','#1f7a3a',17);}
   if(timeLeft<=0||(shotsLeft<=0&&actionDone)){endGame();return}
   requestAnimationFrame(loop);
 }
