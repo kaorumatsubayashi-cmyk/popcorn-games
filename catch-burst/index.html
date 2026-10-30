@@ -82,6 +82,8 @@ h1{font-size:27px;line-height:1.12;margin:6px 0;color:var(--red);letter-spacing:
 .station-card{width:100%;background:#fff;border:2px solid #e5c79a;border-radius:17px;padding:12px;text-align:left}
 .station-card h3{font-size:17px;color:#742a2e;margin:0 0 8px;text-align:center}
 .station-card p{font-size:13px;line-height:1.6;margin:5px 0;color:#4e4031}
+.flavor-grid{display:grid;grid-template-columns:repeat(2,1fr);gap:7px}
+.flavor-grid span{display:flex;align-items:center;justify-content:center;text-align:center;min-height:40px;padding:5px 3px;background:#fffef5;border:2px solid #e4a74b;border-radius:11px;font-size:13.5px;font-weight:900;line-height:1.25;color:#6c2a20}
 .menu-line{display:flex;justify-content:space-between;align-items:center;gap:10px;padding:10px 4px;border-bottom:1px dashed #dfc9aa;font-weight:800;font-size:14px}
 .menu-line:last-child{border-bottom:none}
 .menu-line b{white-space:nowrap;color:#a32a23}
@@ -120,7 +122,7 @@ h1{font-size:27px;line-height:1.12;margin:6px 0;color:var(--red);letter-spacing:
       </div>
       <div class="small" style="margin-top:8px;text-align:center">30秒・最大12ショット。終了時に260点以上でクリア！ 最高得点をめざそう。壁反射も使えます。<br>ぼやぼやするとスズメがコーンを食べに来ます。黒豆やスズメに当たると減点、連鎖もそこでストップ！ スズメは火の鳥に変身して的を食べ、的が減ったまま戻りません。<br>スマホ：指でドラッグ ／ PC：マウスでドラッグ</div>
     </div>
-    <div class="start-notice">🎯 260点以上で「割引抽選券」GET！<br>🎊 ガラポンはハズレなし・最低10円引き<br>※抽選券は当日のみ有効・1回限り使用可</div>
+    <div class="start-notice">🎯 260点以上で「割引抽選券」GET！<br>🎊 ガラポンで10円、50円、100円引き、<br>１袋おまけのどれかが当たる！<br>※抽選券は当日のみ有効・1回限り使用可</div>
     <button id="startBtn" class="btn primary">ゲームスタート！</button>
     <button id="resumeTicketBtn" class="btn secondary" hidden>🎟 今日獲得した抽選券を表示</button>
   </section>
@@ -136,14 +138,14 @@ h1{font-size:27px;line-height:1.12;margin:6px 0;color:var(--red);letter-spacing:
         <h2 id="resultHeading"></h2><p id="resultMessage"></p>
         <div id="prizeSection" hidden>
           <div class="prize-callout">🎊 ガラポンはハズレなし！</div>
-          <div class="prize-help">最低でも10円引き！ 当たるのは次の4種類</div>
+          <div class="prize-help">ガラポンで10円、50円、100円引き、<br>１袋おまけのどれかが当たる！</div>
           <div class="prize-table">
             <div><strong>10円引き</strong></div>
             <div><strong>50円引き</strong></div>
             <div><strong>100円引き</strong></div>
-            <div>ハーフ＆ハーフ<br><strong style="font-size:15px">オプション料<br>100円が無料</strong><small>もしくは50円引き</small></div>
+            <div><strong>１袋おまけ</strong></div>
           </div>
-          <p style="font-size:12px;margin:8px 0 0">※ 割引の種類は屋台でガラポンを回して決まります。</p>
+          <p style="font-size:12px;margin:8px 0 0">※ どれが当たるかは屋台でガラポンを回して決まります。</p>
         </div>
       </div>
       <div id="ticketPanel" class="ticket-panel" hidden>
@@ -157,9 +159,8 @@ h1{font-size:27px;line-height:1.12;margin:6px 0;color:var(--red);letter-spacing:
       </div>
       <div class="station-card">
         <h3>🍿 ポップコーン・メニュー</h3>
-        <div class="menu-line"><span>ポップコーン</span><b>価格・味は店頭でご確認ください</b></div>
-        <div class="menu-line"><span>ハーフ＆ハーフ</span><b>追加100円</b></div>
-        <p style="font-size:11px;text-align:center">※ 詳しい味・料金の正式メニューは店頭でご案内します。</p>
+        <div class="flavor-grid"><span>塩</span><span>塩キャラメル</span><span>バーモントカレー</span><span>コーンポタージュ</span><span>マヨ七味</span><span>醤油バター</span></div>
+        <p style="font-size:11px;text-align:center">※ 価格は屋台でご案内します。</p>
       </div>
       <div class="station-card">
         <h3>📍 社学・松林ゼミはテント2番！</h3>
@@ -170,7 +171,7 @@ h1{font-size:27px;line-height:1.12;margin:6px 0;color:var(--red);letter-spacing:
         <button id="retryBtn" class="btn primary">もう一度遊ぶ</button>
         <button id="shareBtn" class="btn secondary">結果を友達にシェア</button>
       </div>
-      <div class="result-footnote">大学祭当日のみ有効・1回限り使用可。<br>割引抽選券はガラポンへの参加券です。割引内容は抽選後に決まります。</div>
+      <div class="result-footnote">大学祭当日のみ有効・1回限り使用可。<br>割引抽選券はガラポンへの参加券です。特典は抽選後に決まります。</div>
     </div>
   </section>
   <div id="rotateHint">縦向きで遊ぶと操作しやすくなります。</div>

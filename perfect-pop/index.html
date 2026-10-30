@@ -256,10 +256,9 @@
 .score-breakdown{font-size:12px;color:#86664e}
 .prize-box{background:#fff1d7;border:3px solid #f2a24a;border-radius:17px;padding:12px;color:#53351b;text-align:center;margin:0 0 12px}
 .prize-box h2{margin:1px 0 5px;font-size:clamp(19px,5.4vw,25px);color:#ae291b}
-.minimum-prize{background:#be3824;color:white;padding:8px 6px;font-size:clamp(15px,4.8vw,20px);font-weight:900;border-radius:999px}
+.minimum-prize{background:#be3824;color:white;padding:8px 10px;font-size:clamp(14px,4.3vw,18px);font-weight:900;border-radius:14px;line-height:1.45}
 .prize-grid{display:grid;grid-template-columns:repeat(2,1fr);gap:7px;margin:10px 0}
 .prize-grid>div{background:white;border:2px solid #efd2a6;border-radius:10px;font-size:17px;font-weight:900;padding:11px 4px;min-height:68px;display:flex;flex-direction:column;align-items:center;justify-content:center}
-.prize-grid>div:last-child{font-size:12px;line-height:1.4}
 .prize-grid span{font-weight:900;color:#ad3528;font-size:13px}
 .prize-box p{font-size:12px;line-height:1.5;margin:5px 0 0}
 .ticket-v2{background:#fffdfa;border:3px dashed #d9944b;border-radius:16px;padding:13px 11px;text-align:center}
@@ -275,6 +274,8 @@
 .info-card h2{text-align:center;font-size:18px;margin:0 0 8px;color:#874a24}
 .menu-row{display:flex;align-items:center;justify-content:space-between;gap:10px;padding:9px 1px;border-bottom:1px dashed #d1baa1;font-size:13px}
 .menu-row span{text-align:right;font-weight:700}
+.flavor-grid{display:grid;grid-template-columns:repeat(2,1fr);gap:7px}
+.flavor-grid span{display:flex;align-items:center;justify-content:center;text-align:center;min-height:40px;padding:5px 3px;background:white;border:2px solid #efd2a6;border-radius:10px;font-size:13.5px;font-weight:900;line-height:1.25;color:#4d3926}
 .small-caption{font-size:11px;line-height:1.5;color:#795d47;margin:8px 0 0}
 .station-map{display:block;width:100%;height:auto;border:1px solid #dec3a1;border-radius:10px}
 .tent-loc{text-align:center;font-size:17px;font-weight:900;color:#a04422;margin:9px 0 0}
@@ -328,7 +329,7 @@
         <span class="tip">異物混入注意！</span>
       </div>
       <button class="btn start-btn" id="btnStart">START<small>（<span id="durLabel">30</span>秒勝負！）</small></button>
-      <p class="catch">目指せ <b>115点以上！</b><br>クリアで <b>🎟 割引抽選券</b> をGET！<br><strong class="title-win">ガラポンはハズレなし・最低10円引き！</strong><br><small>※抽選券は大学祭当日のみ有効・1回限り</small></p>
+      <p class="catch">目指せ <b>115点以上！</b><br>クリアで <b>🎟 割引抽選券</b> をGET！<br><strong class="title-win">ガラポンで10円、50円、100円引き、<br>１袋おまけのどれかが当たる！</strong><br><small>※抽選券は大学祭当日のみ有効・1回限り</small></p>
       <div class="title-foot">
         <button class="btn ghost" id="btnHowTo">あそびかた</button>
         <button class="btn ghost" id="btnSound" type="button" aria-label="音 オン／オフ">🔊 音あり</button>
@@ -367,10 +368,10 @@
       <div id="winSection" hidden>
         <div class="prize-box">
           <h2>🎊 ガラポンはハズレなし！</h2>
-          <div class="minimum-prize">必ず何か当たる！ 最低でも10円引き</div>
+          <div class="minimum-prize">ガラポンで10円、50円、100円引き、<br>１袋おまけのどれかが当たる！</div>
           <div class="prize-grid">
             <div>10円引き</div><div>50円引き</div><div>100円引き</div>
-            <div>ハーフ＆ハーフの<br>オプション料100円が無料<br><span>または50円引き</span></div>
+            <div>１袋おまけ</div>
           </div>
           <p>どの特典になるかは、テント２番でガラポンを回して決まります。</p>
         </div>
@@ -386,9 +387,8 @@
       </div>
       <div class="info-card">
         <h2>🍿 ポップコーン・メニュー</h2>
-        <div class="menu-row"><b>ポップコーン</b><span>種類・価格は屋台でご確認ください</span></div>
-        <div class="menu-row"><b>ハーフ＆ハーフ</b><span>オプション料 ＋100円</span></div>
-        <p class="small-caption">※ メニュー表の確定版が未提供のため、価格・味の詳細は店頭案内にしています。</p>
+        <div class="flavor-grid"><span>塩</span><span>塩キャラメル</span><span>バーモントカレー</span><span>コーンポタージュ</span><span>マヨ七味</span><span>醤油バター</span></div>
+        <p class="small-caption">※ 価格は屋台でご案内します。</p>
       </div>
       <div class="info-card">
         <h2>📍 屋台の場所</h2>
@@ -2318,7 +2318,7 @@ function showOutcome(r){
   $('rFinal').textContent=r.final;
   $('verdict').classList.toggle('lost',!ok);
   $('rVerdict').textContent=ok?'🎉 115点達成！抽選券を獲得！':'残念！再チャレンジをお待ちしております';
-  $('rSub').textContent=ok?'テント２番のガラポンを1回まわせます。ハズレなし、最低10円引き！':`クリアラインは115点。あと${Math.max(0,115-r.final)}点！ もう一度挑戦しよう！`;
+  $('rSub').textContent=ok?'テント２番のガラポンを1回まわせます。ガラポンで10円、50円、100円引き、１袋おまけのどれかが当たる！':`クリアラインは115点。あと${Math.max(0,115-r.final)}点！ もう一度挑戦しよう！`;
   $('rBreakdown').textContent=r.saved?'本日獲得した抽選券を再表示中':`ポップ ${r.pops}粒 ／ 焦がし ${r.burns}回 ／ 未除去の異物 ${r.foreign}個 ／ 誤タップ ${r.wrong||0}回`;
   $('winSection').hidden=!ok;
   if(ok){
@@ -2352,7 +2352,7 @@ $('btnTicketRestore').addEventListener('click',wfOpenSaved);
 $('btnHowTo').addEventListener('click',()=>toast('火力UP/DOWNの長押しで温度を緑色に保つ！異物はタップで除去！'));
 $('btnShare').addEventListener('click',async()=>{
   if(!lastResult)return;
-  const text=lastResult.ticket?`パーフェクトポップで${lastResult.final}点！割引抽選券GET！テント２番でガラポンはハズレなし、最低10円引き！`:`パーフェクトポップで${lastResult.final}点！115点目指して挑戦中！`;
+  const text=lastResult.ticket?`パーフェクトポップで${lastResult.final}点！割引抽選券GET！テント２番のガラポンで10円、50円、100円引き、１袋おまけのどれかが当たる！`:`パーフェクトポップで${lastResult.final}点！115点目指して挑戦中！`;
   try{if(navigator.share){await navigator.share({title:'弾けろ！パーフェクトポップ',text,url:location.href.split('#')[0]});return;}await navigator.clipboard.writeText(text+'\n'+location.href.split('#')[0]);toast('結果をコピーしました');}catch(e){toast('共有できませんでした。スコアを友達に教えてね！');}
 });
 /* 起動：プレイ時間は実経過時間でカウントする。 */
